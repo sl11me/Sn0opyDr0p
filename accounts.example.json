@@ -1,0 +1,5 @@
+[
+  {"label": "main", "type": "evm", "address": "0x..."},
+  {"label": "sol", "type": "solana", "address": "..."},
+  {"label": "x", "type": "social", "address": "@ton_handle"}
+]

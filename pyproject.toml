@@ -1,0 +1,10 @@
+[project]
+name = "sn0opydr0p"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["anthropic", "pydantic", "web3"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
