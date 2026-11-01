@@ -88,7 +88,7 @@ def fetch_grimoire(state, days):
     box.login(os.environ["GMAIL_USER"], os.environ["GMAIL_APP_PASSWORD"])
     box.select("INBOX", readonly=True)
     since = (datetime.now() - timedelta(days=days)).strftime("%d-%b-%Y")
-    sender = os.environ.get("GRIMOIRE_FROM", "grimoire")
+    sender = os.environ.get("GRIMOIRE_FROM", "cryptomage@substack.com")
     _, ids = box.search(None, "FROM", f'"{sender}"', "SINCE", since)
     mails = []
     for i in ids[0].split():
