@@ -21,9 +21,24 @@ def test_merge_render(tmp_path, monkeypatch):
     monkeypatch.setattr(hunter, "TRACKER", tmp_path / "T.md")
     state = {"airdrops": {}, "progress": {}, "seen_emails": []}
     a = hunter.Airdrop(slug="foo", name="Foo", chain="Base", summary="s", potential=4, effort=2, risk=1,
-                       cost_usd="~2$", deadline="inconnue", steps=["bridge"], links=["https://foo.xyz"], red_flags=[])
-    hunter.merge(state, [a])
+                       cost_usd="~2$", deadline="inconnue", deadline_date="", next_action="bridge", alive=True,
+                       steps=["bridge"], links=["https://foo.xyz"], red_flags=[])
+    assert hunter.merge(state, [a]) == ["foo"]
+    assert hunter.merge(state, [a]) == []
     state["progress"]["foo"]["main"] = "fait"
     hunter.render(state)
     md = (tmp_path / "T.md").read_text()
     assert "[Foo](https://foo.xyz)" in md and "main: fait" in md and "★★★★" in md
+
+
+def test_report():
+    from datetime import date, timedelta
+    soon = (date.today() + timedelta(days=3)).isoformat()
+    far = (date.today() + timedelta(days=60)).isoformat()
+    base = dict(name="X", potential=3, risk=2, next_action="claim", alive=True)
+    state = {"airdrops": {"a": base | {"deadline_date": soon}, "b": base | {"deadline_date": far, "name": "Far"},
+                          "dead": base | {"alive": False, "name": "Dead"}},
+             "progress": {"a": {"main": "fait"}}}
+    r = hunter.build_report(state, "Brief.", ["b"], 2)
+    assert soon in r and far not in r and "Dead" not in r
+    assert "main: fait" in r and "## 🆕 Nouveaux" in r

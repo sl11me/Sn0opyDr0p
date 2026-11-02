@@ -2,6 +2,8 @@
 
 Agent chasseur d'airdrops : lit les mails du **Grimoire du Mage** (Gmail), vérifie chaque opportunité sur le web avec Claude, note potentiel / effort / risque, et tient `TRACKER.md` à jour par compte.
 
+Chaque matin (GitHub Actions), il revérifie les airdrops suivis, en ajoute de nouveaux et t'envoie un compte rendu par mail (`REPORT.md`) : ce qui presse, quoi faire aujourd'hui, ce qu'on laisse tomber.
+
 ## Setup
 
 ```bash
@@ -16,11 +18,16 @@ Gmail : activer la 2FA, créer un [mot de passe d'application](https://myaccount
 
 ```bash
 uv run --env-file .env hunter.py hunt              # mails des 14 derniers jours + web
+uv run --env-file .env hunter.py hunt --send       # idem + compte rendu par mail
 uv run --env-file .env hunter.py hunt --no-mail    # recherche web seule
 uv run hunter.py mark monad-testnet main fait
 uv run hunter.py mark monad-testnet main réclamé --amount "1200 MON"
 uv run --env-file .env hunter.py tx --chain base --account main --to 0x... --value 0.001 --airdrop foo
 ```
+
+## Run quotidien
+
+`.github/workflows/hunt.yml` tourne tous les jours à 6h UTC (et à la main via *Run workflow*), puis commit `TRACKER.md`, `REPORT.md` et `state.json`. Secrets du repo à créer : `ANTHROPIC_API_KEY`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`. Aucune clé privée de wallet ne va sur GitHub : les transactions restent locales.
 
 ## Garde-fous on-chain
 
