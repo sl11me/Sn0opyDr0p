@@ -5,26 +5,25 @@
       "name": "Hyperliquid – 2e airdrop HYPE (spéculatif)",
       "chain": "Hyperliquid",
       "alive": true,
-      "summary": "Aucun programme de points ni S2 officiel en octobre 2026. Environ 39 % de l'offre est réservée aux émissions futures, mais rien n'est annoncé.",
+      "summary": "Environ 38,9 % de l'offre restent réservés aux émissions futures et récompenses communautaires. Mais la doc officielle (vérifiée en octobre 2026) ne mentionne ni saison 2 de points ni 2e airdrop. Le protocole se porte bien (105M$ de revenus en septembre, partenariat ICE). Ça reste de la pure spéculation.",
       "potential": 3,
-      "effort": 3,
-      "risk": 2,
-      "cost_usd": "50-500$",
+      "effort": 2,
+      "risk": 3,
+      "cost_usd": "Frais de trading",
       "deadline": "Aucune annonce",
       "deadline_date": "",
-      "next_action": "Ne pas farmer exprès. Utiliser Hyperliquid et HyperEVM seulement si tu en as besoin (lien avec Elysium le 09/11).",
+      "next_action": "Ne fais rien de spécifique : utilise Hyperliquid seulement si tu y trades déjà, éventuellement via Elysium après le 09/11.",
       "steps": [
-        "Utiliser app.hyperliquid.xyz pour tes vrais trades",
-        "Utiliser HyperEVM et Elysium de façon naturelle",
-        "Surveiller les docs officielles"
+        "N'utiliser app.hyperliquid.xyz que pour un vrai besoin de trading.",
+        "Éventuellement utiliser HyperEVM et Elysium avec de petits montants.",
+        "Ignorer les annonces non officielles de « Season 2 »."
       ],
       "links": [
-        "https://hyperliquid.xyz",
-        "https://app.hyperliquid.xyz"
+        "https://hyperliquid.xyz"
       ],
       "red_flags": [
-        "Aucune S2 officielle",
-        "Faux sites « HYPE S2 claim »"
+        "Aucun 2e airdrop annoncé officiellement.",
+        "Faux sites de claim HYPE S2 très fréquents."
       ],
       "first_seen": "2026-11-02"
     },
@@ -33,28 +32,27 @@
       "name": "Arcus – Points Saison 1 (Robinhood Chain)",
       "chain": "Robinhood Chain",
       "alive": true,
-      "summary": "DEX de l'équipe dYdX sur Robinhood Chain, lancé le 02/07. Actions tokenisées, perps RWA, pTokens. Token Arcus confirmé, distinct de DYDX. Plus de 2 Md$ de volume.",
+      "summary": "DEX d'actions tokenisées et de perps créé par l'équipe dYdX, sur Robinhood Chain. Plus de 5Md$ de volume ; Robinhood Wallet envoie désormais vers lui les swaps de plus de 190 Stock Tokens. Saison 1 : 250k points par semaine (trading, dépôts, parrainages), mise à jour le mercredi à 15h EST. Fin de saison annoncée au S1 2027.",
       "potential": 4,
-      "effort": 3,
-      "risk": 3,
-      "cost_usd": "50-300$",
+      "effort": 2,
+      "risk": 2,
+      "cost_usd": "20-200$",
       "deadline": "Fin S1 estimée S1 2027",
       "deadline_date": "",
-      "next_action": "Trouver le domaine officiel via le X @arcus_xyz, bridger un petit montant sur Robinhood Chain et trader un peu chaque semaine.",
+      "next_action": "Fais tes premiers échanges de Stock Tokens via Arcus ou Robinhood Wallet (mieux récompensés en points) et vérifie ton tableau de points mercredi.",
       "steps": [
-        "Prendre le lien de l'app uniquement depuis la bio du X officiel @arcus_xyz",
-        "Bridger des USDC sur Robinhood Chain via le bridge officiel",
-        "Faire du spot (0 % de frais) et quelques perps avec peu de levier",
-        "Suivre les points de la Saison 1"
+        "Aller sur arcus.xyz et connecter un wallet EVM.",
+        "Déposer de l'USDC sur Robinhood Chain.",
+        "Échanger des Stock Tokens (le passage par Robinhood Wallet rapporte plus de points) ou trader des perps à faible levier.",
+        "Vérifier son tableau de points chaque mercredi.",
+        "Utiliser uniquement les liens de parrainage officiels."
       ],
       "links": [
-        "https://x.com/arcus_xyz",
-        "https://defillama.com/protocol/arcus"
+        "https://arcus.xyz"
       ],
       "red_flags": [
-        "Domaine officiel non vérifié ici",
-        "Nouvelle chaîne : risque lié au bridge",
-        "Fin du programme non datée"
+        "Restrictions géographiques possibles sur les actions tokenisées.",
+        "Token non confirmé officiellement."
       ],
       "first_seen": "2026-11-02"
     },
@@ -63,83 +61,88 @@
       "name": "Variational – Points avant TGE $VAR",
       "chain": "Arbitrum",
       "alive": true,
-      "summary": "TGE de $VAR prévu au T4 2026, avec un airdrop de 32 % de l'offre débloqué à 100 % au TGE, réparti selon les points (environ 150 000 par semaine). Équipe et investisseurs (50 %) bloqués 12 mois.",
+      "summary": "Perp DEX sans frais (Omni), soutenu entre autres par Coinbase Ventures et Dragonfly. Le TGE de $VAR est prévu au T4 2026, avec 32 % de l'offre distribués au lancement selon les points. 150k points sont distribués chaque vendredi jusqu'au TGE. Il faut au moins 1 point pour pouvoir signer les CGU et toucher l'airdrop. Omni doit passer de bêta privée à mainnet public juste avant le TGE.",
       "potential": 4,
       "effort": 3,
       "risk": 3,
-      "cost_usd": "50-300$",
+      "cost_usd": "50-500$ (spread/slippage)",
       "deadline": "TGE T4 2026, non daté",
       "deadline_date": "",
-      "next_action": "Déposer un petit capital sur Variational Omni et trader régulièrement avec peu de levier pour gagner des points chaque semaine avant le snapshot.",
+      "next_action": "Ouvre un compte sur Omni (code d'accès si la bêta privée l'exige) et fais assez de volume, avec un risque contrôlé, pour obtenir au moins 1 point avant le TGE.",
       "steps": [
-        "Aller sur variational.io et ouvrir l'app Omni",
-        "Connecter un seul wallet et déposer des USDC sur Arbitrum",
-        "Trader régulièrement avec peu de levier (le volume compte plus que le risque)",
-        "Suivre les points chaque semaine et les annonces du TGE"
+        "Aller sur variational.io et lancer Omni (avec un code d'accès si besoin).",
+        "Déposer de l'USDC sur Arbitrum avec un montant que tu peux te permettre de perdre.",
+        "Trader avec peu de levier (ou en positions couvertes) pour obtenir au moins 1 point.",
+        "Vérifier chaque vendredi les points reçus.",
+        "Au TGE, signer les CGU $VAR sur le site officiel pour être éligible."
       ],
       "links": [
         "https://variational.io"
       ],
       "red_flags": [
-        "Snapshot possible sans préavis",
-        "On arrive tard : points dilués",
-        "Risque de liquidation sur les perps"
+        "Le TGE a déjà été repoussé une fois (prévu à la fin du T3 au départ).",
+        "Le coût réel (spread) peut dépasser le gain si tu as peu de points.",
+        "Le perp à levier peut entraîner des liquidations."
       ],
       "first_seen": "2026-11-02"
     },
     "jumper": {
       "slug": "jumper",
       "name": "Jumper – Airdrop $JUMP (XP)",
-      "chain": "Multi-chaînes",
+      "chain": "Multi-chain (EVM)",
       "alive": true,
-      "summary": "Agrégateur de LI.FI. Vente publique de $JUMP faite sur Legion du 29/09 au 02/10. TGE toujours pas daté, l'XP doit donner droit à une part de l'allocation communautaire.",
-      "potential": 3,
+      "summary": "Agrégateur de swap et de bridge (LI.FI). Le token $JUMP est confirmé : prévente Legion clôturée le 02/10 avec 48,6M$ levés à 75M$ de FDV, et premarket ouvert le 12/10. TGE prévu au T4 2026, sans date officielle. L'XP gagné en utilisant le produit (swaps, bridges, Earn, missions, campagne Base) sert à l'allocation communautaire.",
+      "potential": 4,
       "effort": 2,
       "risk": 2,
-      "cost_usd": "5-50$",
-      "deadline": "TGE non daté",
+      "cost_usd": "5-30$ (frais de swap/bridge)",
+      "deadline": "TGE T4 2026 non daté",
       "deadline_date": "",
-      "next_action": "Faire quelques bridges et swaps dont tu as vraiment besoin via jumper.exchange et vérifier ton XP dans le profil.",
+      "next_action": "Fais cette semaine quelques vrais swaps et bridges sur Jumper, plus 1 ou 2 missions de la campagne Base, pour accumuler de l'XP avant le TGE.",
       "steps": [
-        "Passer par jumper.exchange pour tes vrais bridges et swaps",
-        "Faire les quêtes XP officielles du profil",
-        "Approuver le montant exact, jamais en illimité",
-        "Suivre l'annonce du TGE et du claim"
+        "Aller sur le site officiel de Jumper (jumper.exchange) et connecter un seul wallet.",
+        "Faire des swaps et bridges utiles (que tu aurais faits de toute façon) pour gagner de l'XP.",
+        "Compléter les missions ou la campagne Base actives sur la page Rewards.",
+        "Suivre le Jumper Pass et ton rang dans le classement.",
+        "Attendre l'annonce officielle du TGE et du claim sur le compte X officiel."
       ],
       "links": [
         "https://jumper.exchange"
       ],
       "red_flags": [
-        "Faux sites de claim JUMP",
-        "Approve illimités sur les agrégateurs"
+        "La date de TGE circule via un compte « Jumper Ecosystem » non vérifié : ne pas s'y fier.",
+        "Faux checkers et faux claims $JUMP : ne signer aucun approve illimité.",
+        "Domaine actuel à vérifier depuis le compte X officiel : un guide tiers parle de jumper.xyz."
       ],
       "first_seen": "2026-11-02"
     },
     "extended": {
       "slug": "extended",
       "name": "Extended – Xpoints avant TGE",
-      "chain": "Starknet→Arc",
+      "chain": "Arc (ex-Starknet)",
       "alive": true,
-      "summary": "Perp DEX en migration de Starknet vers Arc (Circle). Points hebdomadaires toujours versés (600 000 max par semaine), 30 % pour la communauté. TGE retardé, campagne Final Arc terminée début novembre.",
-      "potential": 3,
+      "summary": "Perp DEX créé par une équipe ex-Revolut. Il a terminé le 22/10 sa migration de Starknet vers Arc, la blockchain de Circle (environ 120M$ de TVL migrés). Les points hebdomadaires continuent, plafonnés autour de 600k par semaine. Une allocation communautaire est prévue avant le TGE, qui a été repoussé et n'est pas daté. Rachats de tokens prévus dès le TGE.",
+      "potential": 4,
       "effort": 3,
       "risk": 3,
-      "cost_usd": "50-300$",
-      "deadline": "TGE retardé",
+      "cost_usd": "50-300$ (frais trading)",
+      "deadline": "TGE retardé, non daté",
       "deadline_date": "",
-      "next_action": "Ne pas commencer maintenant (faible rapport gain/coût pour un nouveau venu). Surveiller seulement l'annonce du TGE.",
+      "next_action": "Dépose un petit montant d'USDC sur Extended (désormais sur Arc) et trade régulièrement, ce qui te place aussi sur le mainnet Arc.",
       "steps": [
-        "Si tu y vas quand même : extended.exchange, petit dépôt, trader peu de levier",
-        "Suivre les points chaque semaine",
-        "Suivre la migration vers Arc"
+        "Aller sur extended.exchange et connecter son wallet.",
+        "Déposer de l'USDC (les dépôts et retraits sont rouverts sur Arc).",
+        "Trader des perps ou des marchés RWA à faible levier, ou utiliser les Vaults.",
+        "Vérifier ses points chaque semaine (mise à jour le mardi).",
+        "Suivre l'annonce du TGE sur les canaux officiels."
       ],
       "links": [
         "https://extended.exchange"
       ],
       "red_flags": [
-        "TGE sans cesse repoussé",
-        "Émissions de points en baisse",
-        "Risque lié à la migration de chaîne"
+        "Le TGE a été repoussé plusieurs fois.",
+        "Migration récente d'une chaîne à l'autre : risque technique de bridge.",
+        "Risque de liquidation sur les perps."
       ],
       "first_seen": "2026-11-02"
     },
@@ -148,83 +151,88 @@
       "name": "TxFlow – Points perp DEX (Saison 1)",
       "chain": "TxFlow L1",
       "alive": true,
-      "summary": "Perp DEX en carnet d'ordres sur son propre L1. La Saison 1 a démarré le 12/10 : 1,25 M de points par semaine pour les traders, versés le lundi, jusqu'au T1 2027.",
+      "summary": "L1 financière dont le premier produit est un perp DEX à carnet d'ordres on-chain. La Saison 1 a démarré le 12/10 : 1,25M points par semaine, distribués le lundi (environ 6 000 comptes à l'epoch 2). Fin prévue au T1 2027, avec peut-être d'autres saisons. Pas de TGE annoncé.",
       "potential": 3,
       "effort": 3,
       "risk": 3,
-      "cost_usd": "50-300$",
-      "deadline": "Fin S1 au T1 2027",
+      "cost_usd": "30-300$ (frais trading)",
+      "deadline": "Fin S1 T1 2027",
       "deadline_date": "",
-      "next_action": "Ouvrir un compte sur app.txflow.com avec un petit dépôt et faire du volume chaque semaine pour toucher les points du lundi.",
+      "next_action": "Commence à trader un petit volume régulier chaque semaine sur app.txflow.com pour être présent dans les distributions du lundi.",
       "steps": [
-        "Aller sur app.txflow.com",
-        "Connecter un seul wallet et déposer un petit montant",
-        "Trader chaque semaine avec peu de levier",
-        "Vérifier les points chaque lundi"
+        "Aller sur txflow.com et lancer l'app.",
+        "Déposer un montant modéré de stablecoins.",
+        "Trader régulièrement chaque semaine, avec peu de levier.",
+        "Vérifier ses points chaque lundi.",
+        "Ne pas surinvestir : le TGE n'est pas encore en vue."
       ],
       "links": [
-        "https://app.txflow.com"
+        "https://txflow.com"
       ],
       "red_flags": [
-        "L1 récent, peu éprouvé",
-        "Marketing agressif (« welcome rewards »)",
-        "Pas de token officiellement daté"
+        "Pas de date de TGE.",
+        "Nouvelle L1 : risque technique et de liquidité.",
+        "Les bonus de bienvenue de « 30 100$ » vus sur YouTube sont du marketing d'affiliés."
       ],
       "first_seen": "2026-11-02"
     },
     "qfex": {
       "slug": "qfex",
       "name": "QFEX – Perp DEX RWA (pré-points)",
-      "chain": "inconnue",
+      "chain": "QFEX",
       "alive": true,
-      "summary": "Perp DEX 100 % RWA (actions, etc.) déjà en activité, mais programme de points pas encore lancé.",
-      "potential": 2,
-      "effort": 1,
+      "summary": "Perp DEX sur actifs traditionnels (actions, or), fondé par des diplômés de Cambridge, avec un seed de 9,5M$. Le fondateur a annoncé un programme de points « Saison 0 » début octobre. Le trading y coûte cher (carnet d'ordres mince, frais), ce que confirment des tests de bots de market making.",
+      "potential": 3,
+      "effort": 3,
       "risk": 3,
-      "cost_usd": "0$ pour l'instant",
-      "deadline": "Points pas lancés",
+      "cost_usd": "100-500$ (frais/slippage)",
+      "deadline": "Saison 0 en cours",
       "deadline_date": "",
-      "next_action": "Attendre l'annonce officielle du programme de points sur le X @QFEX avant d'y mettre de l'argent.",
+      "next_action": "Vérifie sur le site officiel les règles de la Saison 0 et teste avec un petit volume avant de t'engager, car les frais sont élevés.",
       "steps": [
-        "Suivre @QFEX",
-        "Au lancement des points, vérifier le domaine officiel",
-        "Commencer avec un petit capital"
+        "Aller sur le site officiel de QFEX et ouvrir un compte avec un seul wallet.",
+        "Lire les règles de la Saison 0.",
+        "Trader un petit volume (en limit orders de préférence) et mesurer le coût réel.",
+        "Augmenter seulement si le coût reste raisonnable par rapport aux points gagnés."
       ],
       "links": [
-        "https://x.com/QFEX"
+        "https://qfex.com"
       ],
       "red_flags": [
-        "Domaine officiel non vérifié ici",
-        "Aucun token ni programme confirmé"
+        "Carnet d'ordres mince : le coût de farming peut dépasser le gain.",
+        "Token non confirmé.",
+        "Restrictions réglementaires possibles sur les produits RWA.",
+        "Domaine non revérifié faute de recherches web : le confirmer depuis le compte X officiel avant de connecter un wallet."
       ],
       "first_seen": "2026-11-02"
     },
     "elysium-ascend": {
       "slug": "elysium-ascend",
       "name": "Elysium (L2 HyperEVM) / Ascend – Points",
-      "chain": "Elysium/HyperEVM",
+      "chain": "Elysium (HyperEVM)",
       "alive": true,
-      "summary": "Elysium est le L2 de Kinetiq (Arbitrum Orbit), qui se règle sur HyperEVM avec le HYPE comme gas. Mainnet confirmé le 09/11/2026. Pas de date de fin pour les points Ascend.",
+      "summary": "Elysium est une L2 Arbitrum Orbit de Kinetiq qui règle sur HyperEVM et utilise HYPE comme gas. Testnet depuis le 22/09, mainnet le 09/11. Ascend, le launchpad phare, est cofondé par le KOL CryptoTomYT : le HYPE déposé devient du kHYPE, et les récompenses de staking achètent les nouveaux tokens. Les règles exactes des points ne sont pas encore publiées.",
       "potential": 3,
       "effort": 2,
-      "risk": 3,
-      "cost_usd": "20-200$",
+      "risk": 4,
+      "cost_usd": "10-100$ (HYPE gas + dépôt)",
       "deadline": "09/11 mainnet",
       "deadline_date": "2026-11-09",
-      "next_action": "Préparer quelques HYPE sur HyperEVM et, le 09/11, bridger un petit montant vers Elysium via le lien officiel publié par Kinetiq.",
+      "next_action": "Le 09/11, attends l'annonce officielle du mainnet de Kinetiq et ses audits, puis teste Elysium avec un petit montant de HYPE.",
       "steps": [
-        "Avoir un peu de HYPE sur HyperEVM",
-        "Le 09/11, prendre le lien du bridge uniquement depuis kinetiq.xyz ou le X officiel",
-        "Bridger un petit montant et utiliser 2-3 dApps natives",
-        "S'inscrire au programme de points Ascend s'il est confirmé officiellement et suivre ses points"
+        "Suivre l'annonce du mainnet sur kinetiq.xyz et le compte X officiel de Kinetiq.",
+        "Avoir un peu de HYPE pour le gas.",
+        "Bridger un petit montant vers Elysium seulement via le bridge officiel.",
+        "Tester Ascend avec un dépôt limité, une fois les règles de points publiées.",
+        "Révoquer les approvals inutiles après usage."
       ],
       "links": [
         "https://kinetiq.xyz"
       ],
       "red_flags": [
-        "Faux bridges au lancement",
-        "Un seul séquenceur (Conduit) : chaîne neuve et centralisée",
-        "Pas d'airdrop officiellement confirmé"
+        "Nouvelle L2 : risque de bridge ou de smart contract au lancement.",
+        "Launchpad cofondé par un KOL : risque de memecoins et de rug sur les tokens lancés.",
+        "Domaine officiel d'Ascend non revérifié."
       ],
       "first_seen": "2026-11-02"
     },
@@ -233,27 +241,27 @@
       "name": "Titan Exchange – Points testnet",
       "chain": "Canton Network",
       "alive": true,
-      "summary": "Exchange axé sur la confidentialité (crypto, actions), réglé sur Canton Network. Testnet incitatif en ligne avec des points chaque semaine. Gratuit.",
+      "summary": "Exchange axé sur la confidentialité (crypto, actions), sur Canton Network. Un testnet incitatif avec points est ouvert : 10 000 USDCx de test via le faucet, bonus de 250 points pour le tutoriel, +10 % via parrainage. Aucun token ni conversion des points n'est confirmé.",
       "potential": 2,
       "effort": 2,
       "risk": 2,
       "cost_usd": "0$",
       "deadline": "Pas de fin annoncée",
       "deadline_date": "",
-      "next_action": "Trouver le lien du testnet depuis le X officiel @TitanExchange_ (pas via un lien de parrainage), puis faire quelques trades long/short chaque semaine.",
+      "next_action": "En passif seulement : fais le tutoriel du premier trade sur le testnet officiel, puis quelques trades par semaine si tu as le temps.",
       "steps": [
-        "Prendre le lien du testnet depuis la bio de @TitanExchange_",
-        "Connecter un seul wallet et récupérer les fonds testnet",
-        "Faire des longs et des shorts chaque semaine",
-        "Vérifier les points hebdomadaires"
+        "Trouver le lien du testnet depuis le compte X officiel de Titan (@TitanExchange_).",
+        "Récupérer les USDCx de test.",
+        "Faire le tutoriel du premier trade (250 points).",
+        "Trader de temps en temps et suivre le classement."
       ],
       "links": [
         "https://x.com/TitanExchange_"
       ],
       "red_flags": [
-        "Domaine vu seulement dans des liens de parrainage (non vérifié)",
-        "Des tokens « TITAN » sans rapport existent déjà",
-        "Valeur des points testnet incertaine"
+        "Aucun token ni airdrop confirmé officiellement.",
+        "Domaine titanx.cc vu seulement via des liens de parrainage : non vérifié.",
+        "Écosystème Canton orienté institutionnels."
       ],
       "first_seen": "2026-11-02"
     },
@@ -262,55 +270,56 @@
       "name": "Predict.fun – Choix du claim PREDICT",
       "chain": "BNB Chain",
       "alive": true,
-      "summary": "Token PREDICT annoncé le 28/10 : offre de 1 milliard, 70 M (7 %) pour l'airdrop de la Saison 1. Si tu as des points PP, tu choisis : 35 % tout de suite et 65 % perdus, ou 100 % après un an de staking. Sans choix, c'est le staking.",
+      "summary": "La Saison 1 est terminée : 70M PREDICT (7 % de l'offre) pour les détenteurs de Predict Points. Claim ouvert depuis le 30/10 à 9h UTC, pour environ un mois. Deux options : 35 % tout de suite, ou 100 % en vesting sur 12 mois. Ceux qui choisissent le vesting peuvent repasser en claim immédiat dans le mois qui suit le TGE. Le formulaire Binance Wallet ferme le 26/11 à 17h UTC+8. La Saison 2 a commencé.",
       "potential": 3,
       "effort": 1,
       "risk": 2,
-      "cost_usd": "0-1$",
+      "cost_usd": "~1$ gas",
       "deadline": "26/11 9h UTC choix",
       "deadline_date": "2026-11-26",
-      "next_action": "Vérifier sur predict.fun (ou Binance Wallet) si le wallet a des points PP, puis choisir le mode de claim avant le 26/11 à 9h UTC.",
+      "next_action": "Vérifie ton allocation sur predict.fun et choisis entre 35 % tout de suite et le vesting 12 mois avant le 26/11 (Binance Wallet), sans attendre la fin de la fenêtre d'environ un mois.",
       "steps": [
-        "Ouvrir predict.fun ou Binance Wallet et vérifier tes points PP",
-        "Comparer : 35 % liquides au listing, ou 100 % bloqués un an (risque sur le prix)",
-        "Envoyer le formulaire de choix avant le 26/11 9h UTC (pour être crédité le jour du listing, soumettre au plus tôt)",
-        "Ne jamais signer d'approve illimité pour un claim"
+        "Se connecter à predict.fun avec le wallet de la Saison 1 et consulter son allocation.",
+        "Choisir : 35 % tout de suite (le reste est perdu) ou 100 % en vesting sur 12 mois.",
+        "Si tu passes par Binance Wallet, remplir le formulaire avant le 26/11 à 17h UTC+8.",
+        "Ne pas laisser passer la fenêtre de claim : ce qui n'est pas réclamé est perdu.",
+        "Facultatif : continuer à utiliser le protocole pour la Saison 2, avec une mise modérée."
       ],
       "links": [
         "https://predict.fun"
       ],
       "red_flags": [
-        "Faux formulaires de claim",
-        "Option staking : un an bloqué, risque sur le prix",
-        "Le fuseau horaire varie selon les sources (UTC chez Binance)"
+        "Les tokens non réclamés sont perdus.",
+        "Les sites de faux claim PREDICT se multiplient : ne passer que par predict.fun ou Binance Wallet."
       ],
       "first_seen": "2026-11-02"
     },
     "standx": {
       "slug": "standx",
       "name": "StandX – Claim DUSD (fermeture)",
-      "chain": "BNB Chain/Solana",
+      "chain": "BNB Chain / Solana",
       "alive": true,
-      "summary": "StandX ferme sans lancer de token. Un airdrop unique en DUSD se claim du 01/11 au 31/12/2026, avec le wallet StandX existant (BNB Chain ou Solana). Les rendements sont coupés depuis le 15/10.",
+      "summary": "StandX ne lancera pas de token et ferme son exchange perp. À la place, un airdrop unique de DUSD sans blocage est versé. Le claim est ouvert du 02/11 00h UTC au 31/12 08h UTC. Il faut fermer ses positions avant le 15/01/2027 ; les retraits et le rachat des DUSD se terminent le 31/01/2027.",
       "potential": 2,
       "effort": 1,
       "risk": 2,
-      "cost_usd": "~1$",
-      "deadline": "31/12 9h claim",
+      "cost_usd": "~1$ gas",
+      "deadline": "31/12 8h UTC claim",
       "deadline_date": "2026-12-31",
-      "next_action": "Connecter le wallet StandX existant sur standx.com, claim les DUSD puis les échanger ou retirer avec le reste des fonds.",
+      "next_action": "Aujourd'hui, va sur la page officielle de StandX, vérifie ton éligibilité et réclame tes DUSD avec ton wallet BNB ou Solana habituel.",
       "steps": [
-        "Aller sur standx.com en tapant l'adresse",
-        "Connecter le wallet déjà utilisé sur StandX (BNB Chain ou Solana)",
-        "Claim les DUSD",
-        "Échanger les DUSD et retirer tous les fonds bien avant la fin des retraits"
+        "Ouvrir la page airdrop sur le domaine officiel de StandX (pas un lien reçu en DM).",
+        "Connecter le wallet BNB Chain ou Solana déjà utilisé sur StandX.",
+        "Réclamer les DUSD (pas de blocage) avant le 31/12 à 08h UTC.",
+        "Fermer toutes ses positions avant le 15/01/2027.",
+        "Racheter ou retirer ses DUSD et vider le Perps Wallet avant le 31/01/2027."
       ],
       "links": [
         "https://standx.com"
       ],
       "red_flags": [
-        "Plateforme en fermeture : ne rien laisser dessus",
-        "Faux sites de remboursement ou de claim"
+        "Projet en fermeture : les faux sites de claim vont se multiplier.",
+        "La liquidité de DUSD sera retirée de PancakeSwap et Raydium à la fermeture, donc vendre tôt plutôt que tard."
       ],
       "first_seen": "2026-11-02"
     },
@@ -319,26 +328,25 @@
       "name": "Aster – Claim vesting Stage 6",
       "chain": "BNB Chain",
       "alive": true,
-      "summary": "Ceux qui ont choisi le vesting complet en Stage 6 (Convergence) peuvent claim du 28/10/2026 au 28/11/2026, 12h UTC. Notre fiche se trompait en parlant d'une ouverture le 28/11.",
-      "potential": 3,
+      "summary": "Le Stage 6 « Convergence » distribue 64M ASTER. Ceux qui avaient choisi le vesting complet (fenêtre du 20/04 au 02/05/2026) peuvent réclamer leur allocation du 28/10 au 28/11 à 12h UTC. Le claim immédiat du Stage 6 est déjà fermé.",
+      "potential": 2,
       "effort": 1,
       "risk": 2,
-      "cost_usd": "~1$ de gas",
+      "cost_usd": "~1$ gas",
       "deadline": "28/11 12h UTC claim",
       "deadline_date": "2026-11-28",
-      "next_action": "Aller sur asterdex.com avec le wallet qui a participé et claim tout de suite l'allocation Stage 6.",
+      "next_action": "Connecte-toi sur asterdex.com pour voir si tu as une allocation vesting Stage 6, et réclame-la avant le 28/11 à 12h UTC.",
       "steps": [
-        "Ouvrir asterdex.com en tapant l'adresse (pas de lien reçu en DM)",
-        "Connecter le wallet qui a participé au Stage 6",
-        "Aller dans la section Airdrop/Claim et vérifier l'allocation",
-        "Claim avant le 28/11 12h UTC (les dates varient selon les sources, ne pas attendre)"
+        "Aller sur asterdex.com, page airdrop.",
+        "Connecter le wallet utilisé pendant le Stage 6.",
+        "Si tu avais choisi le vesting, réclamer l'allocation complète avant le 28/11 à 12h UTC."
       ],
       "links": [
         "https://www.asterdex.com"
       ],
       "red_flags": [
-        "Faux sites de claim Aster en circulation",
-        "Les sources ne donnent pas toutes les mêmes dates : claim au plus vite"
+        "Ne concerne que ceux qui avaient choisi le vesting : si tu n'avais rien choisi, il n'y a rien à faire.",
+        "Méfiance envers les faux domaines « aster claim »."
       ],
       "first_seen": "2026-11-02"
     },
@@ -347,26 +355,27 @@
       "name": "Polymarket – Token POLY (non daté)",
       "chain": "Polygon",
       "alive": true,
-      "summary": "Token POLY et airdrop confirmés, sans critères ni date. Le fondateur a relancé les rumeurs en octobre 2026. Polymarket est bloqué en France par l'ANJ.",
+      "summary": "Token POLY et airdrop confirmés par le CMO ; marques POLY et $POLY déposées. À TOKEN2049 en octobre 2026, le CEO a évoqué un token « programmable », sans date ni critères. Aucun TGE annoncé.",
       "potential": 4,
       "effort": 2,
-      "risk": 4,
-      "cost_usd": "20-200$",
+      "risk": 2,
+      "cost_usd": "Mises perso (10-100$)",
       "deadline": "Aucune date",
       "deadline_date": "",
-      "next_action": "Ne rien faire depuis la France (accès bloqué, un VPN enfreint les conditions d'utilisation et risque l'exclusion). Surveiller les annonces officielles.",
+      "next_action": "Garde une activité régulière et sincère (quelques paris par mois) sur polymarket.com, sans faire de wash trading.",
       "steps": [
-        "Vérifier que ton pays a légalement accès à Polymarket",
-        "Si c'est autorisé : parier de petits montants régulièrement",
-        "Ne jamais claim via un lien autre que polymarket.com"
+        "Utiliser polymarket.com avec un seul compte, selon sa juridiction.",
+        "Faire quelques paris réels et réguliers sur des marchés variés.",
+        "Éventuellement fournir de la liquidité.",
+        "Attendre une annonce officielle."
       ],
       "links": [
         "https://polymarket.com"
       ],
       "red_flags": [
-        "Accès bloqué en France (ANJ)",
-        "Arnaques « POLY claim » très nombreuses",
-        "Pas de critères publiés"
+        "Aucune date ni critère.",
+        "Restrictions géographiques (vérifier que c'est légal là où tu vis).",
+        "Sites « POLY claim » frauduleux."
       ],
       "first_seen": "2026-11-02"
     },
@@ -375,27 +384,84 @@
       "name": "Arc (L1 de Circle) – Testnet",
       "chain": "Arc",
       "alive": true,
-      "summary": "L1 de Circle, testnet gratuit. Tokenomics publiées avec 60 % pour l'écosystème selon airdrops.io, mais aucune distribution aux particuliers confirmée. Mainnet non daté.",
-      "potential": 2,
+      "summary": "Circle a lancé le mainnet Arc fin octobre (75 000 membres Arc House, plus de 700M de transactions sur le testnet). Le token ARC existe : prévente privée de 222M$ à 3Md$ de FDV, 60 % de l'offre réservés à l'écosystème. Aucun airdrop ni critère n'a été annoncé. Des protocoles comme Morpho et Extended sont déjà en ligne sur le mainnet.",
+      "potential": 3,
       "effort": 2,
-      "risk": 1,
-      "cost_usd": "0$",
-      "deadline": "Mainnet non daté",
+      "risk": 2,
+      "cost_usd": "~0-20$",
+      "deadline": "Aucun airdrop annoncé",
       "deadline_date": "",
-      "next_action": "Récupérer des USDC testnet sur faucet.circle.com et faire quelques transactions sur 2-3 dApps du testnet Arc.",
+      "next_action": "Passe du testnet au mainnet Arc en faisant quelques vraies opérations (Extended, Morpho) et garde ton profil Arc House actif.",
       "steps": [
-        "Ajouter le testnet Arc depuis arc.network",
-        "Récupérer des USDC testnet sur faucet.circle.com",
-        "Faire des swaps et transferts sur les dApps de l'écosystème, un peu chaque semaine",
-        "Ne jamais payer pour un « accès anticipé »"
+        "Ajouter le réseau Arc via la documentation officielle.",
+        "Faire quelques transactions réelles en USDC sur des protocoles connus (Extended, Morpho).",
+        "Garder un profil Arc House actif.",
+        "Ignorer tout « claim ARC » non annoncé par Circle."
       ],
       "links": [
-        "https://www.arc.network",
-        "https://faucet.circle.com"
+        "https://arc.network",
+        "https://www.circle.com"
       ],
       "red_flags": [
-        "Aucun airdrop confirmé",
-        "Faux « tokens Arc » à claim"
+        "Aucun airdrop confirmé.",
+        "Projet porté par une entreprise régulée : distribution possiblement limitée selon la juridiction (KYC).",
+        "Faux sites de claim ARC."
+      ],
+      "first_seen": "2026-11-02"
+    },
+    "grass-stage2": {
+      "slug": "grass-stage2",
+      "name": "Grass – Claim USDC Stage 2",
+      "chain": "Solana",
+      "alive": true,
+      "summary": "Les récompenses du Stage 2 sont payées en USDC (pas en GRASS) à tous ceux qui ont gagné des Network Points entre le 14/10/2024 et le 08/06/2026. Claim ouvert depuis le 22/07/2026 sur le dashboard officiel, jusqu'au 22/01/2027.",
+      "potential": 2,
+      "effort": 1,
+      "risk": 1,
+      "cost_usd": "~0$",
+      "deadline": "22/01/2027 claim",
+      "deadline_date": "2027-01-22",
+      "next_action": "Si tu as fait tourner Grass entre fin 2024 et juin 2026, connecte-toi sur app.grass.io/dashboard et réclame tes USDC.",
+      "steps": [
+        "Se connecter sur app.grass.io/dashboard.",
+        "Vérifier son allocation USDC sur la page Allocation.",
+        "Confirmer le claim (versement dans le Grass Wallet intégré).",
+        "Transférer ensuite vers ton wallet Solana habituel si tu le souhaites."
+      ],
+      "links": [
+        "https://app.grass.io"
+      ],
+      "red_flags": [
+        "Ne concerne que les anciens utilisateurs.",
+        "Faux dashboards Grass."
+      ],
+      "first_seen": "2026-11-02"
+    },
+    "metamask-rewards": {
+      "slug": "metamask-rewards",
+      "name": "MetaMask – Rewards (token MASK)",
+      "chain": "Multi-chain (EVM)",
+      "alive": true,
+      "summary": "Consensys a confirmé un token MetaMask, attendu fin 2026 mais non daté. La Saison 1 de MetaMask Rewards a déjà distribué plus de 30M$ en LINEA ; le programme continue sous forme de campagnes et de défis (swaps, perps, bridge dans le wallet).",
+      "potential": 4,
+      "effort": 2,
+      "risk": 2,
+      "cost_usd": "5-50$ (frais de swap)",
+      "deadline": "Aucune date",
+      "deadline_date": "",
+      "next_action": "Active MetaMask Rewards dans ton wallet et fais tes swaps et bridges habituels depuis MetaMask pour les campagnes en cours.",
+      "steps": [
+        "Mettre à jour MetaMask depuis metamask.io uniquement.",
+        "Activer la section Rewards dans l'application.",
+        "Faire tes swaps, bridges et petits trades perps habituels directement dans MetaMask.",
+        "Participer aux campagnes et défis affichés dans Rewards."
+      ],
+      "links": [
+        "https://metamask.io"
+      ],
+      "red_flags": [
+        "Le « MASK claim » est l'arnaque la plus répandue : MetaMask ne demande jamais ta seed phrase.",
+        "Les frais de swap MetaMask sont plus élevés que ceux des agrégateurs."
       ],
       "first_seen": "2026-11-02"
     }
@@ -414,7 +480,9 @@
     "standx": {},
     "aster-stage6": {},
     "polymarket": {},
-    "arc-testnet": {}
+    "arc-testnet": {},
+    "grass-stage2": {},
+    "metamask-rewards": {}
   },
   "seen_emails": [
     "<20261003160300.3.ef4ce4abce6d2356@mg-d0.substack.com>",
