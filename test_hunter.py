@@ -22,6 +22,7 @@ def test_merge_render(tmp_path, monkeypatch):
     state = {"airdrops": {}, "progress": {}, "seen_emails": []}
     a = hunter.Airdrop(slug="foo", name="Foo", chain="Base", summary="s", potential=4, effort=2, risk=1,
                        cost_usd="~2$", deadline="inconnue", deadline_date="", next_action="bridge", alive=True,
+                       who="agent", action_url="", how_to=[],
                        steps=["bridge"], links=["https://foo.xyz"], red_flags=[])
     assert hunter.merge(state, [a]) == ["foo"]
     assert hunter.merge(state, [a]) == []
@@ -84,3 +85,26 @@ def test_run_actions_without_key(monkeypatch):
     hunter.run_actions(state, [_action(), _action(amount_usd=99)], execute=True)
     assert [e["status"] for e in state["executions"]] == ["proposée", "refusée : 99.0$ hors plafond par tx (25.0$)"]
     assert state["progress"] == {}
+
+
+def test_html_mail():
+    from datetime import date, timedelta
+    soon = (date.today() + timedelta(days=2)).isoformat()
+    base = dict(potential=3, risk=2, alive=True, links=["https://foo.xyz"], deadline_date="")
+    state = {"airdrops": {
+        "claim": base | {"name": "Claim <Foo>", "who": "toi", "deadline_date": soon, "next_action": "claimer",
+                         "action_url": "https://claim.foo.xyz/app", "how_to": ["Connecte le wallet", "Signe **claim**"]},
+        "evil": base | {"name": "Evil", "who": "toi", "next_action": "x", "action_url": "javascript:alert(1)",
+                        "links": [], "how_to": []},
+        "zzz": base | {"name": "Dodo", "who": "attendre", "next_action": "rien"}},
+        "progress": {}, "executions": [{"date": str(date.today()), "airdrop": "claim", "chain": "base", "usd": 10,
+                                        "desc": "arbitrum→base ETH→ETH", "reason": "r", "tx": "0xabc", "status": "envoyée"}]}
+    wallet = {"address": "0x1", "balances": {"base": {"eth": 0.1, "usdc": 0, "usd": 230}}}
+    h = hunter.build_html(state, "- 🔥 **Vite** [site](https://foo.xyz)", [], 1, wallet=wallet)
+    assert "Claim &lt;Foo&gt;" in h and "<Foo>" not in h            # échappé
+    assert 'href="https://claim.foo.xyz/app"' in h and "Ouvrir claim.foo.xyz" in h
+    assert "javascript:" not in h                                    # lien non https ignoré
+    assert "<b>claim</b>" in h and "<b>Vite</b>" in h and "demain" not in h and "dans 2 j" in h
+    assert "https://basescan.org/tx/0xabc" in h and "✅" in h and "Dodo" in h
+    md = hunter.build_report(state, "- ok", [], 1, wallet=wallet)
+    assert md.index("À toi de jouer") < md.index("Le brief") and "1. Connecte le wallet" in md
