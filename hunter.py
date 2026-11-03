@@ -38,6 +38,10 @@ CHAINS = {
     "base": {"id": 8453, "rpc": "https://mainnet.base.org", "usdc": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
              "weth": "0x4200000000000000000000000000000000000006", "aave_pool": "0xA238Dd80C259a72e81d7e4664a9801593F98d1c5"},
 }
+# Hyperliquid : HYPE natif sur HyperEVM, puis HyperCore (spot → staking → validateur). docs hyperliquid.gitbook.io
+HYPER = {"api": "https://api.hyperliquid.xyz", "evm_rpc": "https://rpc.hyperliquid.xyz/evm", "evm_id": 999,
+         "core_bridge": "0x2222222222222222222222222222222222222222"}  # adresse système HYPE EVM → Core
+HYPE_EVM_RESERVE = 0.02  # HYPE gardé sur HyperEVM pour le gas
 # Vaults autorisés : symbole, sous-jacent et POOL vérifiés on-chain le 03/11/2026, et revérifiés avant chaque tx.
 # En ajouter un = une PR, après vérification de l'adresse sur le site officiel du protocole.
 VAULTS = {
@@ -82,15 +86,17 @@ class Airdrop(BaseModel):
 
 
 class Action(BaseModel):
-    kind: Literal["swap", "deposit", "withdraw"] = Field(
-        "swap", description="swap = bridge/swap LI.FI ; deposit/withdraw = un vault de la liste")
+    kind: Literal["swap", "deposit", "withdraw", "hype_stake"] = Field(
+        "swap", description="swap = bridge/swap LI.FI ; deposit/withdraw = un vault de la liste ; "
+                            "hype_stake = acheter du HYPE avec l'ETH d'Arbitrum et le staker sur Hyperliquid")
     airdrop: str = Field(description="slug de l'airdrop suivi que cette action fait avancer ('' accepté pour un vault)")
     from_chain: Literal["arbitrum", "base"] = Field(description="swap : chaîne de départ ; vault : ignoré")
     to_chain: Literal["arbitrum", "base"] = Field(description="swap : chaîne d'arrivée ; vault : ignoré")
     from_token: Literal["ETH", "USDC"] = Field("ETH", description="swap uniquement")
     to_token: Literal["ETH", "USDC"] = Field("ETH", description="swap uniquement")
     vault: str = Field("", description=f"deposit/withdraw : une clé parmi {', '.join(VAULTS)}")
-    amount_usd: float = Field(description="montant en dollars, sous le plafond par transaction ; withdraw : 0 = tout")
+    amount_usd: float = Field(description="montant en dollars, sous le plafond par transaction ; withdraw : 0 = tout ; "
+                                          "hype_stake : 0 = staker le HYPE déjà présent sans en racheter")
     reason: str = Field(description="pourquoi cette action compte pour l'éligibilité, une phrase")
 
 
@@ -186,7 +192,10 @@ actions par run, exécutées dans l'ordre :
 - swap : bridge ou swap via LI.FI entre ETH et USDC, Arbitrum ↔ Base ;
 - deposit : dépôt dans un vault de la liste (vaults_available) ; pour un vault WETH l'ETH est wrappé
   automatiquement, pour un vault USDC il faut l'USDC (sinon un swap ETH→USDC juste avant) ;
-- withdraw : retrait d'un vault vers le wallet (amount_usd=0 pour tout retirer).
+- withdraw : retrait d'un vault vers le wallet (amount_usd=0 pour tout retirer) ;
+- hype_stake : achète du HYPE avec l'ETH d'Arbitrum et le stake chez un validateur Hyperliquid fiable
+  (piste du 2e airdrop HYPE) ; amount_usd=0 stake le HYPE déjà présent. Le stake est bloqué 1 jour et
+  sortir prend 7 jours : n'y mets que de l'argent qui peut rester, dans la limite de hype_budget_usd.
 Une action doit faire avancer l'éligibilité d'un airdrop suivi (activité demandée sur Arbitrum/Base,
 dépôt qui compte pour un programme de points…) ou placer au rendement des fonds qui dorment.
 Pas d'activité vide pour gonfler des stats, pas de répétition inutile : regarde l'historique.
@@ -311,6 +320,8 @@ def build_report(state, brief, new, n_mails, horizon=30, wallet=None):
                 + (" · ".join(f"{c} : {b['eth']} ETH + {b['usdc']} USDC (~{b['usd']}$)" for c, b in wallet["balances"].items())
                    if "balances" in wallet else f"soldes indisponibles ({wallet.get('error')})"), ""]
         out += [f"- 🏦 {p['name']} : {p['amount']} (~{p['usd']}$)" for p in wallet.get("vaults", {}).values()]
+        if (hl := wallet.get("hyperliquid", {})).get("total"):
+            out.append(f"- 🟢 Hyperliquid : {hl['staked']} HYPE stakés, {hl['total']} au total (~{hl['usd']}$)")
         out += [f"- {_status_icon(e['status'])} {e['desc']} {e['usd']}$ ({e['airdrop']}) → **{e['status']}**"
                 + (f" [tx]({EXPLORERS[e['chain']]}{e['tx']})" if e["tx"] else "") + f" — {e['reason']}"
                 for e in d["runs"]] or ["- 😴 aucune action aujourd'hui"]
@@ -390,6 +401,9 @@ def build_html(state, brief, new, n_mails, horizon=30, wallet=None):
             or '<div style="margin-top:6px">😴 Aucune action on-chain aujourd\'hui.</div>'
         vaults = "".join(f'<div style="margin-top:4px">🏦 {e(p["name"])} : {p["amount"]} (~{p["usd"]} $)</div>'
                          for p in wallet.get("vaults", {}).values())
+        if (hl := wallet.get("hyperliquid", {})).get("total"):
+            vaults += (f'<div style="margin-top:4px">🟢 Hyperliquid : <b>{hl["staked"]} HYPE stakés</b>, '
+                       f'{hl["total"]} au total (~{hl["usd"]} $)</div>')
         out.append(f'''<h2 style="{h2}">🤖 Wallet agent</h2><div style="{card}">
 <div style="font-size:12px;color:#6b7280;word-break:break-all">{e(wallet["address"])}</div>
 <div style="margin-top:4px">💰 {bal}</div>{vaults}{runs}</div>''')
@@ -575,8 +589,14 @@ def wallet_status(state):
                 if amount:
                     vaults[key] = {"name": f"{v['name']} ({name})", "amount": round(amount, 6),
                                    "usd": round(amount * (1 if v["asset"] == "USDC" else price), 2)}
+    try:
+        hype = hype_status(addr)
+        hype["usd"] = round(hype["total"] * hype_price(), 2)
+    except Exception as e:  # Hyperliquid indisponible : le reste du compte rendu passe quand même
+        hype = {"error": str(e)[:100]}
     max_tx, max_day = caps()
-    return {"address": addr, "eth_usd": round(price, 2), "balances": balances, "vaults": vaults,
+    return {"address": addr, "eth_usd": round(price, 2), "balances": balances, "vaults": vaults, "hyperliquid": hype,
+            "hype_budget_usd": float(os.environ.get("HYPE_BUDGET_USD", "50")),
             "vaults_available": {k: f"{v['name']} sur {v['chain']} ({v['asset']})" for k, v in VAULTS.items()},
             "gas_reserve_eth": GAS_RESERVE_ETH, "max_tx_usd": max_tx, "max_day_usd": max_day,
             "spent_today_usd": spent_today(state), "recent_actions": state.get("executions", [])[-10:]}
@@ -584,9 +604,9 @@ def wallet_status(state):
 
 def check_action(a, state, spent, max_tx, max_day):
     """Garde-fous avant toute transaction. Retourne l'erreur ou None."""
-    if a.kind != "swap" and a.vault not in VAULTS:
+    if a.kind in ("deposit", "withdraw") and a.vault not in VAULTS:
         return f"vault {a.vault!r} hors liste"
-    if a.kind == "withdraw":
+    if a.kind == "withdraw" or (a.kind == "hype_stake" and a.amount_usd == 0):
         return None if a.amount_usd >= 0 else "montant négatif"
     if not 0 < a.amount_usd <= max_tx:
         return f"{a.amount_usd}$ hors plafond par tx ({max_tx}$)"
@@ -653,15 +673,19 @@ def _amount(usd, asset):
 
 
 def _swap(w3, acct, a, max_tx):
-    c, native = CHAINS[a.from_chain], a.from_token == "ETH"
-    amount = _amount(a.amount_usd, a.from_token)
+    return _lifi_swap(w3, acct, a.from_chain, CHAINS[a.to_chain]["id"], a.from_token,
+                      NATIVE if a.to_token == "ETH" else CHAINS[a.to_chain]["usdc"], a.amount_usd, max_tx)
+
+
+def _lifi_swap(w3, acct, from_chain, to_chain_id, from_token, to_token, usd, max_tx):
+    c, native = CHAINS[from_chain], from_token == "ETH"
+    amount = _amount(usd, from_token)
     _need_gas(w3, acct, amount if native else 0)
     if not native and _c(w3, c["usdc"], ERC20).functions.balanceOf(acct.address).call() < amount:
-        raise RuntimeError(f"pas assez d'USDC sur {a.from_chain}")
-    q = _lifi("quote", fromChain=c["id"], toChain=CHAINS[a.to_chain]["id"],
-              fromToken=NATIVE if native else c["usdc"],
-              toToken=NATIVE if a.to_token == "ETH" else CHAINS[a.to_chain]["usdc"], fromAmount=str(amount),
-              fromAddress=acct.address, toAddress=acct.address, slippage=0.005)
+        raise RuntimeError(f"pas assez d'USDC sur {from_chain}")
+    q = _lifi("quote", fromChain=c["id"], toChain=to_chain_id, fromToken=NATIVE if native else c["usdc"],
+              toToken=to_token, fromAmount=str(amount), fromAddress=acct.address, toAddress=acct.address,
+              slippage=0.005)
     err = verify_quote(q, c["id"], acct.address, amount, native, max_tx)
     if err:
         raise RuntimeError(err)
@@ -717,16 +741,122 @@ def _vault(w3, acct, a):
     return h
 
 
+# --- Hyperliquid : staking HYPE --------------------------------------------
+
+def _hl_info(kind, **kw):
+    import requests
+    r = requests.post(f"{HYPER['api']}/info", json={"type": kind, **kw}, timeout=30)
+    r.raise_for_status()
+    return r.json()
+
+
+def hype_price():
+    return float(_lifi("token", chain=HYPER["evm_id"], token=NATIVE)["priceUSD"])
+
+
+def hype_status(addr):
+    """HYPE de l'agent : sur HyperEVM, en spot HyperCore, et en staking."""
+    from web3 import Web3
+    evm = Web3(Web3.HTTPProvider(HYPER["evm_rpc"]))
+    spot = next((b for b in _hl_info("spotClearinghouseState", user=addr).get("balances", []) if b["coin"] == "HYPE"), {})
+    st = _hl_info("delegatorSummary", user=addr)
+    out = {"evm": float(evm.from_wei(evm.eth.get_balance(Web3.to_checksum_address(addr)), "ether")),
+           "spot": float(spot.get("total", 0)) - float(spot.get("hold", 0)),
+           "staked": float(st.get("delegated", 0)), "unstaked": float(st.get("undelegated", 0)),
+           "pending_withdrawal": float(st.get("totalPendingWithdrawal", 0))}
+    out["total"] = round(sum(out.values()), 8)
+    return out
+
+
+def pick_validator(summaries):
+    """Validateur actif, non jailé, commission ≤ 5 %, uptime ≥ 99 %, le plus gros stake."""
+    def uptime(v):
+        stats = v.get("stats") or [[None, {}]]
+        return float(stats[0][1].get("uptimeFraction", 0))
+    ok = [v for v in summaries if v.get("isActive") and not v.get("isJailed")
+          and float(v["commission"]) <= 0.05 and uptime(v) >= 0.99]
+    if not ok:
+        raise RuntimeError("aucun validateur Hyperliquid éligible")
+    return max(ok, key=lambda v: float(v["stake"]))
+
+
+CDEPOSIT_TYPES = [{"name": "hyperliquidChain", "type": "string"}, {"name": "wei", "type": "uint64"},
+                  {"name": "nonce", "type": "uint64"}]
+
+
+def _hl_post(acct, action, types, primary, base_url=None):
+    """Action « user-signed » HyperCore (signée par le wallet agent). Lève si refusée."""
+    from hyperliquid.exchange import Exchange
+    from hyperliquid.utils.constants import MAINNET_API_URL
+    from hyperliquid.utils.signing import sign_user_signed_action
+
+    ex = Exchange(acct, base_url or MAINNET_API_URL)
+    sig = sign_user_signed_action(acct, action, types, primary, ex.base_url == MAINNET_API_URL)
+    r = ex._post_action(action, sig, action["nonce"])
+    if r.get("status") != "ok":
+        raise RuntimeError(f"Hyperliquid a refusé {action['type']} : {r.get('response')}")
+    return r
+
+
+def _wait(cond, what, timeout=600, every=10):
+    import time
+    end = time.time() + timeout
+    while time.time() < end:
+        if cond():
+            return
+        time.sleep(every)
+    raise RuntimeError(f"{what} pas encore arrivé : sera repris au prochain run")
+
+
+def hype_stake(acct, a, max_tx):
+    """ETH Arbitrum → HYPE (LI.FI) → HyperCore spot → staking → validateur. Reprend là où ça s'est arrêté."""
+    import time
+    from decimal import Decimal
+    from hyperliquid.utils.signing import TOKEN_DELEGATE_TYPES
+    from web3 import Web3
+
+    me, h = acct.address, ""
+    evm = Web3(Web3.HTTPProvider(HYPER["evm_rpc"]))
+    if a.amount_usd > 0:
+        budget = float(os.environ.get("HYPE_BUDGET_USD", "50"))
+        if (hype_status(me)["total"] * hype_price()) + a.amount_usd > budget * 1.05:
+            raise RuntimeError(f"budget Hyperliquid ({budget}$) atteint")
+        before = evm.eth.get_balance(me)
+        h = _lifi_swap(_w3("arbitrum"), acct, "arbitrum", HYPER["evm_id"], "ETH", NATIVE, a.amount_usd, max_tx)
+        _wait(lambda: evm.eth.get_balance(me) > before, "le HYPE sur HyperEVM")
+    reserve = evm.to_wei(Decimal(str(HYPE_EVM_RESERVE)), "ether")
+    if (bal := evm.eth.get_balance(me)) > 2 * reserve:  # HyperEVM → HyperCore spot
+        spot_before = hype_status(me)["spot"]
+        _send(evm, acct, {"to": Web3.to_checksum_address(HYPER["core_bridge"]), "value": bal - reserve})
+        _wait(lambda: hype_status(me)["spot"] > spot_before, "le HYPE sur HyperCore")
+    if (wei := int(hype_status(me)["spot"] * 1e8)) > 0:  # HYPE : 8 décimales sur HyperCore
+        n = int(time.time() * 1000)
+        _hl_post(acct, {"type": "cDeposit", "hyperliquidChain": "Mainnet", "signatureChainId": "0xa4b1",
+                        "wei": wei, "nonce": n}, CDEPOSIT_TYPES, "HyperliquidTransaction:CDeposit")
+    if (wei := int(hype_status(me)["unstaked"] * 1e8)) > 0:
+        v = pick_validator(_hl_info("validatorSummaries"))
+        n = int(time.time() * 1000)
+        _hl_post(acct, {"type": "tokenDelegate", "hyperliquidChain": "Mainnet", "signatureChainId": "0xa4b1",
+                        "validator": v["validator"], "wei": wei, "isUndelegate": False, "nonce": n},
+                 TOKEN_DELEGATE_TYPES, "HyperliquidTransaction:TokenDelegate")
+    return h
+
+
 def execute_action(a, key, max_tx):
     """Exécute une action déjà validée par check_action. Retourne le hash de la dernière tx."""
-    w3 = _w3(a.from_chain if a.kind == "swap" else VAULTS[a.vault]["chain"])
+    w3 = _w3(VAULTS[a.vault]["chain"] if a.kind in ("deposit", "withdraw") else
+             "arbitrum" if a.kind == "hype_stake" else a.from_chain)
     acct = w3.eth.account.from_key(key)
     if acct.address.lower() != AGENT_WALLET.lower():
         raise RuntimeError("PK_AGENT ne correspond pas à AGENT_WALLET")
+    if a.kind == "hype_stake":
+        return hype_stake(acct, a, max_tx)
     return _swap(w3, acct, a, max_tx) if a.kind == "swap" else _vault(w3, acct, a)
 
 
 def describe(a):
+    if a.kind == "hype_stake":
+        return "staking HYPE (Hyperliquid)" + ("" if a.amount_usd else ", HYPE déjà présent")
     if a.kind == "swap":
         return f"{a.from_chain}→{a.to_chain} {a.from_token}→{a.to_token}"
     v = VAULTS.get(a.vault, {"name": a.vault, "chain": "?"})
@@ -740,7 +870,8 @@ def run_actions(state, actions, execute):
     key = os.environ.get("PK_AGENT") if execute else None
     log = state.setdefault("executions", [])
     for a in actions:
-        chain = a.from_chain if a.kind == "swap" else VAULTS.get(a.vault, {}).get("chain", a.from_chain)
+        chain = ("arbitrum" if a.kind == "hype_stake" else a.from_chain if a.kind == "swap"
+                 else VAULTS.get(a.vault, {}).get("chain", a.from_chain))
         entry = {"date": str(date.today()), "kind": a.kind, "airdrop": a.airdrop, "chain": chain, "usd": a.amount_usd,
                  "desc": describe(a), "reason": a.reason, "tx": ""}
         err = check_action(a, state, spent_today(state), max_tx, max_day)

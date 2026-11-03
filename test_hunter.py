@@ -149,3 +149,19 @@ def test_vault_calldata():
     assert weth.encode_abi("deposit", args=[])[:10] == "0xd0e30db0"
     assert weth.encode_abi("withdraw", args=[1])[:10] == "0x2e1a7d4d"
     assert vault.encode_abi("approve", args=[me, 5])[:10] == "0x095ea7b3"
+
+
+def test_pick_validator():
+    v = lambda name, stake, **kw: {"name": name, "validator": name, "stake": stake, "isActive": True, "isJailed": False,
+                                   "commission": "0.03", "stats": [["day", {"uptimeFraction": "1.0"}]]} | kw
+    vals = [v("gros-jaile", 900, isJailed=True), v("cher", 800, commission="0.2"), v("instable", 700,
+            stats=[["day", {"uptimeFraction": "0.9"}]]), v("inactif", 600, isActive=False), v("bon", 500), v("petit", 100)]
+    assert hunter.pick_validator(vals)["name"] == "bon"
+
+
+def test_check_action_hype():
+    state = {"airdrops": {"hyperliquid-s2": {"alive": True}}}
+    assert hunter.check_action(_action(kind="hype_stake", airdrop="hyperliquid-s2", amount_usd=20), state, 0, 25, 50) is None
+    assert hunter.check_action(_action(kind="hype_stake", airdrop="", amount_usd=0), state, 50, 25, 50) is None  # restake
+    assert "plafond par tx" in hunter.check_action(_action(kind="hype_stake", airdrop="", amount_usd=30), state, 0, 25, 50)
+    assert hunter.describe(_action(kind="hype_stake", amount_usd=0)).startswith("staking HYPE")
