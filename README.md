@@ -1,10 +1,24 @@
 # Sn0opyDr0p
 
-**Chirac**, l'agent chasseur d'airdrops : lit les mails du **Grimoire du Mage** (Gmail), vérifie chaque opportunité sur le web avec Claude, note potentiel / effort / risque, et tient `TRACKER.md` à jour par compte.
+**Chirac**, l'agent chasseur d'airdrops : lit les newsletters de chasseurs d'airdrops (**Grimoire du Mage**, Bankless, M31 Capital, Airdrop Alert, Cryptopolitan) dans Gmail, parcourt les agrégateurs (CryptoRank, DropsTab, Airdrops.io), vérifie chaque opportunité sur le web avec Claude, note potentiel / effort / risque, et tient `TRACKER.md` à jour par compte.
 
 Chaque matin (GitHub Actions), il revérifie les airdrops suivis, en ajoute de nouveaux et t'envoie un compte rendu par mail (`REPORT.md`) : d'abord « 🙋 À toi de jouer », les actions manuelles avec le pas-à-pas et le bouton vers le site officiel, puis le brief, les échéances, le wallet agent et les nouveautés.
 
-Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, le dépôt / retrait dans un vault (Aave USDC/WETH sur Base et Arbitrum, Spark USDC sur Base), ou le staking de HYPE sur Hyperliquid, sous plafonds, dès qu'un nouveau mail du Grimoire arrive (vérifié toutes les 2 h), et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
+Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, le dépôt / retrait dans un vault (Aave USDC/WETH sur Base et Arbitrum, Spark USDC sur Base), ou le staking de HYPE sur Hyperliquid, sous plafonds, dès qu'une nouvelle newsletter arrive (vérifié toutes les 2 h), et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
+
+## Sources
+
+Abonne l'adresse Gmail de Chirac à ces newsletters ; il les lit toutes, avec le même filtrage :
+
+| Newsletter | Motif d'expéditeur |
+|---|---|
+| [Le Grimoire du Mage](https://cryptomage.substack.com) | `cryptomage@substack.com` |
+| [M31 Capital — The Monthly Airdrop](https://m31capital.substack.com) | `m31capital@substack.com` |
+| [Bankless](https://www.bankless.com) | `bankless` |
+| [Airdrop Alert](https://airdropalert.com/newsletter) | `airdropalert` |
+| [Cryptopolitan — Airdrop Newsletter](https://www.cryptopolitan.com/airdrop-newsletter/) | `cryptopolitan` |
+
+`NEWSLETTER_FROM=motif1,motif2` remplace cette liste. À chaque run il consulte aussi [CryptoRank Drophunting](https://cryptorank.io/drophunting), [DropsTab](https://dropstab.com/activities) et [Airdrops.io](https://airdrops.io), et X via la recherche web. Un nouvel airdrop n'est retenu qu'avec un site officiel vérifié et (airdrop confirmé, fonds levés connus ou deux sources indépendantes), 5 au plus par run ; le tracker indique où il a été vu.
 
 ## Setup
 

@@ -23,13 +23,13 @@ def test_merge_render(tmp_path, monkeypatch):
     a = hunter.Airdrop(slug="foo", name="Foo", chain="Base", summary="s", potential=4, effort=2, risk=1,
                        cost_usd="~2$", deadline="inconnue", deadline_date="", next_action="bridge", alive=True,
                        who="agent", action_url="", how_to=[],
-                       steps=["bridge"], links=["https://foo.xyz"], red_flags=[])
+                       steps=["bridge"], links=["https://foo.xyz"], red_flags=[], sources=["CryptoRank"])
     assert hunter.merge(state, [a]) == ["foo"]
     assert hunter.merge(state, [a]) == []
     state["progress"]["foo"]["main"] = "fait"
     hunter.render(state)
     md = (tmp_path / "T.md").read_text()
-    assert "[Foo](https://foo.xyz)" in md and "main: fait" in md and "★★★★" in md
+    assert "[Foo](https://foo.xyz)" in md and "main: fait" in md and "★★★★" in md and "Vu dans : CryptoRank" in md
 
 
 def test_report():
@@ -165,3 +165,26 @@ def test_check_action_hype():
     assert hunter.check_action(_action(kind="hype_stake", airdrop="", amount_usd=0), state, 50, 25, 50) is None  # restake
     assert "plafond par tx" in hunter.check_action(_action(kind="hype_stake", airdrop="", amount_usd=30), state, 0, 25, 50)
     assert hunter.describe(_action(kind="hype_stake", amount_usd=0)).startswith("staking HYPE")
+
+
+def test_newsletters(monkeypatch):
+    raw = {b"1": b"Message-ID: <a@x>\nSubject: Grimoire\n\nfarm", b"2": b"Message-ID: <b@x>\nSubject: Alert\n\n" + b"x" * 30000}
+
+    class Box:
+        def __init__(self, host): pass
+        def login(self, u, p): pass
+        def select(self, *a, **k): pass
+        def logout(self): pass
+        def search(self, _, __, sender, *rest):
+            return "OK", [{'"cryptomage@substack.com"': b"1", '"airdropalert"': b"2 1"}.get(sender, b"")]
+        def fetch(self, i, _): return "OK", [(None, raw[i])]
+
+    monkeypatch.setattr(hunter.imaplib, "IMAP4_SSL", Box)
+    monkeypatch.setenv("GMAIL_USER", "u"); monkeypatch.setenv("GMAIL_APP_PASSWORD", "p")
+    monkeypatch.delenv("NEWSLETTER_FROM", raising=False)
+    mails = hunter.fetch_newsletters({"seen_emails": []}, 3)
+    assert [(m["id"], m["source"]) for m in mails] == [("<a@x>", "Le Grimoire du Mage"), ("<b@x>", "Airdrop Alert")]
+    assert len(mails[1]["body"]) == hunter.MAIL_MAX_CHARS
+    assert hunter.fetch_newsletters({"seen_emails": ["<a@x>", "<b@x>"]}, 3) == []
+    monkeypatch.setenv("NEWSLETTER_FROM", "foo@substack.com, bar")
+    assert list(hunter.newsletters()) == ["foo@substack.com", "bar"]
