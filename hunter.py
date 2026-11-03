@@ -161,38 +161,34 @@ Si rien n'est pertinent, renvoie une liste vide. Les actions manuelles restent d
 
 
 def analyze(mails, state, wallet):
-    import anthropic
+    """Analyse via Claude Code (abonnement Claude, pas de crédits API), outils limités au web."""
+    import subprocess
+    import tempfile
 
-    client = anthropic.Anthropic()
     mail_txt = "\n\n".join(
         f"<mail subject={m['subject']!r} date={m['date']!r}>\n{m['body']}\n</mail>" for m in mails
     ) or "(aucun nouveau mail : cherche toi-même les meilleurs airdrops actifs du moment)"
     known = [{"slug": s, "name": a["name"], "deadline": a["deadline"], "progress": state["progress"].get(s, {})}
              for s, a in state["airdrops"].items() if a.get("alive", True)]
-    messages = [{
-        "role": "user",
-        "content": f"Date du jour : {date.today()}\nAirdrops déjà suivis :\n"
-                   f"{json.dumps(known, ensure_ascii=False)}\n\nWallet agent :\n"
-                   f"{json.dumps(wallet, ensure_ascii=False)}\n\n{mail_txt}",
-    }]
-    for _ in range(5):  # pause_turn = la recherche web a besoin d'un tour de plus
-        resp = client.beta.messages.parse(
-            model="claude-opus-5-5",
-            max_tokens=16000,
-            system=SYSTEM,
-            messages=messages,
-            tools=[{"type": "web_search_20260209", "name": "web_search", "max_uses": 30}],
-            output_config={"effort": "high"},
-            output_format=Report,
-            betas=["server-side-fallback-2026-07-01"],
-            fallbacks="default",
-        )
-        if resp.stop_reason != "pause_turn":
-            break
-        messages.append({"role": "assistant", "content": resp.content})
-    if resp.stop_reason == "refusal" or resp.parsed_output is None:
-        raise SystemExit(f"Analyse impossible (stop_reason={resp.stop_reason})")
-    return resp.parsed_output
+    data = (f"Date du jour : {date.today()}\nAirdrops déjà suivis :\n{json.dumps(known, ensure_ascii=False)}\n\n"
+            f"Wallet agent :\n{json.dumps(wallet, ensure_ascii=False)}\n\n{mail_txt}")
+    # Sans ANTHROPIC_API_KEY, Claude Code utilise l'abonnement ; et il ne voit aucun secret.
+    env = {k: v for k, v in os.environ.items()
+           if k not in ("ANTHROPIC_API_KEY", "PK_AGENT", "GMAIL_APP_PASSWORD") and not k.startswith("PK_")}
+    cmd = ["claude", "-p", "Analyse les données fournies sur l'entrée standard et rends le rapport.",
+           "--output-format", "json", "--json-schema", json.dumps(Report.model_json_schema()),
+           "--system-prompt", SYSTEM, "--model", os.environ.get("CLAUDE_MODEL", "sonnet"),
+           "--tools", "WebSearch,WebFetch", "--allowedTools", "WebSearch,WebFetch",
+           "--strict-mcp-config", "--max-turns", "60"]
+    with tempfile.TemporaryDirectory() as cwd:  # pas de CLAUDE.md ni de fichiers du repo à portée
+        r = subprocess.run(cmd, input=data, capture_output=True, text=True, env=env, cwd=cwd, timeout=1800)
+    try:
+        out = json.loads(r.stdout)
+    except json.JSONDecodeError:
+        raise SystemExit(f"Claude Code a échoué (code {r.returncode}) : {(r.stderr or r.stdout)[-500:]}")
+    if out.get("is_error") or "structured_output" not in out:
+        raise SystemExit(f"Analyse impossible : {str(out.get('result'))[-500:]}")
+    return Report.model_validate(out["structured_output"])
 
 
 def merge(state, airdrops):

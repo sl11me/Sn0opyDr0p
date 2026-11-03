@@ -16,13 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4 (épinglé : le job voit la clé du wallet)
       - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e  # v6
+      - run: npm install -g @anthropic-ai/claude-code@2.1.314
       # l'agent n'agit que si la variable AGENT_EXECUTE vaut true (Settings → Variables) : c'est l'interrupteur
       - run: uv run hunter.py hunt --send ${{ vars.AGENT_EXECUTE == 'true' && '--execute' || '' }}
         env:
           PK_AGENT: ${{ secrets.PK_AGENT }}
           MAX_TX_USD: ${{ vars.MAX_TX_USD || '25' }}
           MAX_DAY_USD: ${{ vars.MAX_DAY_USD || '50' }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}  # abonnement Claude, pas de crédits API
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
       - name: commit tracker
