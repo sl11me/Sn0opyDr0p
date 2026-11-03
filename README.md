@@ -4,7 +4,7 @@
 
 Chaque matin (GitHub Actions), il revérifie les airdrops suivis, en ajoute de nouveaux et t'envoie un compte rendu par mail (`REPORT.md`) : d'abord « 🙋 À toi de jouer », les actions manuelles avec le pas-à-pas et le bouton vers le site officiel, puis le brief, les échéances, le wallet agent et les nouveautés.
 
-Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, sous plafonds, dès qu'un nouveau mail du Grimoire arrive (vérifié toutes les 2 h), et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
+Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, ou le dépôt / retrait dans un vault (Aave USDC/WETH sur Base et Arbitrum, Spark USDC sur Base), sous plafonds, dès qu'un nouveau mail du Grimoire arrive (vérifié toutes les 2 h), et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
 
 ## Setup
 
@@ -53,7 +53,8 @@ gh run list --workflow hunt.yml --repo sl11me/Sn0opyDr0p             # derniers 
 
 Agent automatique (`hunt --execute`) :
 
-- Claude choisit dans un menu fermé (bridge/swap depuis ETH, vers ETH ou USDC, Arbitrum ↔ Base) ; il n'écrit jamais de calldata. La transaction vient de l'API LI.FI.
+- Claude choisit dans un menu fermé : swap/bridge ETH ↔ USDC (Arbitrum ↔ Base), dépôt ou retrait dans un vault de `VAULTS`. Il n'écrit jamais de calldata : pour les swaps elle vient de LI.FI, pour les vaults elle est encodée par le code avec des ABI fixes (Aave `supply`/`withdraw`, ERC-4626 `deposit`/`withdraw`/`redeem`).
+- Vaults : adresses vérifiées on-chain, et revérifiées avant chaque tx (sous-jacent, POOL Aave). Approbations au montant exact, jamais illimitées. Les retraits ne comptent pas dans le plafond du jour (ils rendent des fonds au wallet). Ajouter un vault = une PR.
 - Avant de signer, le code vérifie : contrat = LI.FI Diamond, expéditeur **et** destinataire = wallet agent, montant exact, perte < 10 %, plafonds par tx et par jour, réserve de gas, airdrop suivi et actif. La tx est simulée (`estimate_gas`) avant envoi.
 - `PK_AGENT` doit correspondre à l'adresse du wallet agent, sinon rien n'est signé.
 - Perte maximale possible = le solde du wallet dédié. N'y mets que le budget de l'agent.
