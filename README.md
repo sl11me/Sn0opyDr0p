@@ -29,7 +29,7 @@ uv run --env-file .env hunter.py tx --chain base --account main --to 0x... --val
 
 ## Run quotidien
 
-`.github/workflows/hunt.yml` tourne tous les jours à 6h UTC (et à la main via *Run workflow*), puis commit `TRACKER.md`, `REPORT.md` et `state.json`. Secrets du repo : `ANTHROPIC_API_KEY`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, et `PK_AGENT` (clé privée du wallet dédié, **uniquement** celui-là).
+`.github/workflows/hunt.yml` tourne tous les jours à 6h UTC (et à la main via *Run workflow*), puis commit `TRACKER.md`, `REPORT.md` et `state.json`. Secrets du repo : `CLAUDE_CODE_OAUTH_TOKEN` (ton abonnement Claude, généré par `claude setup-token` : l'analyse passe par Claude Code, sans crédits API), `GMAIL_USER`, `GMAIL_APP_PASSWORD`, et `PK_AGENT` (clé privée du wallet dédié, **uniquement** celui-là).
 
 Variables du repo (*Settings → Secrets and variables → Actions → Variables*) :
 
