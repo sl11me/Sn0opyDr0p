@@ -3,7 +3,8 @@
 hunt  : lit les mails du Grimoire du Mage (Gmail IMAP), revérifie les airdrops suivis sur le web,
         en note de nouveaux et écrit le compte rendu du jour (REPORT.md, --send pour le mail)
 mark  : met à jour la progression d'un airdrop pour un compte
-        ; avec --execute, le wallet agent fait seul les bridges/swaps LI.FI choisis, sous plafonds
+        ; avec --execute, le wallet agent fait seul les bridges/swaps LI.FI choisis, sous plafonds,
+        quand un nouveau mail arrive (--force : même sans) ; --if-mail : rien à faire sans nouveau mail
 tx    : signe et envoie une transaction EVM après validation manuelle
 track : régénère TRACKER.md
 """
@@ -460,7 +461,10 @@ def main():
     h.add_argument("--days", type=int, default=14)
     h.add_argument("--no-mail", action="store_true", help="recherche web seule")
     h.add_argument("--send", action="store_true", help="envoie le compte rendu par mail")
-    h.add_argument("--execute", action="store_true", help="le wallet agent exécute les actions (PK_AGENT requis)")
+    h.add_argument("--execute", action="store_true",
+                   help="le wallet agent exécute les actions, seulement s'il y a un nouveau mail (PK_AGENT requis)")
+    h.add_argument("--force", action="store_true", help="avec --execute : agir même sans nouveau mail")
+    h.add_argument("--if-mail", action="store_true", help="ne rien faire s'il n'y a pas de nouveau mail")
     m = sub.add_parser("mark", help="progression d'un airdrop pour un compte")
     m.add_argument("slug")
     m.add_argument("account")
@@ -480,6 +484,8 @@ def main():
     if args.cmd == "hunt":
         mails = [] if args.no_mail else fetch_grimoire(state, args.days)
         print(f"{len(mails)} nouveau(x) mail(s) du Grimoire")
+        if args.if_mail and not mails:
+            return
         try:
             wallet = wallet_status(state)
         except Exception as e:  # RPC ou LI.FI en panne : on chasse quand même, sans agir
@@ -488,7 +494,8 @@ def main():
         new = merge(state, result.airdrops)
         state["seen_emails"] += [m["id"] for m in mails]
         print(f"{len(result.airdrops)} airdrop(s) analysé(s), {len(new)} nouveau(x)")
-        run_actions(state, result.actions, args.execute and "balances" in wallet)
+        # l'agent passe à l'action quand le Grimoire publie ; sinon il propose seulement
+        run_actions(state, result.actions, args.execute and (bool(mails) or args.force) and "balances" in wallet)
         if any(e["status"] == "envoyée" and e["date"] == str(date.today()) for e in state["executions"]):
             wallet = wallet_status(state)
         report = build_report(state, result.brief, new, len(mails), wallet=wallet)

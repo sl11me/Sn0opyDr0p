@@ -4,7 +4,7 @@ Agent chasseur d'airdrops : lit les mails du **Grimoire du Mage** (Gmail), véri
 
 Chaque matin (GitHub Actions), il revérifie les airdrops suivis, en ajoute de nouveaux et t'envoie un compte rendu par mail (`REPORT.md`) : ce qui presse, quoi faire aujourd'hui, ce qu'on laisse tomber.
 
-Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, sous plafonds, et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
+Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, sous plafonds, dès qu'un nouveau mail du Grimoire arrive (vérifié toutes les 2 h), et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
 
 ## Setup
 
@@ -38,6 +38,16 @@ Variables du repo (*Settings → Secrets and variables → Actions → Variables
 | `AGENT_EXECUTE` | absent | `true` = l'agent signe ; sinon il propose seulement. C'est l'interrupteur. |
 | `MAX_TX_USD` | 25 | plafond par transaction |
 | `MAX_DAY_USD` | 50 | plafond de dépense par jour |
+
+## Piloter l'agent
+
+```bash
+gh workflow run hunt.yml --repo sl11me/Sn0opyDr0p                    # lancer maintenant (agit s'il y a un nouveau mail)
+gh workflow run hunt.yml --repo sl11me/Sn0opyDr0p -f force=true      # lancer et agir même sans nouveau mail
+gh variable set AGENT_EXECUTE --body false --repo sl11me/Sn0opyDr0p  # arrêter : il ne signe plus rien
+gh variable set AGENT_EXECUTE --body true --repo sl11me/Sn0opyDr0p   # rallumer
+gh run list --workflow hunt.yml --repo sl11me/Sn0opyDr0p             # derniers runs
+```
 
 ## Garde-fous on-chain
 
