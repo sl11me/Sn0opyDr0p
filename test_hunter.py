@@ -42,3 +42,45 @@ def test_report():
     r = hunter.build_report(state, "Brief.", ["b"], 2)
     assert soon in r and far not in r and "Dead" not in r
     assert "main: fait" in r and "## 🆕 Nouveaux" in r
+
+
+W = "0x50F3347425617069E61a9A27Cbb8d645d19996f8"
+
+
+def _action(**kw):
+    return hunter.Action(**({"airdrop": "a", "from_chain": "arbitrum", "to_chain": "base", "to_token": "ETH",
+                             "amount_usd": 10, "reason": "r"} | kw))
+
+
+def test_check_action():
+    state = {"airdrops": {"a": {"alive": True}, "dead": {"alive": False}}}
+    assert hunter.check_action(_action(), state, 0, 25, 50) is None
+    assert "plafond par tx" in hunter.check_action(_action(amount_usd=30), state, 0, 25, 50)
+    assert "plafond du jour" in hunter.check_action(_action(), state, 45, 25, 50)
+    assert "même chaîne" in hunter.check_action(_action(to_chain="arbitrum"), state, 0, 25, 50)
+    assert hunter.check_action(_action(to_chain="arbitrum", to_token="USDC"), state, 0, 25, 50) is None
+    assert "clos" in hunter.check_action(_action(airdrop="dead"), state, 0, 25, 50)
+
+
+def test_verify_quote():
+    wei = 3 * 10**15
+    q = {"transactionRequest": {"to": hunter.LIFI_DIAMOND.lower(), "chainId": 42161, "from": W, "value": hex(wei)},
+         "action": {"fromAddress": W, "toAddress": W.lower(), "fromAmount": str(wei)},
+         "estimate": {"fromAmountUSD": "6.9", "toAmountUSD": "6.87"}}
+    assert hunter.verify_quote(q, 42161, W, wei, 25) is None
+    assert "chaîne" in hunter.verify_quote(q, 8453, W, wei, 25)
+    assert "montant" in hunter.verify_quote(q, 42161, W, wei + 1, 25)
+    bad = {**q, "action": {**q["action"], "toAddress": "0x000000000000000000000000000000000000dEaD"}}
+    assert "destinataire" in hunter.verify_quote(bad, 42161, W, wei, 25)
+    bad = {**q, "transactionRequest": {**q["transactionRequest"], "to": "0x000000000000000000000000000000000000dEaD"}}
+    assert "contrat" in hunter.verify_quote(bad, 42161, W, wei, 25)
+    bad = {**q, "estimate": {"fromAmountUSD": "6.9", "toAmountUSD": "5"}}
+    assert "perte" in hunter.verify_quote(bad, 42161, W, wei, 25)
+
+
+def test_run_actions_without_key(monkeypatch):
+    monkeypatch.delenv("PK_AGENT", raising=False)
+    state = {"airdrops": {"a": {"alive": True}}, "progress": {}}
+    hunter.run_actions(state, [_action(), _action(amount_usd=99)], execute=True)
+    assert [e["status"] for e in state["executions"]] == ["proposée", "refusée : 99.0$ hors plafond par tx (25.0$)"]
+    assert state["progress"] == {}
