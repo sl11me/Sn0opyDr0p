@@ -4,7 +4,7 @@
 
 Chaque matin (GitHub Actions), il revérifie les airdrops suivis, en ajoute de nouveaux et t'envoie un compte rendu par mail (`REPORT.md`) : d'abord « 🙋 À toi de jouer », les actions manuelles avec le pas-à-pas et le bouton vers le site officiel, puis le brief, les échéances, le wallet agent et les nouveautés.
 
-Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, ou le dépôt / retrait dans un vault (Aave USDC/WETH sur Base et Arbitrum, Spark USDC sur Base), sous plafonds, dès qu'un nouveau mail du Grimoire arrive (vérifié toutes les 2 h), et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
+Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, le dépôt / retrait dans un vault (Aave USDC/WETH sur Base et Arbitrum, Spark USDC sur Base), ou le staking de HYPE sur Hyperliquid, sous plafonds, dès qu'un nouveau mail du Grimoire arrive (vérifié toutes les 2 h), et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
 
 ## Setup
 
@@ -38,6 +38,7 @@ Variables du repo (*Settings → Secrets and variables → Actions → Variables
 | `AGENT_EXECUTE` | absent | `true` = l'agent signe ; sinon il propose seulement. C'est l'interrupteur. |
 | `MAX_TX_USD` | 25 | plafond par transaction |
 | `MAX_DAY_USD` | 50 | plafond de dépense par jour |
+| `HYPE_BUDGET_USD` | 50 | total maximum en HYPE (staké ou en route) sur Hyperliquid |
 
 ## Piloter l'agent
 
@@ -56,6 +57,7 @@ Agent automatique (`hunt --execute`) :
 - Claude choisit dans un menu fermé : swap/bridge ETH ↔ USDC (Arbitrum ↔ Base), dépôt ou retrait dans un vault de `VAULTS`. Il n'écrit jamais de calldata : pour les swaps elle vient de LI.FI, pour les vaults elle est encodée par le code avec des ABI fixes (Aave `supply`/`withdraw`, ERC-4626 `deposit`/`withdraw`/`redeem`).
 - Vaults : adresses vérifiées on-chain, et revérifiées avant chaque tx (sous-jacent, POOL Aave). Approbations au montant exact, jamais illimitées. Les retraits ne comptent pas dans le plafond du jour (ils rendent des fonds au wallet). Ajouter un vault = une PR.
 - Avant de signer, le code vérifie : contrat = LI.FI Diamond, expéditeur **et** destinataire = wallet agent, montant exact, perte < 10 %, plafonds par tx et par jour, réserve de gas, airdrop suivi et actif. La tx est simulée (`estimate_gas`) avant envoi.
+- Hyperliquid (`hype_stake`) : ETH Arbitrum → HYPE natif sur HyperEVM via LI.FI (même vérification de devis), envoi à l'adresse système `0x2222…2222` vers HyperCore, puis `cDeposit` et `tokenDelegate` signés par le wallet agent, chez le validateur actif, non jailé, commission ≤ 5 %, uptime ≥ 99 % qui a le plus gros stake. Reprend là où il s'est arrêté au run suivant. Stake bloqué 1 jour, sortie en 7 jours (à faire sur app.hyperliquid.xyz avec le wallet dans MetaMask).
 - `PK_AGENT` doit correspondre à l'adresse du wallet agent, sinon rien n'est signé.
 - Perte maximale possible = le solde du wallet dédié. N'y mets que le budget de l'agent.
 - Couper l'agent : passer `AGENT_EXECUTE` à `false`, ou supprimer le secret `PK_AGENT`.
