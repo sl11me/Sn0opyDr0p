@@ -1,8 +1,8 @@
 # Sn0opyDr0p
 
-Agent chasseur d'airdrops : lit les mails du **Grimoire du Mage** (Gmail), vérifie chaque opportunité sur le web avec Claude, note potentiel / effort / risque, et tient `TRACKER.md` à jour par compte.
+**Chirac**, l'agent chasseur d'airdrops : lit les mails du **Grimoire du Mage** (Gmail), vérifie chaque opportunité sur le web avec Claude, note potentiel / effort / risque, et tient `TRACKER.md` à jour par compte.
 
-Chaque matin (GitHub Actions), il revérifie les airdrops suivis, en ajoute de nouveaux et t'envoie un compte rendu par mail (`REPORT.md`) : ce qui presse, quoi faire aujourd'hui, ce qu'on laisse tomber.
+Chaque matin (GitHub Actions), il revérifie les airdrops suivis, en ajoute de nouveaux et t'envoie un compte rendu par mail (`REPORT.md`) : d'abord « 🙋 À toi de jouer », les actions manuelles avec le pas-à-pas et le bouton vers le site officiel, puis le brief, les échéances, le wallet agent et les nouveautés.
 
 Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996f8`, Arbitrum + Base) : quand un airdrop suivi demande de l'activité on-chain, il fait lui-même le bridge ou le swap via LI.FI, sous plafonds, dès qu'un nouveau mail du Grimoire arrive (vérifié toutes les 2 h), et le note dans le compte rendu. Les airdrops obtenus arrivent sur ce wallet.
 

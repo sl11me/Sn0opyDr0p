@@ -1,4 +1,4 @@
-"""Sn0opyDr0p — chasseur d'airdrops.
+"""Sn0opyDr0p — chasseur d'airdrops. L'agent s'appelle Chirac.
 
 hunt  : lit les mails du Grimoire du Mage (Gmail IMAP), revérifie les airdrops suivis sur le web,
         en note de nouveaux et écrit le compte rendu du jour (REPORT.md, --send pour le mail)
@@ -18,6 +18,7 @@ from datetime import date, datetime, timedelta
 from email.header import decode_header, make_header
 from html import unescape
 from pathlib import Path
+from urllib.parse import urlparse
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -53,6 +54,12 @@ class Airdrop(BaseModel):
     deadline: str = Field(description="court, ex: '26/11 claim' ou 'inconnue'")
     deadline_date: str = Field(description="prochaine date butoir YYYY-MM-DD, '' si inconnue")
     next_action: str = Field(description="la prochaine action concrète à faire, une phrase")
+    who: Literal["toi", "agent", "attendre"] = Field(
+        description="qui fait next_action : toi = à la main (claim sur le site, quête, formulaire, connexion dApp), "
+                    "agent = bridge/swap que le wallet agent peut faire, attendre = rien à faire pour l'instant")
+    action_url: str = Field(description="lien officiel direct vers la page où faire next_action, '' si aucun")
+    how_to: list[str] = Field(description="si who=toi : 2 à 5 étapes très concrètes et courtes pour le faire "
+                                          "à la main (où cliquer, quoi signer, quoi vérifier) ; sinon []")
     steps: list[str]
     links: list[str] = Field(description="domaine officiel du projet d'abord (pas x.com sauf si aucun site)")
     red_flags: list[str]
@@ -68,8 +75,9 @@ class Action(BaseModel):
 
 
 class Report(BaseModel):
-    brief: str = Field(description="compte rendu du jour en français, liste markdown de 5 à 10 puces courtes, comme un associé : "
-                                   "ce qui a changé, quoi faire aujourd'hui, ce qui presse, ce qu'on laisse tomber")
+    brief: str = Field(description="compte rendu du jour en français, liste markdown de 4 à 8 puces très courtes, "
+                                   "chacune commence par un emoji parlant, ton d'associé complice : ce qui a changé, "
+                                   "ce qui presse, ce qu'on laisse tomber")
     airdrops: list[Airdrop]
     actions: list[Action] = Field(description="0 à 3 actions on-chain pour le wallet de l'agent ; vide si rien d'utile")
 
@@ -139,7 +147,7 @@ def fetch_grimoire(state, days):
 
 # --- analyse (Claude + web search) ---------------------------------------
 
-SYSTEM = """Tu es un chasseur d'airdrops crypto expérimenté et prudent.
+SYSTEM = """Tu es Chirac, chasseur d'airdrops crypto expérimenté et prudent, l'associé de l'utilisateur.
 On te donne des newsletters (Le Grimoire du Mage) et tu peux chercher sur le web.
 Pour chaque opportunité d'airdrop actuelle (pas les airdrops déjà distribués et clos) :
 - vérifie sur le web qu'elle est réelle et toujours active, trouve le site officiel ;
@@ -204,47 +212,183 @@ def merge(state, airdrops):
 
 # --- compte rendu ----------------------------------------------------------
 
-def build_report(state, brief, new, n_mails, horizon=30, wallet=None):
+EXPLORERS = {"arbitrum": "https://arbiscan.io/tx/", "base": "https://basescan.org/tx/"}
+STATUS_ICON = {"envoyée": "✅", "proposée": "💡", "refusée": "⛔", "échec": "❌"}
+TRACKER_URL = "https://github.com/sl11me/Sn0opyDr0p/blob/main/TRACKER.md"
+
+
+def digest(state, new, horizon=30):
+    """Ce que le compte rendu doit montrer, trié, pour le markdown comme pour le HTML."""
     today = date.today()
     live = {s: a for s, a in state["airdrops"].items() if a.get("alive", True)}
-    soon = sorted((a["deadline_date"], s) for s, a in live.items()
-                  if a.get("deadline_date") and today.isoformat() <= a["deadline_date"]
-                  <= (today + timedelta(days=horizon)).isoformat())
-    out = [f"# Compte rendu Sn0opyDr0p — {today}", "", f"_{n_mails} mail(s) du Grimoire lus, "
-           f"{len(live)} airdrops actifs suivis._", "", brief, ""]
-    if soon:
+
+    def days_left(a):
+        d = a.get("deadline_date")
+        try:
+            return (date.fromisoformat(d) - today).days if d else None
+        except ValueError:
+            return None
+
+    def key(a):
+        d = days_left(a)
+        return (d if d is not None and d >= 0 else 999, -a["potential"])
+
+    todo = sorted((a for a in live.values() if a.get("who") == "toi"), key=key)
+    soon = sorted((a for a in live.values() if (days_left(a) is not None and 0 <= days_left(a) <= horizon)), key=key)
+    return {
+        "live": live, "todo": todo, "soon": soon, "days_left": days_left,
+        "new": [live[s] for s in new if s in live],
+        "waiting": [a for a in live.values() if a.get("who", "attendre") == "attendre"],
+        "runs": [e for e in state.get("executions", []) if e["date"] == str(today)],
+        "progress": {s: p for s, p in state["progress"].items() if s in live and p},
+    }
+
+
+def _url(a):
+    for u in [a.get("action_url", "")] + a.get("links", []):
+        if u.startswith("https://"):
+            return u
+    return ""
+
+
+def _when(n):
+    if n is None:
+        return ""
+    return "aujourd'hui !" if n == 0 else "demain" if n == 1 else f"dans {n} j"
+
+
+def _status_icon(status):
+    return STATUS_ICON.get(status.split(" ")[0], "•")
+
+
+def build_report(state, brief, new, n_mails, horizon=30, wallet=None):
+    """Compte rendu en markdown (REPORT.md et version texte du mail)."""
+    d, today = digest(state, new, horizon), date.today()
+    out = [f"# 🕵️ Chirac — compte rendu du {today:%d/%m/%Y}", "",
+           f"📬 {n_mails} mail(s) du Grimoire · 🪂 {len(d['live'])} airdrops suivis · 🙋 {len(d['todo'])} à faire toi-même", ""]
+    if d["todo"]:
+        out += ["## 🙋 À toi de jouer", ""]
+        for a in d["todo"]:
+            when = _when(d["days_left"](a))
+            out += [f"### {a['name']}" + (f" — ⏰ {when}" if when else ""), "", f"👉 {a['next_action']}", ""]
+            out += [f"{i}. {step}" for i, step in enumerate(a.get("how_to", []), 1)]
+            if _url(a):
+                out += ["", f"🔗 {_url(a)}"]
+            out.append("")
+    out += ["## 📰 Le brief de Chirac", "", brief, ""]
+    if d["soon"]:
         out += [f"## ⏰ Échéances sous {horizon} jours", ""]
-        out += [f"- **{d}** — {live[s]['name']} : {live[s].get('next_action', '')}" for d, s in soon] + [""]
-    if new:
-        out += ["## 🆕 Nouveaux", ""]
-        out += [f"- {live[s]['name']} ({'★' * live[s]['potential']}, risque {live[s]['risk']}/5) : "
-                f"{live[s].get('next_action', '')}" for s in new if s in live] + [""]
-    doing = [(s, p) for s, p in state["progress"].items() if s in live and p]
-    if doing:
-        out += ["## 🎯 Tes comptes", ""]
-        out += [f"- {live[s]['name']} — " + ", ".join(f"{k}: {v}" for k, v in p.items())
-                + f" → {live[s].get('next_action', '')}" for s, p in doing] + [""]
+        out += [f"- **{a['deadline_date']}** ({_when(d['days_left'](a))}) — {a['name']} : {a['next_action']}"
+                for a in d["soon"]] + [""]
     if wallet:
         out += ["## 🤖 Wallet agent", "", f"`{wallet['address']}` — "
                 + (" · ".join(f"{c} : {b['eth']} ETH + {b['usdc']} USDC (~{b['usd']}$)" for c, b in wallet["balances"].items())
                    if "balances" in wallet else f"soldes indisponibles ({wallet.get('error')})"), ""]
-        explorers = {"arbitrum": "https://arbiscan.io/tx/", "base": "https://basescan.org/tx/"}
-        out += [f"- {e['desc']} {e['usd']}$ ({e['airdrop']}) → **{e['status']}**"
-                + (f" [tx]({explorers[e['chain']]}{e['tx']})" if e["tx"] else "") + f" — {e['reason']}"
-                for e in state.get("executions", []) if e["date"] == str(today)] or ["- aucune action aujourd'hui"]
+        out += [f"- {_status_icon(e['status'])} {e['desc']} {e['usd']}$ ({e['airdrop']}) → **{e['status']}**"
+                + (f" [tx]({EXPLORERS[e['chain']]}{e['tx']})" if e["tx"] else "") + f" — {e['reason']}"
+                for e in d["runs"]] or ["- 😴 aucune action aujourd'hui"]
         out.append("")
-    out.append("Détails complets : TRACKER.md")
+    if d["new"]:
+        out += ["## 🆕 Nouveaux", ""]
+        out += [f"- {a['name']} ({'⭐' * a['potential']}, risque {a['risk']}/5) : {a['next_action']}" for a in d["new"]] + [""]
+    if d["progress"]:
+        out += ["## 🎯 Tes comptes", ""]
+        out += [f"- {d['live'][s]['name']} — " + ", ".join(f"{k}: {v}" for k, v in p.items()) for s, p in d["progress"].items()] + [""]
+    out.append(f"📋 Tout le détail : {TRACKER_URL}")
     return "\n".join(out)
 
 
-def send_mail(subject, body):
+def _inline(text):
+    """Markdown d'une ligne (gras, liens https) vers HTML échappé."""
+    from html import escape
+    t = escape(text)
+    t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
+    return re.sub(r"\[([^\]]+)\]\((https://[^)\s]+)\)", r'<a href="\2" style="color:#4f46e5">\1</a>', t)
+
+
+def build_html(state, brief, new, n_mails, horizon=30, wallet=None):
+    """Même contenu que build_report, mis en page pour le mail."""
+    from html import escape as e
+    d, today = digest(state, new, horizon), date.today()
+    card = "background:#ffffff;border-radius:14px;padding:16px 18px;margin:0 0 12px;border:1px solid #e7e5f4"
+    h2 = "font-size:18px;margin:26px 0 10px;color:#1e1b4b"
+
+    def badge(n):
+        if n is None:
+            return ""
+        color = "#dc2626" if n <= 3 else "#ea580c" if n <= 7 else "#4f46e5"
+        return (f'<span style="background:{color};color:#fff;border-radius:999px;padding:2px 10px;'
+                f'font-size:12px;font-weight:600;white-space:nowrap">⏰ {e(_when(n))}</span>')
+
+    def button(url, label):
+        return (f'<a href="{e(url)}" style="display:inline-block;background:#4f46e5;color:#ffffff;text-decoration:none;'
+                f'border-radius:10px;padding:10px 16px;font-weight:600;margin-top:10px">{label}</a>')
+
+    out = [f'''<div style="background:#f5f3ff;padding:20px 12px;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#1f2937;line-height:1.5">
+<div style="max-width:600px;margin:0 auto">
+<div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:16px;padding:22px 20px">
+<div style="font-size:26px;font-weight:800">🕵️ Chirac</div>
+<div style="opacity:.9">Ton compte rendu airdrops du {today:%d/%m/%Y}</div>
+<div style="margin-top:12px;font-size:14px">📬 {n_mails} mail(s) du Grimoire &nbsp;·&nbsp; 🪂 {len(d["live"])} suivis &nbsp;·&nbsp; 🙋 {len(d["todo"])} à faire</div>
+</div>''']
+    if d["todo"]:
+        out.append(f'<h2 style="{h2}">🙋 À toi de jouer</h2>')
+        for a in d["todo"]:
+            steps = "".join(f"<li style=\"margin:3px 0\">{_inline(s)}</li>" for s in a.get("how_to", []))
+            url = _url(a)
+            out.append(f'''<div style="{card}">
+<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b style="font-size:16px">{e(a["name"])}</b>{badge(d["days_left"](a))}</div>
+<div style="margin-top:6px">👉 {_inline(a["next_action"])}</div>
+{f'<ol style="margin:8px 0 0;padding-left:20px">{steps}</ol>' if steps else ""}
+{button(url, "🔗 Ouvrir " + e(urlparse(url).netloc)) if url else ""}
+</div>''')
+    else:
+        out.append(f'<div style="{card};margin-top:16px">😎 Rien à faire à la main aujourd\'hui, Chirac s\'occupe du reste.</div>')
+    bullets = [line.lstrip("-* ").strip() for line in brief.splitlines() if line.strip()]
+    out.append(f'<h2 style="{h2}">📰 Le brief de Chirac</h2><div style="{card}"><ul style="margin:0;padding-left:18px">'
+               + "".join(f'<li style="margin:5px 0">{_inline(b)}</li>' for b in bullets) + "</ul></div>")
+    if d["soon"]:
+        out.append(f'<h2 style="{h2}">⏰ Échéances sous {horizon} jours</h2><div style="{card}">')
+        out += [f'<div style="margin:6px 0">{badge(d["days_left"](a))} <b>{e(a["name"])}</b> — {_inline(a["next_action"])}</div>'
+                for a in d["soon"]]
+        out.append("</div>")
+    if wallet:
+        bal = (" &nbsp;·&nbsp; ".join(f"<b>{e(c.capitalize())}</b> {b['eth']} ETH + {b['usdc']} USDC (~{b['usd']} $)"
+                                      for c, b in wallet["balances"].items())
+               if "balances" in wallet else f"soldes indisponibles ({e(str(wallet.get('error')))})")
+        runs = "".join(f'<div style="margin:6px 0">{_status_icon(r["status"])} {e(r["desc"])} · {r["usd"]} $ · '
+                       f'<b>{e(r["status"])}</b>'
+                       + (f' · <a href="{e(EXPLORERS[r["chain"]] + r["tx"])}" style="color:#4f46e5">voir la tx</a>' if r["tx"] else "")
+                       + f'<div style="color:#6b7280;font-size:13px">{e(r["reason"])}</div></div>' for r in d["runs"]) \
+            or '<div style="margin-top:6px">😴 Aucune action on-chain aujourd\'hui.</div>'
+        out.append(f'''<h2 style="{h2}">🤖 Wallet agent</h2><div style="{card}">
+<div style="font-size:12px;color:#6b7280;word-break:break-all">{e(wallet["address"])}</div>
+<div style="margin-top:4px">💰 {bal}</div>{runs}</div>''')
+    if d["new"]:
+        out.append(f'<h2 style="{h2}">🆕 Nouveaux repérés</h2><div style="{card}">')
+        out += [f'<div style="margin:6px 0">✨ <b>{e(a["name"])}</b> {"⭐" * a["potential"]} · risque {a["risk"]}/5<br>'
+                f'<span style="color:#4b5563">{_inline(a["next_action"])}</span></div>' for a in d["new"]]
+        out.append("</div>")
+    if d["waiting"]:
+        out.append(f'<h2 style="{h2}">😴 En veille</h2><div style="{card};color:#4b5563">'
+                   + " · ".join(e(a["name"]) for a in d["waiting"]) + "</div>")
+    out.append(f'''<div style="text-align:center;margin:22px 0 4px">{button(TRACKER_URL, "📋 Voir tout le tracker")}</div>
+<div style="text-align:center;color:#9ca3af;font-size:12px;margin-top:10px">Chirac ne te demandera jamais ta seed phrase. Vérifie toujours l'adresse du site avant de signer. 🛡️</div>
+</div></div>''')
+    return "\n".join(out)
+
+
+def send_mail(subject, body, html=None):
     import smtplib
     from email.message import EmailMessage
+    from email.utils import formataddr
 
     user = os.environ["GMAIL_USER"]
     msg = EmailMessage()
-    msg["From"], msg["To"], msg["Subject"] = user, os.environ.get("REPORT_TO", user), subject
+    msg["From"], msg["To"], msg["Subject"] = formataddr(("Chirac 🕵️", user)), os.environ.get("REPORT_TO", user), subject
     msg.set_content(body)
+    if html:
+        msg.add_alternative(html, subtype="html")
     with smtplib.SMTP_SSL(os.environ.get("SMTP_HOST", "smtp.gmail.com"), 465) as s:
         s.login(user, os.environ["GMAIL_APP_PASSWORD"])
         s.send_message(msg)
@@ -499,10 +643,12 @@ def main():
         if any(e["status"] == "envoyée" and e["date"] == str(date.today()) for e in state["executions"]):
             wallet = wallet_status(state)
         report = build_report(state, result.brief, new, len(mails), wallet=wallet)
+        html = build_html(state, result.brief, new, len(mails), wallet=wallet)
         REPORT.write_text(report + "\n")
         print(report)
         if args.send:
-            send_mail(f"🪂 Airdrops — {date.today()}", report)
+            n = len(digest(state, new)["todo"])
+            send_mail(f"🕵️ Chirac — {n} truc(s) à faire · airdrops du {date.today():%d/%m}", report, html)
             print("→ compte rendu envoyé par mail")
     elif args.cmd == "mark":
         if args.slug not in state["airdrops"]:
