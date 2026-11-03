@@ -2,8 +2,14 @@ name: hunt
 
 on:
   schedule:
-    - cron: "0 6 * * *"  # 7h/8h heure de Paris
+    - cron: "0 6 * * *"     # compte rendu quotidien, 7h/8h heure de Paris
+    - cron: "30 */2 * * *"  # toutes les 2 h : ne fait quelque chose que si le Grimoire a publié
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Agir maintenant, même sans nouveau mail du Grimoire"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -18,7 +24,11 @@ jobs:
       - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e  # v6
       - run: npm install -g @anthropic-ai/claude-code@2.1.314
       # l'agent n'agit que si la variable AGENT_EXECUTE vaut true (Settings → Variables) : c'est l'interrupteur
-      - run: uv run hunter.py hunt --send ${{ vars.AGENT_EXECUTE == 'true' && '--execute' || '' }}
+      - run: >-
+          uv run hunter.py hunt --send
+          ${{ vars.AGENT_EXECUTE == 'true' && '--execute' || '' }}
+          ${{ inputs.force && '--force' || '' }}
+          ${{ github.event.schedule == '30 */2 * * *' && '--if-mail' || '' }}
         env:
           PK_AGENT: ${{ secrets.PK_AGENT }}
           MAX_TX_USD: ${{ vars.MAX_TX_USD || '25' }}
