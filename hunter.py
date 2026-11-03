@@ -710,7 +710,10 @@ def _vault(w3, acct, a):
     else:
         h = _call(w3, acct, t, "withdraw", [amount, me, me])
     if v["asset"] == "WETH" and (bal := weth.functions.balanceOf(me).call()):
-        h = _call(w3, acct, weth, "withdraw", [bal])  # on rend de l'ETH natif
+        try:
+            h = _call(w3, acct, weth, "withdraw", [bal])  # on rend de l'ETH natif
+        except Exception:  # le retrait est fait ; le WETH reste dans le wallet, compté comme de l'ETH
+            pass
     return h
 
 
