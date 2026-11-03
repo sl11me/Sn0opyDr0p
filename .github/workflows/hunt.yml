@@ -3,11 +3,11 @@ name: hunt
 on:
   schedule:
     - cron: "0 6 * * *"     # compte rendu quotidien, 7h/8h heure de Paris
-    - cron: "30 */2 * * *"  # toutes les 2 h : ne fait quelque chose que si le Grimoire a publié
+    - cron: "30 */2 * * *"  # toutes les 2 h : ne fait quelque chose que si une newsletter a publié
   workflow_dispatch:
     inputs:
       force:
-        description: "Agir maintenant, même sans nouveau mail du Grimoire"
+        description: "Agir maintenant, même sans nouvelle newsletter"
         type: boolean
         default: false
 

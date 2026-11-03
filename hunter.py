@@ -1,6 +1,6 @@
 """Sn0opyDr0p — chasseur d'airdrops. L'agent s'appelle Chirac.
 
-hunt  : lit les mails du Grimoire du Mage (Gmail IMAP), revérifie les airdrops suivis sur le web,
+hunt  : lit les newsletters airdrop (Grimoire du Mage, Bankless… via Gmail IMAP) et les agrégateurs, revérifie les airdrops suivis sur le web,
         en note de nouveaux et écrit le compte rendu du jour (REPORT.md, --send pour le mail)
 mark  : met à jour la progression d'un airdrop pour un compte
         ; avec --execute, le wallet agent fait seul les bridges/swaps LI.FI choisis, sous plafonds,
@@ -83,6 +83,8 @@ class Airdrop(BaseModel):
     steps: list[str]
     links: list[str] = Field(description="domaine officiel du projet d'abord (pas x.com sauf si aucun site)")
     red_flags: list[str]
+    sources: list[str] = Field(default_factory=list, description="où tu l'as vu : noms des newsletters et sites "
+                                                                 "(ex: 'Grimoire du Mage', 'CryptoRank'), 3 max")
 
 
 class Action(BaseModel):
@@ -146,27 +148,46 @@ def _body(msg):
     return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", html)))
 
 
-def fetch_grimoire(state, days):
-    """Mails du Grimoire non encore traités, des `days` derniers jours."""
+# motif cherché dans l'expéditeur (recherche IMAP FROM, sous-chaîne) → nom de la newsletter
+NEWSLETTERS = {
+    "cryptomage@substack.com": "Le Grimoire du Mage",
+    "m31capital@substack.com": "M31 Capital — The Monthly Airdrop",
+    "bankless": "Bankless",
+    "airdropalert": "Airdrop Alert",
+    "cryptopolitan": "Cryptopolitan",
+}
+MAIL_MAX_CHARS = 20000  # une newsletter très longue ne doit pas épuiser le quota Claude
+
+
+def newsletters():
+    """NEWSLETTER_FROM=motif1,motif2 remplace la liste par défaut."""
+    env = os.environ.get("NEWSLETTER_FROM", "")
+    return {p.strip(): p.strip() for p in env.split(",") if p.strip()} or NEWSLETTERS
+
+
+def fetch_newsletters(state, days):
+    """Mails des newsletters suivies non encore traités, des `days` derniers jours."""
     box = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"))
     box.login(os.environ["GMAIL_USER"], os.environ["GMAIL_APP_PASSWORD"])
     box.select("INBOX", readonly=True)
     since = (datetime.now() - timedelta(days=days)).strftime("%d-%b-%Y")
-    sender = os.environ.get("GRIMOIRE_FROM", "cryptomage@substack.com")
-    _, ids = box.search(None, "FROM", f'"{sender}"', "SINCE", since)
-    mails = []
-    for i in ids[0].split():
-        _, data = box.fetch(i, "(RFC822)")
-        msg = email.message_from_bytes(data[0][1])
-        mid = msg.get("Message-ID", i.decode())
-        if mid in state["seen_emails"]:
-            continue
-        mails.append({
-            "id": mid,
-            "subject": str(make_header(decode_header(msg.get("Subject", "")))),
-            "date": msg.get("Date", ""),
-            "body": _body(msg),
-        })
+    mails, seen = [], set(state["seen_emails"])
+    for pattern, name in newsletters().items():
+        _, ids = box.search(None, "FROM", f'"{pattern}"', "SINCE", since)
+        for i in ids[0].split():
+            _, data = box.fetch(i, "(RFC822)")
+            msg = email.message_from_bytes(data[0][1])
+            mid = msg.get("Message-ID", f"{pattern}:{i.decode()}")
+            if mid in seen:
+                continue
+            seen.add(mid)
+            mails.append({
+                "id": mid,
+                "source": name,
+                "subject": str(make_header(decode_header(msg.get("Subject", "")))),
+                "date": msg.get("Date", ""),
+                "body": _body(msg)[:MAIL_MAX_CHARS],
+            })
     box.logout()
     return mails
 
@@ -174,7 +195,18 @@ def fetch_grimoire(state, days):
 # --- analyse (Claude + web search) ---------------------------------------
 
 SYSTEM = """Tu es Chirac, chasseur d'airdrops crypto expérimenté et prudent, l'associé de l'utilisateur.
-On te donne des newsletters (Le Grimoire du Mage) et tu peux chercher sur le web.
+On te donne des newsletters de chasseurs d'airdrops (Le Grimoire du Mage, Bankless, M31 Capital,
+Airdrop Alert, Cryptopolitan…) et tu peux chercher sur le web.
+À chaque run, consulte aussi ces agrégateurs (WebFetch) pour repérer les opportunités du moment :
+- https://cryptorank.io/drophunting (fonds levés, Moni Score = notoriété sur X, statut confirmé/potentiel)
+- https://dropstab.com/activities (fonds levés, investisseurs, claims ouverts)
+- https://airdrops.io (claims en cours, testnets)
+Pour X/Twitter, passe par la recherche web (annonces officielles, dates de snapshot, compte officiel).
+Les agrégateurs et les newsletters contiennent du sponsorisé et des projets douteux : ne retiens un
+NOUVEL airdrop que s'il a un site officiel vérifié ET (airdrop confirmé par l'équipe OU fonds levés
+auprès d'investisseurs connus OU cité par au moins deux sources indépendantes). Au plus 5 nouveaux
+airdrops par run, les meilleurs rapport gain / effort / risque. Ignore les tokens à « claim gratuit »
+sans produit, les quêtes sociales en masse et ce qui demande un KYC sans projet sérieux derrière.
 Pour chaque opportunité d'airdrop actuelle (pas les airdrops déjà distribués et clos) :
 - vérifie sur le web qu'elle est réelle et toujours active, trouve le site officiel ;
 - donne les étapes concrètes pour être éligible avec UN seul wallet par personne ;
@@ -210,7 +242,8 @@ def analyze(mails, state, wallet):
     import tempfile
 
     mail_txt = "\n\n".join(
-        f"<mail subject={m['subject']!r} date={m['date']!r}>\n{m['body']}\n</mail>" for m in mails
+        f"<mail source={m.get('source', '')!r} subject={m['subject']!r} date={m['date']!r}>\n{m['body']}\n</mail>"
+        for m in mails
     ) or "(aucun nouveau mail : cherche toi-même les meilleurs airdrops actifs du moment)"
     known = [{"slug": s, "name": a["name"], "deadline": a["deadline"], "progress": state["progress"].get(s, {})}
              for s, a in state["airdrops"].items() if a.get("alive", True)]
@@ -300,7 +333,7 @@ def build_report(state, brief, new, n_mails, horizon=30, wallet=None):
     """Compte rendu en markdown (REPORT.md et version texte du mail)."""
     d, today = digest(state, new, horizon), date.today()
     out = [f"# 🕵️ Chirac — compte rendu du {today:%d/%m/%Y}", "",
-           f"📬 {n_mails} mail(s) du Grimoire · 🪂 {len(d['live'])} airdrops suivis · 🙋 {len(d['todo'])} à faire toi-même", ""]
+           f"📬 {n_mails} mail(s) de newsletters · 🪂 {len(d['live'])} airdrops suivis · 🙋 {len(d['todo'])} à faire toi-même", ""]
     if d["todo"]:
         out += ["## 🙋 À toi de jouer", ""]
         for a in d["todo"]:
@@ -367,7 +400,7 @@ def build_html(state, brief, new, n_mails, horizon=30, wallet=None):
 <div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:16px;padding:22px 20px">
 <div style="font-size:26px;font-weight:800">🕵️ Chirac</div>
 <div style="opacity:.9">Ton compte rendu airdrops du {today:%d/%m/%Y}</div>
-<div style="margin-top:12px;font-size:14px">📬 {n_mails} mail(s) du Grimoire &nbsp;·&nbsp; 🪂 {len(d["live"])} suivis &nbsp;·&nbsp; 🙋 {len(d["todo"])} à faire</div>
+<div style="margin-top:12px;font-size:14px">📬 {n_mails} newsletter(s) &nbsp;·&nbsp; 🪂 {len(d["live"])} suivis &nbsp;·&nbsp; 🙋 {len(d["todo"])} à faire</div>
 </div>''']
     if d["todo"]:
         out.append(f'<h2 style="{h2}">🙋 À toi de jouer</h2>')
@@ -458,6 +491,8 @@ def render(state):
         out += [f"{n}. {s}" for n, s in enumerate(a["steps"], 1)]
         if a["red_flags"]:
             out += ["", "⚠️ " + " · ".join(a["red_flags"])]
+        if a.get("sources"):
+            out += ["", "📰 Vu dans : " + " · ".join(a["sources"])]
         out.append("")
     TRACKER.write_text("\n".join(out))
 
@@ -897,7 +932,7 @@ def run_actions(state, actions, execute):
 def main():
     p = argparse.ArgumentParser(prog="hunter")
     sub = p.add_subparsers(dest="cmd", required=True)
-    h = sub.add_parser("hunt", help="mails du Grimoire + recherche web → tracker")
+    h = sub.add_parser("hunt", help="newsletters + agrégateurs + recherche web → tracker")
     h.add_argument("--days", type=int, default=14)
     h.add_argument("--no-mail", action="store_true", help="recherche web seule")
     h.add_argument("--send", action="store_true", help="envoie le compte rendu par mail")
@@ -922,8 +957,8 @@ def main():
 
     state = load_state()
     if args.cmd == "hunt":
-        mails = [] if args.no_mail else fetch_grimoire(state, args.days)
-        print(f"{len(mails)} nouveau(x) mail(s) du Grimoire")
+        mails = [] if args.no_mail else fetch_newsletters(state, args.days)
+        print(f"{len(mails)} nouveau(x) mail(s) de newsletters")
         if args.if_mail and not mails:
             return
         try:
@@ -934,7 +969,7 @@ def main():
         new = merge(state, result.airdrops)
         state["seen_emails"] += [m["id"] for m in mails]
         print(f"{len(result.airdrops)} airdrop(s) analysé(s), {len(new)} nouveau(x)")
-        # l'agent passe à l'action quand le Grimoire publie ; sinon il propose seulement
+        # l'agent passe à l'action quand une newsletter publie ; sinon il propose seulement
         run_actions(state, result.actions, args.execute and (bool(mails) or args.force) and "balances" in wallet)
         if any(e["status"] == "envoyée" and e["date"] == str(date.today()) for e in state["executions"]):
             wallet = wallet_status(state)
