@@ -68,15 +68,15 @@ def test_verify_quote():
     q = {"transactionRequest": {"to": hunter.LIFI_DIAMOND.lower(), "chainId": 42161, "from": W, "value": hex(wei)},
          "action": {"fromAddress": W, "toAddress": W.lower(), "fromAmount": str(wei)},
          "estimate": {"fromAmountUSD": "6.9", "toAmountUSD": "6.87"}}
-    assert hunter.verify_quote(q, 42161, W, wei, 25) is None
-    assert "chaîne" in hunter.verify_quote(q, 8453, W, wei, 25)
-    assert "montant" in hunter.verify_quote(q, 42161, W, wei + 1, 25)
+    assert hunter.verify_quote(q, 42161, W, wei, True, 25) is None
+    assert "chaîne" in hunter.verify_quote(q, 8453, W, wei, True, 25)
+    assert "montant" in hunter.verify_quote(q, 42161, W, wei + 1, True, 25)
     bad = {**q, "action": {**q["action"], "toAddress": "0x000000000000000000000000000000000000dEaD"}}
-    assert "destinataire" in hunter.verify_quote(bad, 42161, W, wei, 25)
+    assert "destinataire" in hunter.verify_quote(bad, 42161, W, wei, True, 25)
     bad = {**q, "transactionRequest": {**q["transactionRequest"], "to": "0x000000000000000000000000000000000000dEaD"}}
-    assert "contrat" in hunter.verify_quote(bad, 42161, W, wei, 25)
+    assert "contrat" in hunter.verify_quote(bad, 42161, W, wei, True, 25)
     bad = {**q, "estimate": {"fromAmountUSD": "6.9", "toAmountUSD": "5"}}
-    assert "perte" in hunter.verify_quote(bad, 42161, W, wei, 25)
+    assert "perte" in hunter.verify_quote(bad, 42161, W, wei, True, 25)
 
 
 def test_run_actions_without_key(monkeypatch):
@@ -108,3 +108,44 @@ def test_html_mail():
     assert "https://basescan.org/tx/0xabc" in h and "✅" in h and "Dodo" in h
     md = hunter.build_report(state, "- ok", [], 1, wallet=wallet)
     assert md.index("À toi de jouer") < md.index("Le brief") and "1. Connecte le wallet" in md
+
+
+def test_verify_quote_usdc():
+    q = {"transactionRequest": {"to": hunter.LIFI_DIAMOND, "chainId": 8453, "from": W, "value": "0x0"},
+         "action": {"fromAddress": W, "toAddress": W, "fromAmount": "5000000"},
+         "estimate": {"fromAmountUSD": "5", "toAmountUSD": "4.99", "approvalAddress": hunter.LIFI_DIAMOND}}
+    assert hunter.verify_quote(q, 8453, W, 5_000_000, False, 25) is None
+    assert "montant" in hunter.verify_quote(q, 8453, W, 5_000_000, True, 25)   # natif attendu, value=0
+    bad = {**q, "estimate": {**q["estimate"], "approvalAddress": "0x000000000000000000000000000000000000dEaD"}}
+    assert "approbation" in hunter.verify_quote(bad, 8453, W, 5_000_000, False, 25)
+
+
+def test_check_action_vaults():
+    state = {"airdrops": {"a": {"alive": True}}}
+    ok = _action(kind="deposit", vault="aave-usdc-base", airdrop="")
+    assert hunter.check_action(ok, state, 0, 25, 50) is None
+    assert "hors liste" in hunter.check_action(_action(kind="deposit", vault="evil"), state, 0, 25, 50)
+    assert "plafond par tx" in hunter.check_action(_action(kind="deposit", vault="aave-usdc-base", amount_usd=40), state, 0, 25, 50)
+    assert hunter.check_action(_action(kind="withdraw", vault="spark-usdc-base", amount_usd=0), state, 49, 25, 50) is None
+    assert "même chaîne" in hunter.check_action(_action(to_chain="arbitrum", from_token="USDC", to_token="USDC"), state, 0, 25, 50)
+    log = {"executions": [{"date": str(__import__("datetime").date.today()), "status": "envoyée", "usd": 20, "kind": "withdraw"},
+                          {"date": str(__import__("datetime").date.today()), "status": "envoyée", "usd": 10}]}
+    assert hunter.spent_today(log) == 10
+
+
+def test_vault_calldata():
+    from web3 import Web3
+    w3 = Web3()
+    me = "0x50F3347425617069E61a9A27Cbb8d645d19996f8"
+    pool = hunter._c(w3, hunter.CHAINS["base"]["aave_pool"], hunter.AAVE_POOL)
+    vault = hunter._c(w3, hunter.VAULTS["spark-usdc-base"]["token"], hunter.ERC4626)
+    weth = hunter._c(w3, hunter.CHAINS["base"]["weth"], hunter.WETH)
+    usdc = hunter.CHAINS["base"]["usdc"]
+    assert pool.encode_abi("supply", args=[usdc, 1, me, 0])[:10] == "0x617ba037"
+    assert pool.encode_abi("withdraw", args=[usdc, 1, me])[:10] == "0x69328dec"
+    assert vault.encode_abi("deposit", args=[1, me])[:10] == "0x6e553f65"
+    assert vault.encode_abi("redeem", args=[1, me, me])[:10] == "0xba087652"
+    assert vault.encode_abi("withdraw", args=[1, me, me])[:10] == "0xb460af94"
+    assert weth.encode_abi("deposit", args=[])[:10] == "0xd0e30db0"
+    assert weth.encode_abi("withdraw", args=[1])[:10] == "0x2e1a7d4d"
+    assert vault.encode_abi("approve", args=[me, 5])[:10] == "0x095ea7b3"
