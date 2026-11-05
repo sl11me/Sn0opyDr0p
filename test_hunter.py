@@ -188,3 +188,19 @@ def test_newsletters(monkeypatch):
     assert hunter.fetch_newsletters({"seen_emails": ["<a@x>", "<b@x>"]}, 3) == []
     monkeypatch.setenv("NEWSLETTER_FROM", "foo@substack.com, bar")
     assert list(hunter.newsletters()) == ["foo@substack.com", "bar"]
+
+
+def test_watch_wallets(monkeypatch):
+    evm, sol = "0x50F3347425617069E61a9A27Cbb8d645d19996f8", "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"
+    monkeypatch.setenv("WATCH_WALLETS", f"main:{evm}, {sol} ,bad:0x123,cle:{'a' * 64}")
+    assert hunter.watch_wallets() == {"main": evm, "wallet2": sol}
+    monkeypatch.delenv("WATCH_WALLETS")
+    assert hunter.watch_wallets() == {}
+
+
+def test_eligibility_in_report():
+    a = dict(name="KOR", potential=3, risk=2, next_action="Réclamer", alive=True, deadline_date="", who="toi",
+             how_to=["ouvrir"], action_url="https://kor.xyz", links=[], eligibility="main : éligible, 1200 KOR")
+    state = {"airdrops": {"kor": a}, "progress": {}, "executions": []}
+    assert "🎯 main : éligible, 1200 KOR" in hunter.build_report(state, "- ok", [], 0)
+    assert "🎯 main : éligible, 1200 KOR" in hunter.build_html(state, "- ok", [], 0)
