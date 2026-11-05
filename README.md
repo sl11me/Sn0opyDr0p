@@ -53,6 +53,15 @@ Variables du repo (*Settings → Secrets and variables → Actions → Variables
 | `MAX_TX_USD` | 25 | plafond par transaction |
 | `MAX_DAY_USD` | 50 | plafond de dépense par jour |
 | `HYPE_BUDGET_USD` | 50 | total maximum en HYPE (staké ou en route) sur Hyperliquid |
+| `WATCH_WALLETS` | absent | mode zéro dépôt : adresses **publiques** de tes autres wallets, `main:0x…,sol:7xK…` |
+
+### Mode zéro dépôt
+
+Avec `WATCH_WALLETS`, Chirac compare tes wallets aux claims ouverts (airdrops.io, CryptoRank) via les checkers officiels qui acceptent une adresse collée, et te signale dans « 🙋 À toi de jouer » ce que tu peux réclamer (🎯 wallet, montant, date limite). Il ajoute aussi jusqu'à 3 testnets gratuits sérieux. Uniquement des adresses publiques, jamais de clé : le claim reste ton geste, depuis le wallet éligible, qui paie le gas. Les checkers qui exigent de connecter un wallet ne sont pas vérifiables : ils sont marqués « à vérifier ». Ces adresses sont envoyées à Claude et aux sites officiels consultés.
+
+```bash
+gh variable set WATCH_WALLETS --repo sl11me/Sn0opyDr0p --body "main:0x…,sol:7xK…"
+```
 
 ## Piloter l'agent
 

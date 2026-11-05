@@ -32,6 +32,20 @@ STATUSES = ("todo", "en cours", "fait", "éligible", "réclamé", "raté", "skip
 
 # Wallet dédié de l'agent : la clé PK_AGENT doit correspondre à cette adresse, sinon rien n'est signé.
 AGENT_WALLET = os.environ.get("AGENT_WALLET", "0x50F3347425617069E61a9A27Cbb8d645d19996f8")
+# Mode zéro dépôt : adresses PUBLIQUES de tes autres wallets (jamais de clé), dont Chirac vérifie l'éligibilité
+# aux claims ouverts. WATCH_WALLETS=main:0xabc…,sol:7xKX…  (le libellé est facultatif)
+WALLET_RE = re.compile(r"^(0x[0-9a-fA-F]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$")  # EVM ou Solana
+
+
+def watch_wallets():
+    out = {}
+    for n, item in enumerate(filter(None, (s.strip() for s in os.environ.get("WATCH_WALLETS", "").split(","))), 1):
+        label, _, addr = item.rpartition(":")
+        if WALLET_RE.match(addr):
+            out[label.strip() or f"wallet{n}"] = addr
+    return out
+
+
 CHAINS = {
     "arbitrum": {"id": 42161, "rpc": "https://arb1.arbitrum.io/rpc", "usdc": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
                  "weth": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1", "aave_pool": "0x794a61358D6845594F94dc1DB02A252b5b4814aD"},
@@ -83,6 +97,9 @@ class Airdrop(BaseModel):
     steps: list[str]
     links: list[str] = Field(description="domaine officiel du projet d'abord (pas x.com sauf si aucun site)")
     red_flags: list[str]
+    eligibility: str = Field("", description="claim ouvert : ce que tu as vérifié pour les wallets à vérifier, "
+                                             "ex: 'main : éligible, 1 200 KOR' ou 'à vérifier avec le checker officiel' ; "
+                                             "'' si ce n'est pas un claim")
     sources: list[str] = Field(default_factory=list, description="où tu l'as vu : noms des newsletters et sites "
                                                                  "(ex: 'Grimoire du Mage', 'CryptoRank'), 3 max")
 
@@ -233,7 +250,22 @@ dépôt qui compte pour un programme de points…) ou placer au rendement des fo
 Pas d'activité vide pour gonfler des stats, pas de répétition inutile : regarde l'historique.
 Respecte les plafonds et le solde, et garde toujours de l'ETH pour le gas sur chaque chaîne.
 Si un airdrop demande un vault absent de la liste, dis-le dans le brief : on l'ajoutera après
-vérification. Si rien n'est pertinent, renvoie une liste vide. Le reste va dans next_action."""
+vérification. Si rien n'est pertinent, renvoie une liste vide. Le reste va dans next_action.
+
+Mode zéro dépôt (ce qui ne demande aucun apport d'argent) :
+- Claims ouverts : parcours https://airdrops.io/claims/ et les claims ouverts de CryptoRank. Pour chaque wallet à
+  vérifier, regarde si un checker officiel ou une API publique accepte l'adresse (dans l'URL ou en paramètre, sans
+  connexion de wallet) ; n'utilise que le domaine officiel du projet, jamais un lien de redirection d'agrégateur.
+  Éligible confirmé → who=toi, next_action « Réclamer … avant … », eligibility avec le wallet et le montant,
+  how_to du claim (connecter CE wallet, vérifier le domaine, signer sans approve illimité ; le gas du claim est
+  payé par ce wallet). Non vérifiable mais plausible pour ces wallets (projet grand public, Solana pour une adresse
+  Solana…) → eligibility « à vérifier avec le checker officiel », seulement si la date limite est sous 30 jours.
+  Non éligible → ne l'ajoute pas. Sans wallets à vérifier, ne liste pas les claims d'inconnus.
+- Testnets gratuits : au plus 3 testnets sérieux (équipe identifiable, fonds levés ou airdrop confirmé), sans
+  dépôt réel, sans KYC, pas uniquement des quêtes sociales ; who=toi avec les étapes (faucet, actions utiles).
+  Les captchas des faucets restent à l'utilisateur.
+- Gratuit hors chaîne (extension, points par signature) : seulement si le projet est sérieux, même filtre.
+Rappelle dans le brief, en une puce, les claims à échéance proche trouvés pour ses wallets."""
 
 
 def analyze(mails, state, wallet):
@@ -248,7 +280,9 @@ def analyze(mails, state, wallet):
     known = [{"slug": s, "name": a["name"], "deadline": a["deadline"], "progress": state["progress"].get(s, {})}
              for s, a in state["airdrops"].items() if a.get("alive", True)]
     data = (f"Date du jour : {date.today()}\nAirdrops déjà suivis :\n{json.dumps(known, ensure_ascii=False)}\n\n"
-            f"Wallet agent :\n{json.dumps(wallet, ensure_ascii=False)}\n\n{mail_txt}")
+            f"Wallet agent :\n{json.dumps(wallet, ensure_ascii=False)}\n\n"
+            f"Wallets à vérifier (adresses publiques de l'utilisateur, mode zéro dépôt) :\n"
+            f"{json.dumps(watch_wallets(), ensure_ascii=False)}\n\n{mail_txt}")
     # Sans ANTHROPIC_API_KEY, Claude Code utilise l'abonnement ; et il ne voit aucun secret.
     env = {k: v for k, v in os.environ.items()
            if k not in ("ANTHROPIC_API_KEY", "PK_AGENT", "GMAIL_APP_PASSWORD") and not k.startswith("PK_")}
@@ -339,6 +373,8 @@ def build_report(state, brief, new, n_mails, horizon=30, wallet=None):
         for a in d["todo"]:
             when = _when(d["days_left"](a))
             out += [f"### {a['name']}" + (f" — ⏰ {when}" if when else ""), "", f"👉 {a['next_action']}", ""]
+            if a.get("eligibility"):
+                out += [f"🎯 {a['eligibility']}", ""]
             out += [f"{i}. {step}" for i, step in enumerate(a.get("how_to", []), 1)]
             if _url(a):
                 out += ["", f"🔗 {_url(a)}"]
@@ -410,6 +446,7 @@ def build_html(state, brief, new, n_mails, horizon=30, wallet=None):
             out.append(f'''<div style="{card}">
 <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b style="font-size:16px">{e(a["name"])}</b>{badge(d["days_left"](a))}</div>
 <div style="margin-top:6px">👉 {_inline(a["next_action"])}</div>
+{f'<div style="margin-top:6px;color:#047857">🎯 {_inline(a["eligibility"])}</div>' if a.get("eligibility") else ""}
 {f'<ol style="margin:8px 0 0;padding-left:20px">{steps}</ol>' if steps else ""}
 {button(url, "🔗 Ouvrir " + e(urlparse(url).netloc)) if url else ""}
 </div>''')
