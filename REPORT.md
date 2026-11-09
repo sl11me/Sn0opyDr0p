@@ -1,91 +1,83 @@
-# 🕵️ Chirac — compte rendu du 08/11/2026
+# 🕵️ Chirac — compte rendu du 09/11/2026
 
 📬 0 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 6 à faire toi-même
 
 ## 🙋 À toi de jouer
 
-### Predict.fun – Choix du claim PREDICT — ⏰ dans 18 j
+### Elysium (L2 HyperEVM) / Ascend – Points — ⏰ aujourd'hui !
 
-👉 Faire ton choix de claim avant le 26/11 9h UTC sur le site officiel.
+👉 Vérifier si le mainnet est ouvert et quelles actions donnent des points.
 
-1. Aller sur predict.fun (vérifier le domaine)
-2. Connecter ton wallet
-3. Choisir le mode de claim
+1. Ouvrir le site officiel du projet
+2. Lire les règles des points avant tout dépôt
+3. Utiliser un seul wallet
+
+### Predict.fun – Choix du claim PREDICT — ⏰ dans 17 j
+
+👉 Faire le choix de claim sur le site officiel avant le 26/11 9h UTC, si le wallet est éligible.
+
+1. Aller sur le domaine officiel
+2. Connecter le wallet éligible
+3. Choisir l'option de claim
 4. Signer sans approve illimité
 
 🔗 https://predict.fun
 
-### Aster – Claim vesting Stage 6 — ⏰ dans 20 j
+### Aster – Claim vesting Stage 6 — ⏰ dans 19 j
 
-👉 Réclamer avant le 28/11 en vérifiant la date sur l'annonce officielle d'Aster.
+👉 Confirmer la date exacte sur le site officiel, puis réclamer.
 
-1. Aller sur asterdex.com (vérifier le domaine)
-2. Connecter ton wallet
-3. Ouvrir la page de claim Stage 6
-4. Signer sans approve illimité
+1. Ouvrir le site officiel
+2. Connecter le wallet éligible
+3. Réclamer à l'ouverture
 
 🔗 https://www.asterdex.com
 
-### StandX – Claim DUSD (fermeture) — ⏰ dans 53 j
+### StandX – Claim DUSD (fermeture) — ⏰ dans 52 j
 
-👉 Réclamer le DUSD avant le 31/12 si tu y as droit.
+👉 Réclamer le DUSD avant le 31/12 si tu as un solde.
 
-1. Aller sur le site officiel standx.com
-2. Connecter ton wallet
-3. Réclamer le DUSD
-4. Vérifier le montant reçu
+1. Aller sur le site officiel
+2. Connecter le wallet
+3. Réclamer et signer sans approve illimité
 
 🔗 https://standx.com
 
-### Grass – Claim USDC Stage 2 — ⏰ dans 75 j
+### Grass – Claim USDC Stage 2 — ⏰ dans 74 j
 
-👉 Réclamer sur le site officiel si tu es éligible.
+👉 Vérifier l'éligibilité avec le checker officiel et réclamer.
 
-1. Aller sur grass.io (vérifier le domaine)
-2. Connecter ton wallet
-3. Réclamer l'USDC
-4. Vérifier la réception
+1. Aller sur le site officiel
+2. Connecter le wallet Solana
+3. Réclamer
 
 🔗 https://www.grass.io
 
-### Jumper – Airdrop $JUMP (XP)
-
-👉 Faire un swap ou bridge utile, puis suivre l'annonce du TGE.
-
-1. Aller sur jumper.exchange
-2. Connecter ton wallet
-3. Faire un bridge ou swap
-4. Vérifier tes XP
-
-🔗 https://jumper.exchange
-
 ### Arc (L1 de Circle) – Testnet
 
-👉 Optionnel : quelques transactions de testnet via le faucet.
+👉 Optionnel : utiliser le faucet et tester quelques transactions.
 
-1. Aller sur le site officiel d'Arc
-2. Ajouter le réseau testnet
-3. Prendre des fonds au faucet (captcha à ta charge)
-4. Faire quelques transactions
+1. Ajouter le réseau testnet
+2. Prendre des fonds sur le faucet (captcha)
+3. Faire quelques transactions simples
 
 🔗 https://www.arc.network
 
 ## 📰 Le brief de Chirac
 
-- 💤 Wallet agent à zéro (0 ETH, 0 USDC) : aucune action on-chain aujourd'hui, rien à gaspiller.
-- ⏰ Aster Stage 6 : les sources divergent (claim du 4/11 au 4/12 selon Coinranking, ou du 28/10 au 28/11 selon Cryptoticker). Prends la date la plus proche, le 28/11, jusqu'à confirmation officielle.
-- 🗳️ Predict.fun : choix du claim PREDICT le 26/11 à 9h UTC. Une autre source parle d'un premier lot au 29/10, donc ne traîne pas.
-- 🧾 StandX : claim DUSD jusqu'au 31/12 à 8h UTC. Ce qui n'est pas réclamé est perdu.
-- ⚠️ MetaMask : la date du 26/11 vue dans certains récapitulatifs n'est pas confirmée, MetaMask n'a annoncé aucune date. Je la laisse sans échéance.
-- 🚀 Elysium/Ascend : mainnet demain (9/11), à surveiller. Les TGE Variational, Jumper et Extended sont attendus au T4 mais sans date.
-- 🔎 Airdrops.io m'a renvoyé une erreur 403 et je n'ai pas pu consulter les autres agrégateurs. Je n'ajoute donc aucun nouvel airdrop aujourd'hui, faute de vérification solide.
-- 📭 Aucun wallet à vérifier fourni, donc aucun claim personnel à signaler.
+- 🧾 Run en mode léger : je n'ai pas pu recontrôler les sources en ligne. Les 15 airdrops suivis sont repris avec leurs dernières infos connues, à confirmer sur les sites officiels.
+- 💤 Le wallet agent est à 0 $ sur Arbitrum et Base, donc aucune action on-chain. Pas de dépôt, pas de swap, pas de stake HYPE.
+- ⏰ Dates qui pressent : Elysium/Ascend (mainnet le 09/11, aujourd'hui), Predict.fun (choix du claim le 26/11 à 9h UTC), Aster Stage 6 (28/11 ou 04/12 à 12h UTC).
+- 📅 Dates plus lointaines : StandX (31/12), Grass Stage 2 (22/01/2027).
+- 🕒 Les TGE Variational, Jumper et Extended sont annoncés pour T4 2026 / nov. 2026 sans date précise. On surveille leurs comptes officiels.
+- 🙈 Aucun wallet à vérifier fourni, donc aucun claim d'inconnu listé.
+- 🔭 Pas de nouvel airdrop ajouté : je préfère ne rien ajouter que d'ajouter un projet non vérifié.
 
 ## ⏰ Échéances sous 30 jours
 
-- **2026-11-09** (demain) — Elysium (L2 HyperEVM) / Ascend – Points : Vérifier le lancement du mainnet demain et les modalités de points.
-- **2026-11-26** (dans 18 j) — Predict.fun – Choix du claim PREDICT : Faire ton choix de claim avant le 26/11 9h UTC sur le site officiel.
-- **2026-11-28** (dans 20 j) — Aster – Claim vesting Stage 6 : Réclamer avant le 28/11 en vérifiant la date sur l'annonce officielle d'Aster.
+- **2026-11-09** (aujourd'hui !) — Elysium (L2 HyperEVM) / Ascend – Points : Vérifier si le mainnet est ouvert et quelles actions donnent des points.
+- **2026-11-26** (dans 17 j) — Predict.fun – Choix du claim PREDICT : Faire le choix de claim sur le site officiel avant le 26/11 9h UTC, si le wallet est éligible.
+- **2026-11-28** (dans 19 j) — Aster – Claim vesting Stage 6 : Confirmer la date exacte sur le site officiel, puis réclamer.
 
 ## 🤖 Wallet agent
 
