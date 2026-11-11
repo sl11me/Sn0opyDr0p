@@ -1,134 +1,134 @@
-# Tracker airdrops — 2026-11-10
+# Tracker airdrops — 2026-11-11
 
 | Airdrop | Chaîne | Pot. | Effort | Risque | Coût | Deadline | Comptes |
 |---|---|---|---|---|---|---|---|
-| [MetaMask – Rewards (token MASK)](metamask.io) | Multi-chaînes | ★★★★ | 2/5 | 1/5 | ~0-20$ | Aucune date | — |
-| [Polymarket – Token POLY (non daté)](polymarket.com) | Polygon | ★★★★ | 2/5 | 2/5 | 0-50$ | Aucune date | — |
-| [Hyperliquid – 2e airdrop HYPE (spéculatif)](hyperliquid.xyz) | Hyperliquid | ★★★★ | 2/5 | 3/5 | 0-50$ | Aucune annonce | — |
-| [Variational – Points avant TGE $VAR](variational.io) | Arbitrum / Omni | ★★★★ | 3/5 | 3/5 | 10-100$ | TGE T4 2026, non daté | — |
-| [Extended – Xpoints avant TGE](extended.exchange) | Starknet | ★★★★ | 3/5 | 3/5 | 10-100$ | TGE non daté (nov. 2026) | — |
-| [Arc (L1 de Circle) – Testnet](arc.network) | Arc testnet | ★★★ | 2/5 | 1/5 | 0$ | Aucun airdrop annoncé | — |
-| [Predict.fun – Choix du claim PREDICT](predict.fun) | BNB Chain | ★★★ | 1/5 | 2/5 | gas | 26/11 9h UTC choix | — |
-| [Aster – Claim vesting Stage 6](asterdex.com) | BNB / multi-chaînes | ★★★ | 1/5 | 2/5 | gas | 28/11 ou 04/12 12h UTC | — |
-| [Jumper – Airdrop $JUMP (XP)](jumper.exchange) | Multi-chaînes | ★★★ | 2/5 | 2/5 | ~5-20$ | TGE T4 2026 non daté | — |
-| Arcus – Points Saison 1 (Robinhood Chain) | Robinhood Chain | ★★★ | 3/5 | 3/5 | 10-50$ | Fin S1 estimée S1 2027 | — |
-| TxFlow – Points perp DEX (Saison 1) | Perp DEX | ★★★ | 3/5 | 3/5 | 10-50$ | Fin S1 T1 2027 | — |
-| QFEX – Perp DEX RWA (pré-points) | Perp DEX | ★★★ | 3/5 | 3/5 | 10-50$ | Saison 0 en cours | — |
-| Elysium (L2 HyperEVM) / Ascend – Points | HyperEVM L2 | ★★★ | 3/5 | 4/5 | 10-50$ | 09/11 mainnet | — |
-| [StandX – Claim DUSD (fermeture)](standx.com) | Perp DEX | ★★ | 1/5 | 2/5 | gas | 31/12 8h UTC claim | — |
+| [Polymarket – Token POLY (non daté)](polymarket.com) | Polygon | ★★★★ | 2/5 | 2/5 | variable | Aucune date | — |
+| [Variational – Points avant TGE $VAR](variational.io) | Arbitrum | ★★★★ | 3/5 | 3/5 | variable | TGE T4 2026, non daté | — |
+| [Extended – Xpoints avant TGE](extended.exchange) | Starknet | ★★★★ | 3/5 | 3/5 | variable | TGE non daté (nov. 2026) | — |
+| [MetaMask – Rewards (token MASK)](metamask.io) | Multi-chaînes | ★★★ | 2/5 | 1/5 | frais d'usage | Aucune date | — |
+| [Predict.fun – Choix du claim PREDICT](predict.fun) | Blast / BNB | ★★★ | 1/5 | 2/5 | gas | 26/11 9h UTC choix | — |
+| [Aster – Claim vesting Stage 6](asterdex.com) | Multi-chaînes | ★★★ | 1/5 | 2/5 | gas | 28/11 ou 04/12 12h UTC | — |
+| [Jumper – Airdrop $JUMP (XP)](jumper.exchange) | Multi-chaînes | ★★★ | 2/5 | 2/5 | frais de bridge | TGE T4 2026 non daté | — |
+| Titan Exchange – Points testnet | Solana | ★★★ | 2/5 | 2/5 | ~0$ | Pas de fin annoncée | — |
+| [Hyperliquid – 2e airdrop HYPE (spéculatif)](hyperliquid.xyz) | Hyperliquid | ★★★ | 2/5 | 3/5 | 0-50$ | Aucune annonce | — |
+| Arcus – Points Saison 1 (Robinhood Chain) | Robinhood Chain | ★★★ | 3/5 | 3/5 | variable | Fin S1 estimée S1 2027 | — |
+| TxFlow – Points perp DEX (Saison 1) | Perp DEX | ★★★ | 3/5 | 3/5 | variable | Fin S1 T1 2027 | — |
+| [QFEX – Perp DEX RWA (pré-points)](qfex.com) | Perp DEX | ★★★ | 3/5 | 3/5 | variable | Saison 0 en cours | — |
+| Elysium (L2 HyperEVM) / Ascend – Points | HyperEVM | ★★★ | 3/5 | 4/5 | variable | 09/11 mainnet | — |
+| [Arc (L1 de Circle) – Testnet](circle.com) | Arc | ★★ | 2/5 | 1/5 | ~0$ | Aucun airdrop annoncé | — |
+| [StandX – Claim DUSD (fermeture)](standx.com) | Multi-chaînes | ★★ | 1/5 | 2/5 | gas | 31/12 8h UTC claim | — |
 | [Grass – Claim USDC Stage 2](grass.io) | Solana | ★★ | 1/5 | 2/5 | gas | 22/01/2027 claim | — |
-| Titan Exchange – Points testnet | Testnet | ★★ | 2/5 | 2/5 | 0$ | Pas de fin annoncée | — |
 
 ## Détails
 
-### MetaMask – Rewards (token MASK) (`metamask-rewards`)
-
-Programme Rewards de MetaMask, token MASK évoqué.
-
-
-⚠️ Token non confirmé
-
 ### Polymarket – Token POLY (non daté) (`polymarket`)
 
-Token POLY évoqué par l'équipe, sans date.
+Token POLY confirmé par l'équipe mais sans date. Utiliser la plateforme avec un wallet unique.
 
 
-⚠️ Pas de snapshot annoncé
-
-### Hyperliquid – 2e airdrop HYPE (spéculatif) (`hyperliquid-s2`)
-
-Piste spéculative d'un 2e airdrop HYPE, rien d'annoncé par l'équipe.
-
-
-⚠️ Aucune annonce officielle · Staking bloqué 1 jour, sortie en 7 jours
+⚠️ Aucune date
 
 ### Variational – Points avant TGE $VAR (`variational`)
 
-Perp DEX avec points avant le TGE de $VAR.
+Perp DEX avec points avant le TGE de $VAR, prévu T4 2026 sans date.
 
 
 ⚠️ TGE non daté
 
 ### Extended – Xpoints avant TGE (`extended`)
 
-Perp DEX avec Xpoints avant le TGE, prévu en nov. 2026 sans date.
+Perp DEX avec Xpoints avant le TGE, prévu en novembre 2026 sans date.
 
 
 ⚠️ TGE non daté
 
-### Arc (L1 de Circle) – Testnet (`arc-testnet`)
+### MetaMask – Rewards (token MASK) (`metamask-rewards`)
 
-Testnet du L1 de Circle, aucun airdrop annoncé.
+Programme Rewards de MetaMask, token MASK évoqué, sans date.
 
 
-⚠️ Aucun airdrop confirmé
+⚠️ Aucune date
 
 ### Predict.fun – Choix du claim PREDICT (`predict-fun`)
 
 Choix du mode de claim PREDICT avant le 26/11 à 9h UTC.
 
 
-⚠️ Éligibilité non vérifiée (aucun wallet fourni)
+⚠️ Aucun wallet à vérifier fourni, éligibilité non vérifiée
 
 ### Aster – Claim vesting Stage 6 (`aster-stage6`)
 
-Claim du vesting Stage 6, échéance au 28/11 ou 04/12 à 12h UTC.
+Claim du vesting Stage 6, au 28/11 ou 04/12 à 12h UTC.
 
 
-⚠️ Deux dates à confirmer
+⚠️ Date exacte à confirmer
 
 ### Jumper – Airdrop $JUMP (XP) (`jumper`)
 
-XP via les bridges et swaps Jumper, TGE $JUMP prévu T4 2026.
+Les XP Jumper donnent droit à un airdrop $JUMP, TGE prévu T4 2026.
 
 
-⚠️ Date non confirmée
+⚠️ TGE non daté
+
+### Titan Exchange – Points testnet (`titan`)
+
+Points testnet, sans fin annoncée.
+
+
+⚠️ Pas de token confirmé
+
+### Hyperliquid – 2e airdrop HYPE (spéculatif) (`hyperliquid-s2`)
+
+Piste spéculative d'un second airdrop HYPE. Aucune annonce officielle.
+
+
+⚠️ Aucun airdrop confirmé · Stake bloqué 1 jour, sortie en 7 jours
 
 ### Arcus – Points Saison 1 (Robinhood Chain) (`arcus`)
 
-Programme de points saison 1, fin estimée au S1 2027.
+Programme de points S1 sur Robinhood Chain. Fin estimée S1 2027.
 
 
-⚠️ Dates estimées, non confirmées
+⚠️ Dates non confirmées lors de ce run
 
 ### TxFlow – Points perp DEX (Saison 1) (`txflow`)
 
 Saison 1 de points, fin prévue au T1 2027.
 
 
-⚠️ Projet jeune
+⚠️ Peu vérifié lors de ce run
 
 ### QFEX – Perp DEX RWA (pré-points) (`qfex`)
 
-Saison 0 de pré-points sur un perp DEX d'actifs réels.
+Pré-points de la saison 0, en cours.
 
 
-⚠️ Programme non confirmé
+⚠️ Pas de token confirmé
 
 ### Elysium (L2 HyperEVM) / Ascend – Points (`elysium-ascend`)
 
-Mainnet prévu le 09/11 (date passée à reconfirmer), points via Ascend.
+Mainnet prévu le 09/11, déjà passé. Les points Ascend dépendent du lancement.
 
 
-⚠️ L2 récent · Risque smart contract
+⚠️ Projet jeune · Risque smart contract
+
+### Arc (L1 de Circle) – Testnet (`arc-testnet`)
+
+Testnet de Circle, sans airdrop annoncé.
+
+
+⚠️ Aucun airdrop annoncé
 
 ### StandX – Claim DUSD (fermeture) (`standx`)
 
-Claim DUSD lié à la fermeture, jusqu'au 31/12 8h UTC.
+Claim DUSD avant la fermeture le 31/12 à 8h UTC.
 
 
-⚠️ Projet en fermeture
+⚠️ Fermeture du service
 
 ### Grass – Claim USDC Stage 2 (`grass-stage2`)
 
-Claim USDC du Stage 2, jusqu'au 22/01/2027.
+Claim USDC Stage 2 ouvert jusqu'au 22/01/2027.
 
 
-⚠️ Éligibilité non vérifiée
-
-### Titan Exchange – Points testnet (`titan`)
-
-Points testnet, sans dépôt réel.
-
-
-⚠️ Aucun airdrop confirmé
+⚠️ Éligibilité non vérifiée, aucun wallet fourni
