@@ -1,126 +1,83 @@
-# 🕵️ Chirac — compte rendu du 14/11/2026
+# 🕵️ Chirac — compte rendu du 15/11/2026
 
-📬 1 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 10 à faire toi-même
+📬 0 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 6 à faire toi-même
 
 ## 🙋 À toi de jouer
 
-### Predict.fun – Choix du claim PREDICT — ⏰ dans 12 j
+### Predict.fun – Choix du claim PREDICT — ⏰ dans 11 j
 
-👉 Faire le choix du claim sur le site officiel avant le 26/11 9h UTC.
+👉 Vérifier la date sur le site officiel, puis faire ton choix de claim avant le 26/11.
 
-1. Va sur le site officiel Predict.fun
-2. Connecte le wallet concerné
-3. Choisis ton option de claim
-4. Signe sans approve illimité
+1. Aller sur predict.fun (domaine officiel)
+2. Connecter le wallet éligible
+3. Choisir l'option de claim avant l'échéance, sans approve illimité
 
 🔗 https://predict.fun
 
-### Aster – Claim vesting Stage 6 — ⏰ dans 14 j
+### Aster – Claim vesting Stage 6 — ⏰ dans 13 j
 
-👉 Réclamer le vesting dès l'ouverture du claim.
+👉 Réclamer avant le 28/11 par prudence.
 
-1. Ouvre asterdex.com
-2. Connecte ton wallet
-3. Réclame le Stage 6
-4. Vérifie le domaine avant de signer
+1. Aller sur asterdex.com (domaine officiel)
+2. Connecter le wallet éligible
+3. Réclamer le Stage 6 avant le 28/11
 
 🔗 https://www.asterdex.com
 
-### StandX – Claim DUSD (fermeture) — ⏰ dans 47 j
+### StandX – Claim DUSD (fermeture) — ⏰ dans 46 j
 
-👉 Réclamer le DUSD sur le site officiel avant le 31/12 si le wallet est concerné.
+👉 Réclamer ou retirer le DUSD sur le site officiel avant le 31/12.
 
-1. Ouvre le site officiel StandX
-2. Connecte ton wallet
-3. Réclame le DUSD
+1. Aller sur standx.com (domaine officiel)
+2. Connecter le wallet
+3. Réclamer le DUSD. Toute autre adresse proposant un claim DUSD est une arnaque.
 
 🔗 https://standx.com
 
-### Extended – Xpoints avant TGE (XTEN) — ⏰ dans 48 j
+### Extended – Xpoints avant TGE (XTEN) — ⏰ dans 47 j
 
-👉 Signer les conditions dans l'app Extended avant le TGE, avec un wallet EVM non custodial.
+👉 Faire la signature demandée avant le 01/01 à 0h59.
 
-1. Ouvre l'app Extended (domaine officiel)
-2. Va dans la section d'éligibilité ou de claim XTEN
-3. Si tu viens de Starknet, choisis un wallet EVM non custodial avec un compte Extended actif : le choix est définitif
-4. Signe les conditions (message, sans approve)
+1. Aller sur extended.exchange (domaine officiel)
+2. Connecter le wallet
+3. Faire la signature demandée, sans approve illimité
 
-🔗 https://app.extended.exchange
+🔗 https://extended.exchange
 
-### Grass – Claim USDC Stage 2 — ⏰ dans 69 j
+### Grass – Claim USDC Stage 2 — ⏰ dans 68 j
 
-👉 Réclamer l'USDC sur le site officiel si le wallet est éligible.
+👉 Réclamer sur le site officiel avant le 22/01/2027.
 
-1. Va sur grass.io
-2. Connecte ton wallet
-3. Réclame sans approve illimité
+1. Aller sur getgrass.io (domaine officiel)
+2. Connecter le wallet
+3. Réclamer l'USDC du Stage 2
 
-🔗 https://www.grass.io
-
-### Variational – Points avant TGE $VAR
-
-👉 Faire un volume modeste pour les points. Ne viser le concours que si tu as les 250k$ de volume.
-
-1. Ouvre le site officiel Variational
-2. Connecte ton wallet unique
-3. Fais quelques trades à faible risque pour les points
-
-🔗 https://omni.variational.io
-
-### Polymarket – Token POLY (non daté)
-
-👉 Garder une activité régulière et modeste sur Polymarket.
-
-1. Utilise un seul wallet
-2. Trade régulièrement sur plusieurs marchés
-3. Évite le volume artificiel
-
-🔗 https://polymarket.com
+🔗 https://www.getgrass.io
 
 ### MetaMask – Rewards (token MASK)
 
-👉 Utiliser les swaps et fonctions MetaMask de manière régulière.
+👉 Utiliser MetaMask normalement (swaps, perps) pour cumuler des points.
 
-1. Active Rewards dans MetaMask
-2. Fais des swaps ou du perps de temps en temps
-3. Un seul wallet
+1. Ouvrir MetaMask et l'onglet Rewards
+2. Activer le programme avec le wallet principal
+3. Faire quelques swaps ou trades réels
 
-🔗 https://metamask.io/rewards
-
-### Elysium (L2 HyperEVM) / Ascend – Points
-
-👉 Lire l'alpha du Grimoire et ne faire que les actions sans gros dépôt.
-
-1. Lis le guide du Grimoire
-2. Utilise uniquement les domaines officiels du projet
-3. Évite les approves illimités
-
-🔗 https://cryptomage.substack.com/p/on-debarque-sur-elysium-un-play-gratuit
-
-### Arc (L1 de Circle) – Testnet
-
-👉 Utiliser le faucet et faire quelques transactions testnet.
-
-1. Va sur le site officiel Arc
-2. Récupère des tokens de test via le faucet
-3. Fais quelques transferts et swaps testnet
-
-🔗 https://www.arc.network
+🔗 https://metamask.io
 
 ## 📰 Le brief de Chirac
 
-- 🎯 **Extended (XTEN)** : le checker est ouvert. Signe les conditions dans l'app avant le 1er janvier 0h59. Après le TGE, la distribution est décalée. Si tu viens de Starknet, le choix du wallet EVM est définitif.
-- 🚨 **Arcus** : exploit sur les transferts entre sous-comptes. L'équipe dit avoir corrigé et comblé avec sa trésorerie, et les retraits ont repris. On garde le suivi, mais on n'y laisse aucun capital.
-- 🟣 **Variational** : concours à 50k USDC jusqu'au 1er décembre à 1h. Il faut 250k$ de volume minimum, un opt-in et un KYC pour les gagnants. Ça ne vaut pas le coup sans gros volume. On suit seulement les points.
-- ⏰ **À échéance proche** : Predict.fun (choix du claim le 26/11), Aster Stage 6 (28/11 ou 04/12), StandX (31/12), Grass (22/01/2027). Aucun wallet à vérifier n'a été fourni.
-- 🧊 **Wallet agent** : à 0$ partout, donc aucune action on-chain. Rien ne justifie de déposer de l'argent aujourd'hui.
-- 🗑️ **On laisse tomber** : Glider (points gelés, pas de token annoncé) et le farm « FLOP » d'Arthur Hayes, non vérifié.
-- ℹ️ **Je n'ai pas relancé la recherche web ni les agrégateurs ce run**. Les mises à jour viennent de la newsletter. Pas de nouvel airdrop retenu faute de vérification.
+- 🧊 Wallet agent à 0 $ sur Arbitrum et Base : aucune action on-chain aujourd'hui, rien à gaspiller.
+- ⏰ Le plus urgent : Predict.fun, choix du claim PREDICT le 26/11. Cette date n'est pas confirmée à la source du projet, vérifie sur le site.
+- 🪂 Aster Stage 6 : fenêtre de claim jusqu'au 28/11 à 12h UTC d'après la page officielle citée par Bitrue. D'autres sources donnent le 04/12. Prends le 28/11 par prudence.
+- 📅 StandX : claim DUSD ouvert depuis le 02/11, jusqu'au 31/12 à 8h UTC. Seul le site officiel compte, toute autre adresse est une arnaque.
+- 🌿 Grass Stage 2 : claim USDC jusqu'au 22/01/2027, rien ne presse.
+- ⏳ Les autres pistes (Hyperliquid S2, Variational, Jumper, Extended, Polymarket, MetaMask, Arcus, TxFlow, QFEX, Titan, Elysium, Arc) restent en attente de TGE ou de date. Je n'ai pas pu les revérifier cette fois, airdrops.io m'a renvoyé un 403.
+- 🔎 Aucun wallet fourni à vérifier et aucun nouvel airdrop retenu aujourd'hui : je préfère rien ajouter plutôt que de relayer du sponsorisé.
 
 ## ⏰ Échéances sous 30 jours
 
-- **2026-11-26** (dans 12 j) — Predict.fun – Choix du claim PREDICT : Faire le choix du claim sur le site officiel avant le 26/11 9h UTC.
-- **2026-11-28** (dans 14 j) — Aster – Claim vesting Stage 6 : Réclamer le vesting dès l'ouverture du claim.
+- **2026-11-26** (dans 11 j) — Predict.fun – Choix du claim PREDICT : Vérifier la date sur le site officiel, puis faire ton choix de claim avant le 26/11.
+- **2026-11-28** (dans 13 j) — Aster – Claim vesting Stage 6 : Réclamer avant le 28/11 par prudence.
 
 ## 🤖 Wallet agent
 
