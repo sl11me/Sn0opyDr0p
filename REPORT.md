@@ -1,98 +1,126 @@
 # 🕵️ Chirac — compte rendu du 18/11/2026
 
-📬 0 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 7 à faire toi-même
+📬 1 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 11 à faire toi-même
 
 ## 🙋 À toi de jouer
 
 ### Predict.fun – Choix du claim PREDICT — ⏰ dans 8 j
 
-👉 Faire le choix de claim sur le site officiel avant le 26/11 9h UTC.
+👉 Faire le choix du claim sur le site officiel avant le 26/11 9h UTC.
 
-1. Ouvre predict.fun en tapant l'URL toi-même
-2. Connecte ton wallet
-3. Choisis l'option de claim
-4. Signe sans approve illimité
+1. Aller sur predict.fun (domaine officiel)
+2. Connecter le wallet éligible
+3. Choisir l'option de claim puis signer sans approve illimité
 
 🔗 https://predict.fun
 
 ### Aster – Claim vesting Stage 6 — ⏰ dans 10 j
 
-👉 Confirmer la date exacte sur le site officiel puis réclamer.
+👉 Réclamer le vesting à la date d'ouverture.
 
-1. Ouvre asterdex.com en tapant l'URL toi-même
-2. Vérifie la date du Stage 6
-3. Connecte ton wallet
-4. Réclame sans approve illimité
+1. Aller sur asterdex.com
+2. Connecter le wallet
+3. Claim puis signer sans approve illimité
 
 🔗 https://www.asterdex.com
 
 ### Extended – Xpoints avant TGE (XTEN) — ⏰ dans 43 j
 
-👉 Faire la signature demandée avant la date limite, après vérification sur le site officiel.
+👉 Faire la signature sur Extended avant la date limite.
 
-1. Ouvre extended.exchange en tapant l'URL toi-même
-2. Connecte ton wallet
-3. Signe uniquement le message demandé, sans approve illimité
-4. Vérifie que la date limite est toujours valide
+1. Aller sur le site officiel extended.exchange
+2. Connecter le wallet utilisé pour les points
+3. Signer le message de confirmation (pas d'approve)
 
 🔗 https://extended.exchange
 
 ### StandX – Claim DUSD (fermeture) — ⏰ dans 43 j
 
-👉 Réclamer le DUSD avant le 31/12 si tu as des fonds dessus.
+👉 Réclamer les DUSD avant le 31/12.
 
-1. Ouvre standx.com en tapant l'URL toi-même
-2. Connecte ton wallet
-3. Réclame le DUSD
-4. Signe sans approve illimité
+1. Aller sur standx.com
+2. Connecter le wallet
+3. Réclamer et signer sans approve illimité
 
 🔗 https://standx.com
 
 ### Grass – Claim USDC Stage 2 — ⏰ dans 65 j
 
-👉 Vérifier l'éligibilité sur le site officiel puis réclamer.
+👉 Réclamer avant le 22/01/2027 si éligible.
 
-1. Ouvre grass.io en tapant l'URL toi-même
-2. Connecte le wallet Solana lié à ton compte
-3. Réclame l'USDC
-4. Vérifie le domaine avant de signer
+1. Aller sur grass.io
+2. Connecter le wallet Solana
+3. Réclamer et signer
 
 🔗 https://www.grass.io
 
+### Variational – Points avant TGE $VAR
+
+👉 Garder du volume modéré ; surveiller l'annonce de la date du TGE.
+
+1. Se connecter avec un seul wallet
+2. Trader en petit volume avec régularité
+3. Vérifier ses points dans le dashboard
+
+🔗 https://omni.variational.io
+
 ### MetaMask – Rewards (token MASK)
 
-👉 Utiliser MetaMask normalement (swaps, perps) et suivre ses points.
+👉 Utiliser les swaps et le portefeuille MetaMask, activer Rewards.
 
-1. Ouvre le programme Rewards dans MetaMask
-2. Fais quelques swaps ou opérations réelles avec un seul wallet
-3. Suis tes points
+1. Activer Rewards dans MetaMask
+2. Faire des swaps depuis l'app
 
 🔗 https://metamask.io
 
+### Jumper – Airdrop $JUMP (XP)
+
+👉 Faire un petit bridge ou swap occasionnel avec le wallet principal.
+
+1. Connecter le wallet sur jumper.exchange
+2. Faire un swap ou un bridge
+3. Valider les quêtes d'XP
+
+🔗 https://jumper.exchange
+
+### TxFlow – Points perp DEX (Saison 1)
+
+👉 Trader en petit volume avec régularité.
+
+1. Se connecter avec un seul wallet
+2. Trader régulièrement en petit volume
+
+### QFEX – Perp DEX RWA (pré-points)
+
+👉 Trader en petit volume avec régularité.
+
+1. Se connecter avec un seul wallet
+2. Trader en petit volume
+
 ### Arc (L1 de Circle) – Testnet
 
-👉 Faucet puis quelques interactions simples avec un seul wallet.
+👉 Faire quelques transactions testnet via le faucet officiel.
 
-1. Va sur le site officiel arc.network
-2. Prends des fonds de test au faucet (captcha à ta charge)
-3. Fais quelques transferts et interactions simples
-4. Aucun dépôt réel
+1. Prendre des tokens testnet via le faucet officiel (captcha à toi)
+2. Faire quelques transactions de test
 
-🔗 https://www.arc.network
+🔗 https://www.circle.com/arc
 
 ## 📰 Le brief de Chirac
 
-- 🧊 Wallet agent à zéro (0 $ partout) : aucune action on-chain, on ne gaspille rien.
-- ⚠️ Cette passe n'a pas refait de recherche web : les dates viennent de ton suivi, à revérifier avant d'agir.
-- ⏰ Ça presse : Predict.fun, choix du claim PREDICT le 26/11 à 9h UTC. Ensuite Aster Stage 6 (28/11 ou 04/12), StandX DUSD (31/12), Extended (signature avant le 01/01) et Grass USDC Stage 2 (22/01/2027).
-- 🔎 Aucun wallet à vérifier fourni : je n'ai pas pu confirmer d'éligibilité aux claims. Donne-moi tes adresses publiques.
-- 💤 TGE sans date (Variational, Jumper, Polymarket, MetaMask, Hyperliquid S2) : on attend, sans dépôt forcé.
-- 🚫 Aucun nouvel airdrop ajouté, faute de vérification fiable aujourd'hui.
+- 🚨 **Extended** : signature à faire avant le 31/12 (0h59), sinon l'allocation part au fonds écosystème. C'est l'action prioritaire.
+- ⏰ **Predict.fun** : choix du claim PREDICT le 26/11 à 9h UTC. **Aster Stage 6** : claim le 28/11 ou le 04/12 à 12h UTC.
+- 📅 **StandX** : claim DUSD avant le 31/12. **Grass** : claim USDC Stage 2 jusqu'au 22/01/2027.
+- 📉 Marché très bas (BTC ~62k, Fear & Greed 10, open interest en baisse). La concurrence sur les farms de perp DEX (Variational, TxFlow, QFEX) diminue, donc les points sont plus faciles à gagner.
+- 💤 Le wallet agent est vide (0 $ sur Arbitrum et Base), donc **aucune action on-chain** aujourd'hui. Pas de HYPE staké non plus.
+- 🔎 Aucun wallet à vérifier n'a été fourni, donc pas de claims d'inconnus listés. Je n'ai pas ajouté de nouvel airdrop : le mail ne donne rien de vérifiable (le projet à 14M$ n'est pas nommé).
+- ⚠️ Je n'ai pas revérifié les dates sur le web ce run. Elles viennent du suivi existant et du mail du Grimoire du Mage, à confirmer avant d'agir.
+- 🗑️ À laisser de côté pour l'instant : Hyperliquid S2, Polymarket et MetaMask, car aucune date n'est annoncée.
 
 ## ⏰ Échéances sous 30 jours
 
-- **2026-11-26** (dans 8 j) — Predict.fun – Choix du claim PREDICT : Faire le choix de claim sur le site officiel avant le 26/11 9h UTC.
-- **2026-11-28** (dans 10 j) — Aster – Claim vesting Stage 6 : Confirmer la date exacte sur le site officiel puis réclamer.
+- **2026-11-26** (dans 8 j) — Predict.fun – Choix du claim PREDICT : Faire le choix du claim sur le site officiel avant le 26/11 9h UTC.
+- **2026-11-28** (dans 10 j) — Aster – Claim vesting Stage 6 : Réclamer le vesting à la date d'ouverture.
 
 ## 🤖 Wallet agent
 
