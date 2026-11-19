@@ -1,6 +1,6 @@
 # Sn0opyDr0p
 
-**Chirac**, l'agent chasseur d'airdrops : lit les newsletters de chasseurs d'airdrops (**Grimoire du Mage**, Bankless, M31 Capital, Airdrop Alert, Cryptopolitan) dans Gmail, parcourt les agrégateurs (CryptoRank, DropsTab, Airdrops.io), vérifie chaque opportunité sur le web avec Claude, note potentiel / effort / risque, et tient `TRACKER.md` à jour par compte.
+**Sn0opy**, l'agent chasseur d'airdrops : lit les newsletters de chasseurs d'airdrops (**Grimoire du Mage**, Bankless, M31 Capital, Airdrop Alert, Cryptopolitan) dans Gmail, parcourt les agrégateurs (CryptoRank, DropsTab, Airdrops.io), vérifie chaque opportunité sur le web avec Claude, note potentiel / effort / risque, et tient `TRACKER.md` à jour par compte.
 
 Chaque matin (GitHub Actions), il revérifie les airdrops suivis, en ajoute de nouveaux et t'envoie un compte rendu par mail (`REPORT.md`) : d'abord « 🙋 À toi de jouer », les actions manuelles avec le pas-à-pas et le bouton vers le site officiel, puis le brief, les échéances, le wallet agent et les nouveautés.
 
@@ -8,7 +8,7 @@ Il pilote aussi un **wallet dédié** (`0x50F3347425617069E61a9A27Cbb8d645d19996
 
 ## Sources
 
-Abonne l'adresse Gmail de Chirac à ces newsletters ; il les lit toutes, avec le même filtrage :
+Abonne l'adresse Gmail de Sn0opy à ces newsletters ; il les lit toutes, avec le même filtrage :
 
 | Newsletter | Motif d'expéditeur |
 |---|---|
@@ -57,7 +57,7 @@ Variables du repo (*Settings → Secrets and variables → Actions → Variables
 
 ### Mode zéro dépôt
 
-Avec `WATCH_WALLETS`, Chirac compare tes wallets aux claims ouverts (airdrops.io, CryptoRank) via les checkers officiels qui acceptent une adresse collée, et te signale dans « 🙋 À toi de jouer » ce que tu peux réclamer (🎯 wallet, montant, date limite). Il ajoute aussi jusqu'à 3 testnets gratuits sérieux. Uniquement des adresses publiques, jamais de clé : le claim reste ton geste, depuis le wallet éligible, qui paie le gas. Les checkers qui exigent de connecter un wallet ne sont pas vérifiables : ils sont marqués « à vérifier ». Ces adresses sont envoyées à Claude et aux sites officiels consultés.
+Avec `WATCH_WALLETS`, Sn0opy compare tes wallets aux claims ouverts (airdrops.io, CryptoRank) via les checkers officiels qui acceptent une adresse collée, et te signale dans « 🙋 À toi de jouer » ce que tu peux réclamer (🎯 wallet, montant, date limite). Il ajoute aussi jusqu'à 3 testnets gratuits sérieux. Uniquement des adresses publiques, jamais de clé : le claim reste ton geste, depuis le wallet éligible, qui paie le gas. Les checkers qui exigent de connecter un wallet ne sont pas vérifiables : ils sont marqués « à vérifier ». Ces adresses sont envoyées à Claude et aux sites officiels consultés.
 
 ```bash
 gh variable set WATCH_WALLETS --repo sl11me/Sn0opyDr0p --body "main:0x…,sol:7xK…"

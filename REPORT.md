@@ -1,4 +1,4 @@
-# 🕵️ Chirac — compte rendu du 18/11/2026
+# 🕵️ Sn0opy — compte rendu du 18/11/2026
 
 📬 1 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 11 à faire toi-même
 
@@ -106,7 +106,7 @@
 
 🔗 https://www.circle.com/arc
 
-## 📰 Le brief de Chirac
+## 📰 Le brief de Sn0opy
 
 - 🚨 **Extended** : signature à faire avant le 31/12 (0h59), sinon l'allocation part au fonds écosystème. C'est l'action prioritaire.
 - ⏰ **Predict.fun** : choix du claim PREDICT le 26/11 à 9h UTC. **Aster Stage 6** : claim le 28/11 ou le 04/12 à 12h UTC.

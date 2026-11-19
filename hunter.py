@@ -1,4 +1,4 @@
-"""Sn0opyDr0p — chasseur d'airdrops. L'agent s'appelle Chirac.
+"""Sn0opyDr0p — chasseur d'airdrops. L'agent s'appelle Sn0opy.
 
 hunt  : lit les newsletters airdrop (Grimoire du Mage, Bankless… via Gmail IMAP) et les agrégateurs, revérifie les airdrops suivis sur le web,
         en note de nouveaux et écrit le compte rendu du jour (REPORT.md, --send pour le mail)
@@ -32,7 +32,7 @@ STATUSES = ("todo", "en cours", "fait", "éligible", "réclamé", "raté", "skip
 
 # Wallet dédié de l'agent : la clé PK_AGENT doit correspondre à cette adresse, sinon rien n'est signé.
 AGENT_WALLET = os.environ.get("AGENT_WALLET", "0x50F3347425617069E61a9A27Cbb8d645d19996f8")
-# Mode zéro dépôt : adresses PUBLIQUES de tes autres wallets (jamais de clé), dont Chirac vérifie l'éligibilité
+# Mode zéro dépôt : adresses PUBLIQUES de tes autres wallets (jamais de clé), dont Sn0opy vérifie l'éligibilité
 # aux claims ouverts. WATCH_WALLETS=main:0xabc…,sol:7xKX…  (le libellé est facultatif)
 WALLET_RE = re.compile(r"^(0x[0-9a-fA-F]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$")  # EVM ou Solana
 
@@ -211,7 +211,7 @@ def fetch_newsletters(state, days):
 
 # --- analyse (Claude + web search) ---------------------------------------
 
-SYSTEM = """Tu es Chirac, chasseur d'airdrops crypto expérimenté et prudent, l'associé de l'utilisateur.
+SYSTEM = """Tu es Sn0opy, chasseur d'airdrops crypto expérimenté et prudent, l'associé de l'utilisateur.
 On te donne des newsletters de chasseurs d'airdrops (Le Grimoire du Mage, Bankless, M31 Capital,
 Airdrop Alert, Cryptopolitan…) et tu peux chercher sur le web.
 À chaque run, consulte aussi ces agrégateurs (WebFetch) pour repérer les opportunités du moment :
@@ -366,7 +366,7 @@ def _status_icon(status):
 def build_report(state, brief, new, n_mails, horizon=30, wallet=None):
     """Compte rendu en markdown (REPORT.md et version texte du mail)."""
     d, today = digest(state, new, horizon), date.today()
-    out = [f"# 🕵️ Chirac — compte rendu du {today:%d/%m/%Y}", "",
+    out = [f"# 🕵️ Sn0opy — compte rendu du {today:%d/%m/%Y}", "",
            f"📬 {n_mails} mail(s) de newsletters · 🪂 {len(d['live'])} airdrops suivis · 🙋 {len(d['todo'])} à faire toi-même", ""]
     if d["todo"]:
         out += ["## 🙋 À toi de jouer", ""]
@@ -379,7 +379,7 @@ def build_report(state, brief, new, n_mails, horizon=30, wallet=None):
             if _url(a):
                 out += ["", f"🔗 {_url(a)}"]
             out.append("")
-    out += ["## 📰 Le brief de Chirac", "", brief, ""]
+    out += ["## 📰 Le brief de Sn0opy", "", brief, ""]
     if d["soon"]:
         out += [f"## ⏰ Échéances sous {horizon} jours", ""]
         out += [f"- **{a['deadline_date']}** ({_when(d['days_left'](a))}) — {a['name']} : {a['next_action']}"
@@ -434,7 +434,7 @@ def build_html(state, brief, new, n_mails, horizon=30, wallet=None):
     out = [f'''<div style="background:#f5f3ff;padding:20px 12px;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#1f2937;line-height:1.5">
 <div style="max-width:600px;margin:0 auto">
 <div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:16px;padding:22px 20px">
-<div style="font-size:26px;font-weight:800">🕵️ Chirac</div>
+<div style="font-size:26px;font-weight:800">🕵️ Sn0opy</div>
 <div style="opacity:.9">Ton compte rendu airdrops du {today:%d/%m/%Y}</div>
 <div style="margin-top:12px;font-size:14px">📬 {n_mails} newsletter(s) &nbsp;·&nbsp; 🪂 {len(d["live"])} suivis &nbsp;·&nbsp; 🙋 {len(d["todo"])} à faire</div>
 </div>''']
@@ -451,9 +451,9 @@ def build_html(state, brief, new, n_mails, horizon=30, wallet=None):
 {button(url, "🔗 Ouvrir " + e(urlparse(url).netloc)) if url else ""}
 </div>''')
     else:
-        out.append(f'<div style="{card};margin-top:16px">😎 Rien à faire à la main aujourd\'hui, Chirac s\'occupe du reste.</div>')
+        out.append(f'<div style="{card};margin-top:16px">😎 Rien à faire à la main aujourd\'hui, Sn0opy s\'occupe du reste.</div>')
     bullets = [line.lstrip("-* ").strip() for line in brief.splitlines() if line.strip()]
-    out.append(f'<h2 style="{h2}">📰 Le brief de Chirac</h2><div style="{card}"><ul style="margin:0;padding-left:18px">'
+    out.append(f'<h2 style="{h2}">📰 Le brief de Sn0opy</h2><div style="{card}"><ul style="margin:0;padding-left:18px">'
                + "".join(f'<li style="margin:5px 0">{_inline(b)}</li>' for b in bullets) + "</ul></div>")
     if d["soon"]:
         out.append(f'<h2 style="{h2}">⏰ Échéances sous {horizon} jours</h2><div style="{card}">')
@@ -486,7 +486,7 @@ def build_html(state, brief, new, n_mails, horizon=30, wallet=None):
         out.append(f'<h2 style="{h2}">😴 En veille</h2><div style="{card};color:#4b5563">'
                    + " · ".join(e(a["name"]) for a in d["waiting"]) + "</div>")
     out.append(f'''<div style="text-align:center;margin:22px 0 4px">{button(TRACKER_URL, "📋 Voir tout le tracker")}</div>
-<div style="text-align:center;color:#9ca3af;font-size:12px;margin-top:10px">Chirac ne te demandera jamais ta seed phrase. Vérifie toujours l'adresse du site avant de signer. 🛡️</div>
+<div style="text-align:center;color:#9ca3af;font-size:12px;margin-top:10px">Sn0opy ne te demandera jamais ta seed phrase. Vérifie toujours l'adresse du site avant de signer. 🛡️</div>
 </div></div>''')
     return "\n".join(out)
 
@@ -498,7 +498,7 @@ def send_mail(subject, body, html=None):
 
     user = os.environ["GMAIL_USER"]
     msg = EmailMessage()
-    msg["From"], msg["To"], msg["Subject"] = formataddr(("Chirac 🕵️", user)), os.environ.get("REPORT_TO", user), subject
+    msg["From"], msg["To"], msg["Subject"] = formataddr(("Sn0opy 🕵️", user)), os.environ.get("REPORT_TO", user), subject
     msg.set_content(body)
     if html:
         msg.add_alternative(html, subtype="html")
@@ -1016,7 +1016,7 @@ def main():
         print(report)
         if args.send:
             n = len(digest(state, new)["todo"])
-            send_mail(f"🕵️ Chirac — {n} truc(s) à faire · airdrops du {date.today():%d/%m}", report, html)
+            send_mail(f"🕵️ Sn0opy — {n} truc(s) à faire · airdrops du {date.today():%d/%m}", report, html)
             print("→ compte rendu envoyé par mail")
     elif args.cmd == "mark":
         if args.slug not in state["airdrops"]:
