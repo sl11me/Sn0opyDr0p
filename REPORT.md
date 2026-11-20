@@ -1,72 +1,65 @@
 # 🕵️ Sn0opy — compte rendu du 20/11/2026
 
-📬 1 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 5 à faire toi-même
+📬 0 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 4 à faire toi-même
 
 ## 🙋 À toi de jouer
 
 ### Predict.fun – Choix du claim PREDICT — ⏰ dans 6 j
 
-👉 Faire le choix de claim sur le site officiel avant le 26/11 9h UTC.
+👉 Vérifier l'éligibilité et faire le choix du claim sur predict.fun avant le 26/11 9h UTC.
 
-1. Ouvrir predict.fun et vérifier le domaine
-2. Connecter ton wallet éligible
-3. Choisir l'option de claim et signer, sans approve illimité
+1. Ouvrir predict.fun en tapant l'URL toi-même
+2. Connecter ton wallet habituel
+3. Choisir l'option de claim
+4. Signer sans approve illimité
 
 🔗 https://predict.fun
 
 ### Aster – Claim vesting Stage 6 — ⏰ dans 8 j
 
-👉 Réclamer le vesting Stage 6 dès l'ouverture, après avoir confirmé la date.
+👉 Réclamer sur le site officiel d'Aster avant le 28/11 12h UTC par prudence.
 
-1. Ouvrir asterdex.com et vérifier le domaine
-2. Connecter ton wallet
-3. Réclamer et signer sans approve illimité
+1. Ouvrir asterdex.com
+2. Aller sur la page des allocations/claim
+3. Connecter le wallet éligible
+4. Signer le claim sans approve illimité
 
 🔗 https://www.asterdex.com
 
 ### StandX – Claim DUSD (fermeture) — ⏰ dans 41 j
 
-👉 Réclamer le DUSD avant le 31/12.
+👉 Réclamer le DUSD sur le site officiel de StandX avant le 31/12.
 
-1. Ouvrir standx.com et vérifier le domaine
-2. Connecter ton wallet
-3. Réclamer le DUSD et signer sans approve illimité
+1. Ouvrir standx.com
+2. Vérifier l'éligibilité
+3. Signer le claim
 
 🔗 https://standx.com
 
-### Extended – Xpoints avant TGE (XTEN) — ⏰ dans 42 j
-
-👉 Vérifier sur le site officiel la signature à faire avant le 01/01.
-
-1. Aller sur le site officiel extended.exchange
-2. Connecter ton wallet et vérifier le domaine
-3. Signer le message demandé, sans approve illimité
-
-🔗 https://extended.exchange
-
 ### Grass – Claim USDC Stage 2 — ⏰ dans 63 j
 
-👉 Réclamer avant le 22/01/2027 si éligible.
+👉 Réclamer sur le site officiel de Grass avant le 22/01/2027.
 
-1. Ouvrir grass.io et vérifier le domaine
-2. Connecter ton wallet
-3. Réclamer et signer
+1. Ouvrir grass.io
+2. Se connecter
+3. Lancer le claim USDC
 
 🔗 https://www.grass.io
 
 ## 📰 Le brief de Sn0opy
 
-- 📭 La newsletter du jour (Cryptopolitan) ne contient que de la pub HubSpot et un titre sur l'IPO d'Anthropic. Aucun airdrop dedans, donc aucun nouvel airdrop retenu.
-- ⚠️ Je n'ai pas relancé de recherche web ce run. Les 15 airdrops suivis sont renvoyés avec leurs dernières infos connues, sans nouvelle vérification. Contrôle les dates sur les sites officiels avant d'agir.
-- ⏰ Le plus pressé : Predict.fun, choix du claim PREDICT le 26/11 à 9h UTC. Ensuite Aster Stage 6 le 28/11 ou le 04/12 à 12h UTC.
-- 📅 Plus loin : StandX, claim DUSD jusqu'au 31/12. Extended, signature avant le 01/01. Grass, claim USDC Stage 2 jusqu'au 22/01/2027.
-- 👛 Le wallet agent est vide (0 $ sur Arbitrum et Base) et aucun wallet utilisateur n'est à vérifier. Je ne propose donc aucune action on-chain et je n'ai pas pu faire de vérification de claim.
-- 💤 Les autres (Hyperliquid S2, Polymarket, MetaMask, Arc, Variational, Jumper) n'ont pas de date ou de TGE annoncés. On attend.
+- 💤 Wallet agent à 0 $ partout et aucun wallet à vérifier : aucune action on-chain aujourd'hui, on garde la poudre sèche.
+- ⏰ Ça presse : Predict.fun, choix du claim PREDICT le 26/11 à 9h UTC (date non confirmée à la source, à revérifier sur le site officiel). Aster Stage 6, fin le 28/11 ou le 04/12 à 12h UTC (sources divergentes, on vise le 28/11 par prudence).
+- 📅 StandX : claim DUSD jusqu'au 31/12 à 8h UTC. Seul le site officiel est valable, tout autre lien est une arnaque.
+- 🌱 Grass Stage 2 : claim USDC jusqu'au 22/01/2027, rien d'urgent.
+- 🔭 Projets en veille, sans changement vérifié : Hyperliquid S2, Polymarket, MetaMask, Variational, Jumper (TGE T4 2026 non daté), Extended, Arcus, TxFlow, QFEX, Elysium, Titan, Arc.
+- 🚫 Aucun nouvel airdrop ajouté : airdrops.io a renvoyé une erreur 403 et je n'ai rien pu valider sur site officiel.
+- ⚠️ Cette mise à jour s'appuie sur une seule recherche rapide. Les dates des airdrops suivis sont conservées telles quelles, sauf celles citées plus haut.
 
 ## ⏰ Échéances sous 30 jours
 
-- **2026-11-26** (dans 6 j) — Predict.fun – Choix du claim PREDICT : Faire le choix de claim sur le site officiel avant le 26/11 9h UTC.
-- **2026-11-28** (dans 8 j) — Aster – Claim vesting Stage 6 : Réclamer le vesting Stage 6 dès l'ouverture, après avoir confirmé la date.
+- **2026-11-26** (dans 6 j) — Predict.fun – Choix du claim PREDICT : Vérifier l'éligibilité et faire le choix du claim sur predict.fun avant le 26/11 9h UTC.
+- **2026-11-28** (dans 8 j) — Aster – Claim vesting Stage 6 : Réclamer sur le site officiel d'Aster avant le 28/11 12h UTC par prudence.
 
 ## 🤖 Wallet agent
 
