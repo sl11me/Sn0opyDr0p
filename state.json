@@ -5,24 +5,27 @@
       "name": "Hyperliquid – 2e airdrop HYPE (spéculatif)",
       "chain": "Hyperliquid",
       "alive": true,
-      "summary": "Piste spéculative d'un 2e airdrop HYPE, aucune annonce officielle.",
+      "summary": "Piste spéculative d'un 2e airdrop HYPE, sans annonce officielle. Utiliser Hyperliquid (trading, staking) est la seule façon d'être bien placé.",
       "potential": 4,
       "effort": 2,
       "risk": 3,
       "cost_usd": "0-50$",
       "deadline": "Aucune annonce",
       "deadline_date": "",
-      "next_action": "Utiliser Hyperliquid normalement avec un seul wallet et surveiller les annonces officielles.",
+      "next_action": "Attendre une annonce officielle ; staker du HYPE seulement si l'argent peut rester bloqué.",
       "who": "attendre",
-      "action_url": "https://app.hyperliquid.xyz",
+      "action_url": "",
       "how_to": [],
-      "steps": [],
+      "steps": [
+        "Utiliser Hyperliquid avec un seul wallet",
+        "Suivre les annonces officielles"
+      ],
       "links": [
         "hyperliquid.xyz"
       ],
       "red_flags": [
-        "Aucune confirmation de l'équipe",
-        "Stake bloqué 1 jour, sortie en 7 jours"
+        "Aucune confirmation officielle",
+        "Le stake est bloqué 7 jours à la sortie"
       ],
       "eligibility": "",
       "sources": [],
@@ -33,22 +36,28 @@
       "name": "Arcus – Points Saison 1 (Robinhood Chain)",
       "chain": "Robinhood Chain",
       "alive": true,
-      "summary": "Programme de points Saison 1, fin estimée S1 2027.",
+      "summary": "Programme de points saison 1 sur la chaîne Robinhood. Fin de saison estimée au S1 2027.",
       "potential": 3,
       "effort": 3,
       "risk": 3,
-      "cost_usd": "~5-20$",
+      "cost_usd": "10-50$",
       "deadline": "Fin S1 estimée S1 2027",
       "deadline_date": "",
-      "next_action": "Rien d'urgent : suivre l'évolution de la saison.",
-      "who": "attendre",
+      "next_action": "Continuer l'activité légère sur le site officiel, puis surveiller la fin de saison.",
+      "who": "toi",
       "action_url": "",
-      "how_to": [],
-      "steps": [],
+      "how_to": [
+        "Ouvrir le site officiel d'Arcus depuis le compte X officiel",
+        "Connecter un seul wallet",
+        "Faire l'activité qui rapporte des points"
+      ],
+      "steps": [
+        "Activité régulière sur la saison 1"
+      ],
       "links": [],
       "red_flags": [
-        "Site officiel à revérifier",
-        "Chaîne récente"
+        "Site officiel à revérifier avant toute signature",
+        "Projet récent"
       ],
       "eligibility": "",
       "sources": [],
@@ -59,23 +68,31 @@
       "name": "Variational – Points avant TGE $VAR",
       "chain": "Arbitrum",
       "alive": true,
-      "summary": "Perp DEX avec points avant le TGE, prévu T4 2026 mais non daté.",
+      "summary": "Perp DEX avec points avant le TGE de $VAR, prévu au T4 2026 mais non daté.",
       "potential": 4,
       "effort": 3,
       "risk": 3,
-      "cost_usd": "~10-50$",
+      "cost_usd": "10-100$",
       "deadline": "TGE T4 2026, non daté",
       "deadline_date": "",
-      "next_action": "Surveiller l'annonce du TGE et le claim.",
-      "who": "attendre",
-      "action_url": "https://variational.io",
-      "how_to": [],
-      "steps": [],
+      "next_action": "Garder une activité de trading modeste et surveiller l'annonce du TGE.",
+      "who": "toi",
+      "action_url": "https://omni.variational.io",
+      "how_to": [
+        "Se connecter avec un seul wallet",
+        "Trader un petit volume régulièrement",
+        "Vérifier les points dans le tableau de bord"
+      ],
+      "steps": [
+        "Trading régulier",
+        "Suivre l'annonce du TGE"
+      ],
       "links": [
         "variational.io"
       ],
       "red_flags": [
-        "Date de TGE non confirmée"
+        "TGE non daté",
+        "Risque de perte en trading perp"
       ],
       "eligibility": "",
       "sources": [],
@@ -86,23 +103,30 @@
       "name": "Jumper – Airdrop $JUMP (XP)",
       "chain": "Multi-chaînes",
       "alive": true,
-      "summary": "XP via bridges et swaps sur Jumper, TGE annoncé T4 2026 sans date.",
+      "summary": "L'XP gagné en bridgeant et swappant via Jumper donne droit au futur $JUMP. TGE visé au T4 2026, non daté.",
       "potential": 3,
       "effort": 2,
       "risk": 2,
-      "cost_usd": "~5$",
+      "cost_usd": "5-20$",
       "deadline": "TGE T4 2026 non daté",
       "deadline_date": "",
-      "next_action": "Surveiller l'annonce du TGE.",
-      "who": "attendre",
+      "next_action": "Faire un bridge ou un swap par semaine et surveiller l'annonce du TGE.",
+      "who": "toi",
       "action_url": "https://jumper.exchange",
-      "how_to": [],
-      "steps": [],
+      "how_to": [
+        "Ouvrir jumper.exchange",
+        "Connecter un seul wallet",
+        "Faire un petit swap ou bridge",
+        "Vérifier l'XP sur le profil"
+      ],
+      "steps": [
+        "Activité hebdomadaire"
+      ],
       "links": [
         "jumper.exchange"
       ],
       "red_flags": [
-        "Date non confirmée"
+        "TGE non daté"
       ],
       "eligibility": "",
       "sources": [],
@@ -113,28 +137,30 @@
       "name": "Extended – Xpoints avant TGE (XTEN)",
       "chain": "Starknet",
       "alive": true,
-      "summary": "Perp DEX avec Xpoints avant TGE. Une signature est demandée avant le 01/01.",
-      "potential": 3,
-      "effort": 2,
+      "summary": "Perp DEX avec Xpoints avant le TGE de XTEN. La signature est demandée avant le 01/01 à 0h59.",
+      "potential": 4,
+      "effort": 3,
       "risk": 3,
-      "cost_usd": "~5-20$",
+      "cost_usd": "10-100$",
       "deadline": "Signature avant le 01/01 0h59",
-      "deadline_date": "2026-12-31",
-      "next_action": "Faire la signature demandée avant le 01/01 depuis le site officiel.",
+      "deadline_date": "2027-01-01",
+      "next_action": "Faire la signature demandée avant le 01/01 et garder une petite activité de trading.",
       "who": "toi",
       "action_url": "https://extended.exchange",
       "how_to": [
-        "Ouvrir extended.exchange et vérifier le domaine",
-        "Connecter ton wallet unique",
-        "Signer le message demandé, sans approve illimité",
-        "Vérifier tes Xpoints"
+        "Ouvrir extended.exchange",
+        "Connecter ton wallet",
+        "Signer le message demandé (sans approve illimité)"
       ],
-      "steps": [],
+      "steps": [
+        "Signature avant le 01/01",
+        "Activité de trading modérée"
+      ],
       "links": [
         "extended.exchange"
       ],
       "red_flags": [
-        "Vérifier les conditions exactes de la signature"
+        "Vérifier précisément la date de la signature"
       ],
       "eligibility": "",
       "sources": [],
@@ -145,21 +171,28 @@
       "name": "TxFlow – Points perp DEX (Saison 1)",
       "chain": "Multi-chaînes",
       "alive": true,
-      "summary": "Perp DEX avec points Saison 1, fin prévue T1 2027.",
+      "summary": "Perp DEX avec points saison 1, fin prévue au T1 2027.",
       "potential": 3,
       "effort": 3,
-      "risk": 3,
-      "cost_usd": "~10-30$",
+      "risk": 4,
+      "cost_usd": "10-50$",
       "deadline": "Fin S1 T1 2027",
       "deadline_date": "",
-      "next_action": "Rien d'urgent, suivre la saison.",
-      "who": "attendre",
+      "next_action": "Activité légère, et garder un œil sur la fiabilité du projet.",
+      "who": "toi",
       "action_url": "",
-      "how_to": [],
-      "steps": [],
+      "how_to": [
+        "Retrouver le site officiel via le compte X du projet",
+        "Se connecter avec un seul wallet",
+        "Trader un petit volume"
+      ],
+      "steps": [
+        "Trading léger"
+      ],
       "links": [],
       "red_flags": [
-        "Site officiel à revérifier"
+        "Équipe et financement à revérifier",
+        "Projet jeune"
       ],
       "eligibility": "",
       "sources": [],
@@ -170,21 +203,29 @@
       "name": "QFEX – Perp DEX RWA (pré-points)",
       "chain": "Multi-chaînes",
       "alive": true,
-      "summary": "Perp DEX sur actifs réels, pré-points Saison 0.",
+      "summary": "Perp DEX sur actifs réels (RWA), en saison 0 de pré-points.",
       "potential": 3,
       "effort": 3,
       "risk": 3,
-      "cost_usd": "~10-30$",
+      "cost_usd": "10-50$",
       "deadline": "Saison 0 en cours",
       "deadline_date": "",
-      "next_action": "Suivre la fin de la Saison 0.",
-      "who": "attendre",
-      "action_url": "",
-      "how_to": [],
-      "steps": [],
-      "links": [],
+      "next_action": "Petite activité de trading pour accumuler des points.",
+      "who": "toi",
+      "action_url": "https://qfex.com",
+      "how_to": [
+        "Ouvrir qfex.com",
+        "Se connecter avec un seul wallet",
+        "Trader un petit volume"
+      ],
+      "steps": [
+        "Trading léger"
+      ],
+      "links": [
+        "qfex.com"
+      ],
       "red_flags": [
-        "Site officiel à revérifier"
+        "Pré-points sans token confirmé"
       ],
       "eligibility": "",
       "sources": [],
@@ -195,21 +236,28 @@
       "name": "Elysium (L2 HyperEVM) / Ascend – Points",
       "chain": "HyperEVM",
       "alive": true,
-      "summary": "L2 sur HyperEVM, mainnet lancé, programme de points Ascend.",
+      "summary": "L2 sur HyperEVM, mainnet lancé, avec un programme de points via Ascend.",
       "potential": 3,
       "effort": 3,
-      "risk": 3,
-      "cost_usd": "~10-30$",
+      "risk": 4,
+      "cost_usd": "10-50$",
       "deadline": "Mainnet lancé",
       "deadline_date": "",
-      "next_action": "Suivre le programme de points.",
-      "who": "attendre",
+      "next_action": "Vérifier le programme de points sur le site officiel avant de déposer.",
+      "who": "toi",
       "action_url": "",
-      "how_to": [],
-      "steps": [],
+      "how_to": [
+        "Retrouver le site officiel via le compte X du projet",
+        "Vérifier la page des points",
+        "Faire l'activité demandée avec un seul wallet"
+      ],
+      "steps": [
+        "Vérification puis activité légère"
+      ],
       "links": [],
       "red_flags": [
-        "Site officiel à revérifier"
+        "Projet récent",
+        "Risque sur les dépôts"
       ],
       "eligibility": "",
       "sources": [],
@@ -220,23 +268,29 @@
       "name": "Titan Exchange – Points testnet",
       "chain": "Solana",
       "alive": true,
-      "summary": "Agrégateur de swaps avec points, sans date de fin annoncée.",
+      "summary": "Agrégateur de swaps sur Solana avec des points testnet, gratuit et sans fin annoncée.",
       "potential": 3,
       "effort": 2,
       "risk": 2,
-      "cost_usd": "~5$",
+      "cost_usd": "0-5$",
       "deadline": "Pas de fin annoncée",
       "deadline_date": "",
-      "next_action": "Rien d'urgent.",
-      "who": "attendre",
+      "next_action": "Faire quelques actions sur le testnet de temps en temps.",
+      "who": "toi",
       "action_url": "https://titan.exchange",
-      "how_to": [],
-      "steps": [],
+      "how_to": [
+        "Ouvrir titan.exchange",
+        "Connecter un seul wallet",
+        "Faire les actions du testnet"
+      ],
+      "steps": [
+        "Actions testnet régulières"
+      ],
       "links": [
         "titan.exchange"
       ],
       "red_flags": [
-        "Aucune date de TGE"
+        "Aucun airdrop confirmé"
       ],
       "eligibility": "",
       "sources": [],
@@ -251,26 +305,28 @@
       "potential": 3,
       "effort": 1,
       "risk": 2,
-      "cost_usd": "gas",
+      "cost_usd": "~1-5$ gas",
       "deadline": "26/11 9h UTC choix",
       "deadline_date": "2026-11-26",
-      "next_action": "Si éligible, faire le choix du claim avant le 26/11 9h UTC sur le site officiel.",
+      "next_action": "Faire le choix de claim avant le 26/11 à 9h UTC.",
       "who": "toi",
       "action_url": "https://predict.fun",
       "how_to": [
-        "Ouvrir predict.fun et vérifier le domaine",
+        "Aller sur predict.fun (domaine officiel)",
         "Connecter ton wallet",
         "Choisir l'option de claim",
         "Signer sans approve illimité"
       ],
-      "steps": [],
+      "steps": [
+        "Choix avant le 26/11"
+      ],
       "links": [
         "predict.fun"
       ],
       "red_flags": [
-        "Éligibilité non vérifiée, aucun wallet fourni"
+        "Faux domaines de claim possibles"
       ],
-      "eligibility": "",
+      "eligibility": "à vérifier avec le checker officiel",
       "sources": [],
       "first_seen": "2026-11-02"
     },
@@ -279,30 +335,31 @@
       "name": "StandX – Claim DUSD (fermeture)",
       "chain": "Multi-chaînes",
       "alive": true,
-      "summary": "Claim DUSD avant la fermeture, jusqu'au 31/12 à 8h UTC.",
+      "summary": "Le projet ferme : le claim des DUSD est ouvert jusqu'au 31/12 à 8h UTC.",
       "potential": 2,
       "effort": 1,
       "risk": 2,
-      "cost_usd": "gas",
+      "cost_usd": "~1-5$ gas",
       "deadline": "31/12 8h UTC claim",
       "deadline_date": "2026-12-31",
-      "next_action": "Réclamer son DUSD avant le 31/12 si des fonds y restent.",
+      "next_action": "Réclamer les DUSD avant le 31/12 si tu as un solde.",
       "who": "toi",
       "action_url": "https://standx.com",
       "how_to": [
-        "Ouvrir standx.com et vérifier le domaine",
+        "Aller sur standx.com",
         "Connecter ton wallet",
-        "Retirer ou claim le DUSD",
-        "Vérifier la réception"
+        "Retirer ou claim les DUSD"
       ],
-      "steps": [],
+      "steps": [
+        "Claim avant le 31/12"
+      ],
       "links": [
         "standx.com"
       ],
       "red_flags": [
-        "Fermeture du service"
+        "Fermeture du projet"
       ],
-      "eligibility": "",
+      "eligibility": "à vérifier avec le checker officiel",
       "sources": [],
       "first_seen": "2026-11-02"
     },
@@ -311,30 +368,32 @@
       "name": "Aster – Claim vesting Stage 6",
       "chain": "BNB Chain",
       "alive": true,
-      "summary": "Claim du vesting Stage 6 le 28/11 ou le 04/12 à 12h UTC.",
+      "summary": "Claim du vesting Stage 6 d'Aster le 28/11 ou le 04/12 à 12h UTC.",
       "potential": 3,
       "effort": 1,
       "risk": 2,
-      "cost_usd": "gas",
+      "cost_usd": "~1-3$ gas",
       "deadline": "28/11 ou 04/12 12h UTC",
       "deadline_date": "2026-11-28",
-      "next_action": "Réclamer le vesting à l'ouverture, depuis le site officiel.",
+      "next_action": "Réclamer à la date ouverte du Stage 6 sur le site officiel.",
       "who": "toi",
       "action_url": "https://www.asterdex.com",
       "how_to": [
-        "Ouvrir asterdex.com et vérifier le domaine",
+        "Aller sur asterdex.com",
         "Connecter ton wallet",
-        "Claim à l'ouverture de la fenêtre",
+        "Claim le vesting Stage 6",
         "Signer sans approve illimité"
       ],
-      "steps": [],
+      "steps": [
+        "Claim à l'ouverture"
+      ],
       "links": [
         "asterdex.com"
       ],
       "red_flags": [
-        "Date exacte à confirmer"
+        "Faux sites de claim"
       ],
-      "eligibility": "",
+      "eligibility": "à vérifier avec le checker officiel",
       "sources": [],
       "first_seen": "2026-11-02"
     },
@@ -343,23 +402,26 @@
       "name": "Polymarket – Token POLY (non daté)",
       "chain": "Polygon",
       "alive": true,
-      "summary": "Token POLY évoqué par l'équipe, sans date. Garder une activité réelle et normale.",
+      "summary": "Token POLY évoqué par l'équipe, sans date. Utiliser la plateforme régulièrement reste la meilleure position.",
       "potential": 4,
       "effort": 2,
       "risk": 2,
-      "cost_usd": "~0-20$",
+      "cost_usd": "10-50$",
       "deadline": "Aucune date",
       "deadline_date": "",
-      "next_action": "Attendre l'annonce officielle.",
+      "next_action": "Garder une petite activité régulière et surveiller l'annonce.",
       "who": "attendre",
       "action_url": "https://polymarket.com",
       "how_to": [],
-      "steps": [],
+      "steps": [
+        "Parier de petits montants sur des marchés variés"
+      ],
       "links": [
         "polymarket.com"
       ],
       "red_flags": [
-        "Pas de snapshot annoncé"
+        "Pas de date",
+        "Restrictions géographiques"
       ],
       "eligibility": "",
       "sources": [],
@@ -368,24 +430,28 @@
     "arc-testnet": {
       "slug": "arc-testnet",
       "name": "Arc (L1 de Circle) – Testnet",
-      "chain": "Arc testnet",
+      "chain": "Arc",
       "alive": true,
-      "summary": "Testnet gratuit de la L1 de Circle, sans airdrop annoncé.",
+      "summary": "Testnet de la L1 de Circle. Équipe sérieuse, mais aucun airdrop annoncé.",
       "potential": 3,
       "effort": 2,
       "risk": 1,
       "cost_usd": "0$",
       "deadline": "Aucun airdrop annoncé",
       "deadline_date": "",
-      "next_action": "Faire quelques transactions testnet via le faucet (captcha à ta charge).",
+      "next_action": "Utiliser le faucet et faire quelques transactions sur le testnet.",
       "who": "toi",
       "action_url": "https://www.arc.network",
       "how_to": [
-        "Ouvrir arc.network, repérer le faucet officiel",
-        "Réclamer des tokens testnet (captcha)",
-        "Faire un transfert ou un swap testnet"
+        "Ouvrir le site officiel arc.network",
+        "Ajouter le réseau testnet",
+        "Prendre des fonds au faucet (captcha à ta charge)",
+        "Faire quelques transactions"
       ],
-      "steps": [],
+      "steps": [
+        "Faucet",
+        "Transactions de test"
+      ],
       "links": [
         "arc.network"
       ],
@@ -401,30 +467,31 @@
       "name": "Grass – Claim USDC Stage 2",
       "chain": "Solana",
       "alive": true,
-      "summary": "Claim USDC Stage 2 ouvert jusqu'au 22/01/2027.",
+      "summary": "Claim en USDC du Stage 2 de Grass, ouvert jusqu'au 22/01/2027.",
       "potential": 3,
       "effort": 1,
       "risk": 2,
-      "cost_usd": "gas",
+      "cost_usd": "~1$ gas",
       "deadline": "22/01/2027 claim",
       "deadline_date": "2027-01-22",
-      "next_action": "Réclamer si éligible avant le 22/01/2027.",
+      "next_action": "Réclamer l'USDC Stage 2 sur le site officiel avant le 22/01/2027.",
       "who": "toi",
       "action_url": "https://www.grass.io",
       "how_to": [
-        "Ouvrir grass.io et vérifier le domaine",
-        "Connecter le wallet du compte Grass",
-        "Claim les USDC",
-        "Signer sans approve illimité"
+        "Aller sur grass.io",
+        "Connecter ton wallet Solana",
+        "Claim l'USDC Stage 2"
       ],
-      "steps": [],
+      "steps": [
+        "Claim avant le 22/01/2027"
+      ],
       "links": [
         "grass.io"
       ],
       "red_flags": [
-        "Éligibilité non vérifiée"
+        "Faux sites de claim"
       ],
-      "eligibility": "",
+      "eligibility": "à vérifier avec le checker officiel",
       "sources": [],
       "first_seen": "2026-11-02"
     },
@@ -433,23 +500,29 @@
       "name": "MetaMask – Rewards (token MASK)",
       "chain": "Multi-chaînes",
       "alive": true,
-      "summary": "Programme Rewards de MetaMask, token MASK annoncé sans date.",
+      "summary": "Programme Rewards de MetaMask, avec un token MASK évoqué mais sans date.",
       "potential": 4,
       "effort": 2,
       "risk": 1,
-      "cost_usd": "~0-20$",
+      "cost_usd": "0-20$",
       "deadline": "Aucune date",
       "deadline_date": "",
-      "next_action": "Utiliser MetaMask (swaps, perps) avec un seul wallet et attendre l'annonce.",
-      "who": "attendre",
+      "next_action": "Utiliser les swaps ou le portefeuille MetaMask régulièrement et surveiller l'annonce.",
+      "who": "toi",
       "action_url": "https://metamask.io",
-      "how_to": [],
-      "steps": [],
+      "how_to": [
+        "Ouvrir la page Rewards dans MetaMask",
+        "Activer le programme avec un seul compte",
+        "Faire des swaps ou d'autres actions éligibles"
+      ],
+      "steps": [
+        "Activité régulière"
+      ],
       "links": [
         "metamask.io"
       ],
       "red_flags": [
-        "Pas de date"
+        "Token non confirmé"
       ],
       "eligibility": "",
       "sources": [],
