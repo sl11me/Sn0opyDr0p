@@ -1,150 +1,53 @@
-# 🕵️ Sn0opy — compte rendu du 26/11/2026
+# 🕵️ Sn0opy — compte rendu du 27/11/2026
 
-📬 0 mail(s) de newsletters · 🪂 16 airdrops suivis · 🙋 14 à faire toi-même
+📬 0 mail(s) de newsletters · 🪂 15 airdrops suivis · 🙋 3 à faire toi-même
 
 ## 🙋 À toi de jouer
 
-### Predict.fun – Choix du claim PREDICT — ⏰ aujourd'hui !
+### Aster – Claim vesting Stage 6 — ⏰ dans 7 j
 
-👉 Vérifier sur le site officiel si le choix est encore ouvert, puis réclamer.
+👉 Réclamer sur la page airdrop officielle avant le 04/12 12h UTC si tu avais choisi le vesting.
 
-1. Ouvrir predict.fun en tapant l'URL à la main
-2. Connecter le wallet
-3. Choisir 35 % immédiat ou 100 % sur 12 mois
-4. Signer sans approve illimité
+🎯 à vérifier avec le checker officiel
 
-🔗 https://predict.fun
+1. Ouvre asterdex.com/en/airdrop (vérifie le domaine)
+2. Connecte le wallet éligible
+3. Signe le claim sans approve illimité
 
-### Aster – Claim vesting Stage 6 — ⏰ dans 2 j
+🔗 https://www.asterdex.com/en/airdrop
 
-👉 Réclamer à la date d'ouverture sur le site officiel.
+### StandX – Claim DUSD (fermeture) — ⏰ dans 34 j
 
-1. Ouvrir asterdex.com
-2. Connecter le wallet
-3. Réclamer le vesting
+👉 Réclamer le DUSD avant le 31/12 si tu as un solde.
 
-🔗 https://www.asterdex.com
+1. Va sur le site officiel de StandX
+2. Connecte ton wallet
+3. Réclame ou retire ton DUSD
 
-### StandX – Claim DUSD (fermeture) — ⏰ dans 35 j
+### Grass – Claim USDC Stage 2 — ⏰ dans 56 j
 
-👉 Réclamer ton DUSD avant le 31/12.
+👉 Vérifier l'éligibilité sur le site officiel et réclamer.
 
-1. Ouvrir standx.com
-2. Connecter le wallet
-3. Réclamer le DUSD
+1. Ouvre getgrass.io
+2. Connecte ton wallet
+3. Réclame
 
-🔗 https://standx.com
-
-### Grass – Claim USDC Stage 2 — ⏰ dans 57 j
-
-👉 Réclamer sur le site officiel si tu es éligible.
-
-1. Ouvrir grass.io
-2. Connecter le wallet
-3. Réclamer
-
-🔗 https://www.grass.io
-
-### Variational – Points avant TGE $VAR
-
-👉 Garder une activité de trading régulière et surveiller l'annonce du TGE.
-
-1. Se connecter avec le wallet principal
-2. Trader un petit volume chaque semaine
-
-🔗 https://omni.variational.io
-
-### Polymarket – Token POLY (non daté)
-
-👉 Parier de temps en temps sur des marchés variés.
-
-1. Se connecter sur polymarket.com
-2. Placer quelques petits paris
-
-🔗 https://polymarket.com
-
-### MetaMask – Rewards (token MASK)
-
-👉 Utiliser les swaps et les perps MetaMask pour gagner des points.
-
-1. Ouvrir MetaMask
-2. Activer Rewards
-3. Faire quelques swaps
-
-🔗 https://metamask.io
-
-### Arcus – Points Saison 1 (Robinhood Chain)
-
-👉 Continuer l'activité de points à la main, sans dépôt important.
-
-1. Ouvrir l'app officielle d'Arcus
-2. Connecter le wallet principal
-3. Faire les actions de points de la saison
-
-### Jumper – Airdrop $JUMP (XP)
-
-👉 Faire un bridge ou swap occasionnel via Jumper.
-
-1. Ouvrir jumper.exchange
-2. Connecter le wallet
-3. Faire un petit swap ou bridge
-
-🔗 https://jumper.exchange
-
-### TxFlow – Points perp DEX (Saison 1)
-
-👉 Garder une activité régulière et modérée.
-
-1. Ouvrir l'app officielle
-2. Trader un petit volume
-
-### QFEX – Perp DEX RWA (pré-points)
-
-👉 Continuer à trader en petit volume.
-
-1. Créer un compte sur qfex.com
-2. Trader un petit volume
-
-🔗 https://qfex.com
-
-### Elysium (L2 HyperEVM) / Ascend – Points
-
-👉 Garder une activité légère, sans gros dépôt.
-
-1. Utiliser l'app Ascend avec le wallet principal
-
-### Titan Exchange – Points testnet
-
-👉 Faire un petit swap de temps en temps.
-
-1. Aller sur titan.exchange
-2. Connecter le wallet
-3. Faire un petit swap
-
-🔗 https://titan.exchange
-
-### Arc (L1 de Circle) – Testnet
-
-👉 Faire quelques transactions testnet gratuites.
-
-1. Prendre des tokens test sur le faucet officiel
-2. Faire quelques transferts
-
-🔗 https://www.circle.com/arc
+🔗 https://www.getgrass.io
 
 ## 📰 Le brief de Sn0opy
 
-- 🧊 Wallet agent à 0 $ sur Arbitrum et Base : aucune action on-chain aujourd'hui. Pour en lancer, il faut d'abord l'alimenter en ETH.
-- ⏳ Extended (XTEN) : le TGE est visé pour novembre, mais je n'ai trouvé ni date ni fenêtre de claim confirmées. Ça peut tomber d'un jour à l'autre, surveille le compte officiel.
-- 🎯 Predict.fun : les sources se contredisent sur les dates. Le claim semble ouvert depuis fin octobre, avec le choix entre 35 % tout de suite ou 100 % sur 12 mois. Je n'ai pas pu confirmer l'état actuel du choix, à vérifier sur le site officiel.
-- 🔥 Aster Stage 6 (28/11 ou 04/12) et StandX (31/12) : ce sont les prochaines échéances de claim. Grass Stage 2 court jusqu'au 22/01/2027.
-- 💤 Les autres (Hyperliquid S2, Polymarket, MetaMask, Arc, Jumper, Variational) n'ont aucune date. Il n'y a rien à faire sauf rester actif sans forcer.
-- 🚫 Je n'ai ajouté aucun nouvel airdrop : rien n'a passé le filtre de vérification dans le temps imparti. Aucun wallet à vérifier n'a été fourni, donc pas de checker de claim.
+- 🧾 Run léger : airdrops.io m'a renvoyé 403 et je n'ai revérifié sur le web que Aster. Les autres fiches sont reconduites sans nouvelle vérification.
+- ⏰ Aster Stage 6 : la fenêtre de claim se ferme le 04/12 à 12h UTC, et c'est la seule date que j'ai pu confirmer. Elle n'est pas prolongée automatiquement. Seuls ceux qui ont choisi le vesting 6 mois peuvent réclamer.
+- 📅 Predict.fun : le choix du claim était fixé au 26/11 à 9h UTC, donc il est probablement passé. Je le marque clos, à reconfirmer.
+- 🔔 StandX : claim DUSD jusqu'au 31/12 à 8h UTC, sans urgence mais à ne pas oublier.
+- 🌱 Grass Stage 2 : claim USDC jusqu'au 22/01/2027.
+- 🕰️ Extended (TGE fin nov. à confirmer), Variational et Jumper (TGE T4 2026) : surveiller les annonces officielles, aucune date n'a été confirmée.
+- 💤 Wallet agent à 0 $ : aucune action on-chain. Aucun wallet à vérifier n'a été fourni, donc pas de claims d'inconnus listés.
+- 🗑️ Pas de nouvel airdrop ajouté : je n'ai rien pu vérifier de façon fiable aujourd'hui.
 
 ## ⏰ Échéances sous 30 jours
 
-- **2026-11-26** (aujourd'hui !) — Predict.fun – Choix du claim PREDICT : Vérifier sur le site officiel si le choix est encore ouvert, puis réclamer.
-- **2026-11-28** (dans 2 j) — Aster – Claim vesting Stage 6 : Réclamer à la date d'ouverture sur le site officiel.
+- **2026-12-04** (dans 7 j) — Aster – Claim vesting Stage 6 : Réclamer sur la page airdrop officielle avant le 04/12 12h UTC si tu avais choisi le vesting.
 
 ## 🤖 Wallet agent
 
